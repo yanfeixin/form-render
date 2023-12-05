@@ -5,11 +5,7 @@
 			"path": ".."
 		},
 		{
-			"name": "@king-one/build",
-			"path": "../build"
-		},
-		{
-			"name": "vue3",
+			"name": "📦 vue3",
 			"path": "../examples/vue3"
 		}
 	],
