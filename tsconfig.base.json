@@ -1,0 +1,23 @@
+{
+    // https://www.tslang.cn/docs/handbook/compiler-options.html
+    "compilerOptions": {
+      "target": "es2018", // 编译的之后的js标准
+      "module": "ESNext", // 打包模块类型ESNext
+      "esModuleInterop": true,
+      "moduleResolution": "node", //按照node模块来解析
+    //   "removeComments": true,// 删除注释
+    //   "noLib": false, // 不处理类库
+    //   "strict": true,
+    //   "forceConsistentCasingInFileNames": true,// 强制区分⼤⼩写
+    //   "allowSyntheticDefaultImports": true, // 允许没有导出的模块中导入
+    //   "strictFunctionTypes": false,
+    //   "jsx": "preserve",// jsx 不转
+    //   "sourceMap": false,
+    //   "esModuleInterop": true, // 支持es6,commonjs模块
+    //   "resolveJsonModule": true, // 解析json模块
+    //   "noUnusedLocals": true,
+    //   "noUnusedParameters": true,
+    //   "experimentalDecorators": true // 装饰器语法
+    }
+  }
+  

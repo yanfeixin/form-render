@@ -1,0 +1,5 @@
+packages:
+  - docs
+  - build
+  - packages/*
+  - examples/*

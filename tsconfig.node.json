@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "lib": ["ESNext"]
+  },
+  "extends": "./tsconfig.base.json",
+  "include": [
+    "build/**/*",
+  ],
+  "exclude": ["node_modules"]
+}

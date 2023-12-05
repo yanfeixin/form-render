@@ -1,0 +1,32 @@
+{
+  "name": "king-one",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "pnpm run -C examples/vue3 dev",
+    "rm": "node -r @esbuild-kit/cjs-loader scripts/del",
+    "build": "pnpm run -C build build",
+    "stub": "pnpm run -r --parallel stub"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@astrojs/cli-kit": "^0.3.0",
+    "@esbuild-kit/cjs-loader": "^2.4.4",
+    "@king-one/components": "workspace:^",
+    "@king-one/core": "workspace:^",
+    "@king-one/hooks": "workspace:^",
+    "@king-one/theme-chalk": "workspace:^",
+    "@types/node": "^20.8.2",
+    "@vitejs/plugin-vue": "^4.4.0",
+    "@vitejs/plugin-vue-jsx": "3.0.2",
+    "del": "^7.1.0",
+    "sass": "^1.69.3",
+    "typescript": "^5.2.2",
+    "unbuild": "^2.0.0",
+    "vue": "^3.3.4"
+  }
+}
