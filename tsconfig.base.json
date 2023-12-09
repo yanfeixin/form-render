@@ -5,6 +5,9 @@
       "module": "ESNext", // 打包模块类型ESNext
       "esModuleInterop": true,
       "moduleResolution": "node", //按照node模块来解析
+      // "paths": {
+      //   "@king-one/*": ["packages/*"]
+      // }
     //   "removeComments": true,// 删除注释
     //   "noLib": false, // 不处理类库
     //   "strict": true,

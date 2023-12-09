@@ -4,10 +4,10 @@
  * @Autor: caohao
  * @Date: 2023-10-04 19:33:11
  * @LastEditors: caohao
- * @LastEditTime: 2023-12-05 19:29:30
+ * @LastEditTime: 2023-12-06 20:19:50
  */
 import type { App, Directive } from 'vue'
-import type { SFCWithInstall } from '../types'
+import type { SFCWithInstall } from './types'
 const defaultNamePrefix: string = 'K'
 export const withInstall = <T>(main: T) => {
   ;(main as SFCWithInstall<T>).install = (app): void => {

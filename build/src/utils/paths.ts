@@ -4,7 +4,7 @@
  * @Autor: caohao
  * @Date: 2023-10-04 01:08:42
  * @LastEditors: caohao
- * @LastEditTime: 2023-12-05 15:35:03
+ * @LastEditTime: 2023-12-09 16:45:25
  */
 import { resolve } from 'node:path'
 export const PKG_NAME = 'king-one'
@@ -16,7 +16,7 @@ export const buildRoot = resolve(projRoot, 'build')
 // packages
 export const pkgRoot = resolve(projRoot, 'packages')
 export const pkThemeRoot = resolve(pkgRoot, THEME_FILE_NAME)
-export const epRoot = resolve(pkgRoot, PKG_NAME)
+export const epRoot = resolve(pkgRoot, 'ui')
 export const compsRoot = resolve(pkgRoot, 'components')
 
 // dist

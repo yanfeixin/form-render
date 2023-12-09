@@ -1,26 +1,24 @@
-/*
- * @Author: caohao
- * @Date: 2023-03-26 17:28:16
- * @LastEditors: caohao
- * @LastEditTime: 2023-11-29 17:16:42
- * @Description:
- */
-import { TaskFunction } from 'gulp'
-// import chalk from 'chalk';
-import { Project } from 'ts-morph'
+import process from 'process'
 import path from 'path'
-import { mkdir, readFile } from 'fs/promises'
-import glob from 'fast-glob' // 快速查找项目里的所有文件
+import { mkdir, readFile, writeFile } from 'fs/promises'
+import consola from 'consola'
+import * as vueCompiler from 'vue/compiler-sfc'
+import glob from 'fast-glob'
 import chalk from 'chalk'
-import { copyFile } from 'fs-extra'
-import { buildOutput, projRoot, pkgRoot, PKG_NAME, epRoot, epOutput } from '../utils/paths'
-import consola from 'consola' // 终端打印输入
-import type { CompilerOptions, SourceFile } from 'ts-morph' // ts编译api封装库。更方便的处理ts ast(抽象语法树)
-const outDir = path.resolve(buildOutput, 'types') // 根目录下的 dist/types
+import { Project } from 'ts-morph'
+
+import type { CompilerOptions, SourceFile } from 'ts-morph'
+// import { copyFile } from 'fs-extra';
+import { buildOutput, epRoot, pkgRoot, projRoot, PKG_NAME } from '../utils/paths'
+import { excludeFiles } from './buildModules'
+
 const TSCONFIG_PATH = path.resolve(projRoot, 'tsconfig.web.json')
-import * as vueCompiler from 'vue/compiler-sfc' // 提取sfc中的ts
-import { excludeFiles } from './buildModules' // 忽略掉node_module 和__test__中的文件
-export const generateTypesDefinitions: TaskFunction = async (cb) => {
+const outDir = path.resolve(buildOutput, 'types')
+import { pathRewriter } from '../utils/pkg'
+/**
+ * https://github.com/egoist/vue-dts-gen/blob/main/src/index.ts
+ */
+export const generateTypesDefinitions = async () => {
   const compilerOptions: CompilerOptions = {
     emitDeclarationOnly: true,
     outDir,
@@ -34,49 +32,50 @@ export const generateTypesDefinitions: TaskFunction = async (cb) => {
     tsConfigFilePath: TSCONFIG_PATH,
     skipAddingFilesFromTsConfig: true,
   })
+
   const sourceFiles = await addSourceFiles(project)
   consola.success('Added source files')
+
   typeCheck(project)
   consola.success('Type check passed!')
-  const tasks = sourceFiles.map(async (sourceFile) => {
-    const relativePath = path.relative(pkgRoot, sourceFile.getFilePath())
 
-    consola.trace(chalk.yellow(`Generating definition for file: ${chalk.bold(relativePath)}`))
-
-    if (relativePath === 'global.d.ts') {
-      copyFile(sourceFile.getFilePath(), path.join(epOutput, relativePath))
-    } else {
-      const emitOutput = sourceFile.getEmitOutput()
-      const emitFiles = emitOutput.getOutputFiles()
-      if (emitFiles.length === 0) {
-        throw new Error(`Emit no file: ${chalk.bold(relativePath)}`)
-      }
-
-      const subTasks = emitFiles.map(async (outputFile) => {
-        const filepath = outputFile.getFilePath()
-
-        await mkdir(path.dirname(filepath), {
-          recursive: true,
-        })
-
-        consola.success(chalk.green(`Definition for file: ${chalk.bold(relativePath)} generated`))
-      })
-
-      await Promise.all(subTasks)
-    }
-  })
-
-  await Promise.all(tasks)
-  // 获取原始的ts文件 将其输出为js或者.d.ts声明文件
   await project.emit({
     emitOnlyDtsFiles: true,
   })
+
+  const tasks = sourceFiles.map(async (sourceFile) => {
+    const relativePath = path.relative(pkgRoot, sourceFile.getFilePath())
+    consola.trace(chalk.yellow(`Generating definition for file: ${chalk.bold(relativePath)}`))
+
+    const emitOutput = sourceFile.getEmitOutput()
+    const emitFiles = emitOutput.getOutputFiles()
+    if (emitFiles.length === 0) {
+      throw new Error(`Emit no file: ${chalk.bold(relativePath)}`)
+    }
+
+    const subTasks = emitFiles.map(async (outputFile) => {
+      const filepath = outputFile.getFilePath()
+      await mkdir(path.dirname(filepath), {
+        recursive: true,
+      })
+
+      await writeFile(filepath, pathRewriter('esm')(outputFile.getText()), 'utf8')
+
+      consola.success(chalk.green(`Definition for file: ${chalk.bold(relativePath)} generated`))
+    })
+
+    await Promise.all(subTasks)
+  })
+
+  await Promise.all(tasks)
 }
 
 async function addSourceFiles(project: Project) {
+  // project.addSourceFileAtPath(path.resolve(projRoot, 'typings/env.d.ts'))
+
   const globSourceFile = '**/*.{js?(x),ts?(x),vue}'
   const filePaths = excludeFiles(
-    await glob([globSourceFile, `!${PKG_NAME}/**/*`], {
+    await glob([globSourceFile, '!ui/**/*'], {
       cwd: pkgRoot,
       absolute: true,
       onlyFiles: true,
@@ -125,7 +124,7 @@ async function addSourceFiles(project: Project) {
 
   return sourceFiles
 }
-// 诊断ts编译中是否有语法错误
+
 function typeCheck(project: Project) {
   const diagnostics = project.getPreEmitDiagnostics()
   if (diagnostics.length > 0) {
