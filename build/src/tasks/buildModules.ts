@@ -2,7 +2,7 @@
  * @Author: caohao
  * @Date: 2023-11-06 19:57:56
  * @LastEditors: caohao
- * @LastEditTime: 2023-12-09 16:51:37
+ * @LastEditTime: 2023-12-11 14:33:32
  * @Description:
  */
 import { resolve } from 'path'
@@ -10,7 +10,7 @@ import { rollup } from 'rollup'
 import glob from 'fast-glob'
 
 import type { OutputOptions } from 'rollup'
-import { pkgRoot, compsRoot, epRoot } from '../utils/paths'
+import { pkgRoot, epRoot } from '../utils/paths'
 
 import { buildCdnConfig, buildConfigEntries, rollupBuildPlugins, generateExternal } from '../utils'
 // import { generateExternal, rollupBuildPlugins } from '../utils/rollup'
@@ -60,7 +60,7 @@ export const buildNodeModules = async () => {
 // cdn
 export const buildCdnModules = async () => {
   const bundle = await rollup({
-    input: resolve(compsRoot, 'index.ts'),
+    input: resolve(epRoot, 'index.ts'),
     plugins: rollupBuildPlugins(true),
     external: await generateExternal('cdn'),
     treeshake: false,

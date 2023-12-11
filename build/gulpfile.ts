@@ -4,7 +4,7 @@
  * @Autor: caohao
  * @Date: 2023-10-04 01:03:22
  * @LastEditors: caohao
- * @LastEditTime: 2023-12-07 17:52:51
+ * @LastEditTime: 2023-12-11 14:53:55
  */
 import { deleteSync } from 'del'
 import type { TaskFunction } from 'gulp'
@@ -12,7 +12,7 @@ import { series, parallel } from 'gulp'
 // import { title } from './utils/message'
 // import { buildOutput, buildRoot } from './utils/paths'
 import { buildCdnModules, buildNodeModules, buildTheme, generateTypesDefinitions, run, title, buildOutput, buildRoot } from './src'
-
+import { copyTypesDefinitions } from './src/tasks'
 // import { buildTheme } from './tasks/theme/gulpfile.prod'
 // import { run } from './utils/process'
 // import { generateTypesDefinitions } from './tasks/typeExport'
@@ -36,4 +36,4 @@ export const runTask = (name: string) =>
 export const testModel = async () => {
   console.log(111)
 }
-export default series(clean, buildTheme, parallel(buildNodeModules, generateTypesDefinitions))
+export default series(clean, buildTheme, parallel(buildCdnModules, buildNodeModules, generateTypesDefinitions), parallel(copyTypesDefinitions))
