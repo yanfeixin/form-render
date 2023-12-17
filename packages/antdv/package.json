@@ -1,0 +1,17 @@
+{
+  "name": "@king-one/antdv",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "peerDependencies": {
+    "@ant-design/icons-vue": "^7.0.1",
+    "ant-design-vue": "^4.0.7",
+    "vue": "^3.3.4"
+  }
+}
