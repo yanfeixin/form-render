@@ -115,19 +115,11 @@ importers:
         specifier: ^3.3.4
         version: 3.3.9(typescript@5.3.2)
 
-  packages/components:
-    dependencies:
-      vue:
-        specifier: ^3.3.4
-        version: 3.3.9(typescript@5.3.2)
-
   packages/core: {}
 
   packages/hooks: {}
 
   packages/theme-chalk: {}
-
-  packages/ui: {}
 
   packages/utils: {}
 

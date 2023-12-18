@@ -7,9 +7,9 @@
       "types": ["vite/client"],
       "typeRoots": ["./node_modules", "./typings"],
       "skipLibCheck": true,
-      // "paths": {
-      //     "@king-one/*": ["packages/*"]
-      // }
+      "paths": {
+          "@king-one/*": ["packages/*"]
+      }
     },
     "include": ["packages", "typings/vue-shim.d.ts"],
     "exclude": ["node_modules", "dist", "*.js", "lib", "build"]
