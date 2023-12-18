@@ -2,7 +2,7 @@
  * @Author: caohao
  * @Date: 2023-11-06 20:17:06
  * @LastEditors: caohao
- * @LastEditTime: 2023-12-05 16:41:58
+ * @LastEditTime: 2023-12-13 13:43:36
  * @Description:
  */
 import { resolve } from 'path'
@@ -26,7 +26,7 @@ const __defProp = Object.defineProperty
 const __name = (target: any, value: any) => __defProp(target, 'name', { value, configurable: true })
 ;(globalThis as any).__name = __name
 
-export const epPackage = resolve(pkgRoot, 'components', 'package.json')
+export const epPackage = resolve(pkgRoot, 'antdv', 'package.json')
 
 /**
  * 获取package.json文件内容

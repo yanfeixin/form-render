@@ -2,7 +2,7 @@
  * @Author: caohao
  * @Date: 2023-11-06 19:57:56
  * @LastEditors: caohao
- * @LastEditTime: 2023-12-11 14:33:32
+ * @LastEditTime: 2023-12-14 09:18:29
  * @Description:
  */
 import { resolve } from 'path'
@@ -10,7 +10,7 @@ import { rollup } from 'rollup'
 import glob from 'fast-glob'
 
 import type { OutputOptions } from 'rollup'
-import { pkgRoot, epRoot } from '../utils/paths'
+import { pkgRoot, epRoot, antdvRoot } from '../utils/paths'
 
 import { buildCdnConfig, buildConfigEntries, rollupBuildPlugins, generateExternal } from '../utils'
 // import { generateExternal, rollupBuildPlugins } from '../utils/rollup'
@@ -43,7 +43,7 @@ export const buildNodeModules = async () => {
       dir: config.output.path,
       exports: module === 'cjs' ? 'named' : undefined,
       preserveModules: true,
-      preserveModulesRoot: epRoot,
+      preserveModulesRoot: antdvRoot,
       // preserveModulesRoot: pkgRoot,
       sourcemap: true,
       entryFileNames: `[name].${config.ext}`,

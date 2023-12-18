@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 importers:
 
   .:
@@ -10,9 +14,9 @@ importers:
       '@esbuild-kit/cjs-loader':
         specifier: ^2.4.4
         version: 2.4.4
-      '@king-one/components':
+      '@king-one/antdv':
         specifier: workspace:^
-        version: link:packages/components
+        version: link:packages/antdv
       '@king-one/core':
         specifier: workspace:^
         version: link:packages/core
@@ -5520,7 +5524,3 @@ packages:
       y18n: 3.2.2
       yargs-parser: 5.0.1
     dev: true
-
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false

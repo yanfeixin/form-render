@@ -4,7 +4,7 @@
  * @Autor: caohao
  * @Date: 2023-10-04 01:03:22
  * @LastEditors: caohao
- * @LastEditTime: 2023-12-11 14:53:55
+ * @LastEditTime: 2023-12-18 09:59:01
  */
 import { deleteSync } from 'del'
 import type { TaskFunction } from 'gulp'
@@ -36,4 +36,5 @@ export const runTask = (name: string) =>
 export const testModel = async () => {
   console.log(111)
 }
-export default series(clean, buildTheme, parallel(buildCdnModules, buildNodeModules, generateTypesDefinitions), parallel(copyTypesDefinitions))
+//  parallel(copyTypesDefinitions)
+export default series(clean, buildTheme, parallel(buildCdnModules, buildNodeModules))

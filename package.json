@@ -16,7 +16,7 @@
   "devDependencies": {
     "@astrojs/cli-kit": "^0.3.0",
     "@esbuild-kit/cjs-loader": "^2.4.4",
-    "@king-one/components": "workspace:^",
+    "@king-one/antdv": "workspace:^",
     "@king-one/core": "workspace:^",
     "@king-one/hooks": "workspace:^",
     "@king-one/theme-chalk": "workspace:^",
