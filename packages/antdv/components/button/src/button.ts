@@ -4,7 +4,7 @@
  * @Autor: caohao
  * @Date: 2023-10-04 19:28:49
  * @LastEditors: caohao
- * @LastEditTime: 2023-12-13 09:10:11
+ * @LastEditTime: 2023-12-19 16:57:16
  */
 import type { ExtractPropTypes, PropType } from 'vue'
 export type Type = 'primary' | 'success' | 'warning' | 'danger' | 'info'

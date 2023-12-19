@@ -2,7 +2,7 @@
  * @Author: caohao
  * @Date: 2023-12-07 11:25:02
  * @LastEditors: caohao
- * @LastEditTime: 2023-12-07 14:58:13
+ * @LastEditTime: 2023-12-19 15:08:59
  * @Description:
  */
 import { PKG_NAME, PKG_PREFIX } from './paths'
@@ -16,6 +16,7 @@ export const pathRewriter = (module: Module) => {
 
   return (id: string) => {
     id = id.replaceAll(`${PKG_PREFIX}/theme-chalk`, `${PKG_NAME}/theme-chalk`)
+    id = id.replaceAll(`/antdv`, ``)
     id = id.replaceAll(`${PKG_PREFIX}/`, `${config.bundle.path}/`)
     return id
   }

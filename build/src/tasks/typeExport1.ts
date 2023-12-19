@@ -91,30 +91,37 @@ async function addSourceFiles(project: Project) {
   const sourceFiles: SourceFile[] = []
   await Promise.all([
     ...epPaths.map(async (file) => {
-      const content = await readFile(path.resolve(epRoot, file), 'utf-8')
       if (file.endsWith('.vue')) {
+        const content = await readFile(path.resolve(epRoot, file), 'utf-8')
         const hasTsNoCheck = content.includes('@ts-nocheck')
+
         const sfc = vueCompiler.parse(content)
         const { script, scriptSetup } = sfc.descriptor
         if (script || scriptSetup) {
           let content = (hasTsNoCheck ? '// @ts-nocheck\n' : '') + (script?.content ?? '')
+
           if (scriptSetup) {
             const compiled = vueCompiler.compileScript(sfc.descriptor, {
               id: 'xxx',
             })
             content += compiled.content
           }
+
           const lang = scriptSetup?.lang || script?.lang || 'js'
-          const sourceFile = project.createSourceFile(path.resolve(pkgRoot, `${file}.${lang}`), content)
+          console.log(path.relative(process.cwd(), file))
+          const sourceFile = project.createSourceFile(`${path.relative(process.cwd(), file)}.${lang}`, content)
           sourceFiles.push(sourceFile)
         }
       } else {
+        const content = await readFile(path.resolve(epRoot, file), 'utf-8')
         sourceFiles.push(project.createSourceFile(path.resolve(pkgRoot, file), content))
       }
     }),
     ...filePaths.map(async (file) => {
       const sourceFile = project.addSourceFileAtPath(file)
       sourceFiles.push(sourceFile)
+      // const content = await readFile(path.resolve(epRoot, file), 'utf-8')
+      // sourceFiles.push(project.createSourceFile(path.resolve(pkgRoot, file), content))
     }),
   ])
 

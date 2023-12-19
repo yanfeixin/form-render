@@ -8,7 +8,8 @@
       "typeRoots": ["./node_modules", "./typings"],
       "skipLibCheck": true,
       "paths": {
-          "@king-one/*": ["packages/*"]
+          // "@king-one/*": ["packages/*"],
+          // "@king-one/antdv/*":["packages/components/*"]
       }
     },
     "include": ["packages", "typings/vue-shim.d.ts"],
