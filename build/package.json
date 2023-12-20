@@ -13,7 +13,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "gulp --require @esbuild-kit/cjs-loader -f ./gulpfile.ts",
+    "build": "gulp --require @esbuild-kit/cjs-loader -f ./gulpfile.ts  --mode antdv",
     "stub": "unbuild --stub"
   },
   "keywords": [],
@@ -23,11 +23,13 @@
   "devDependencies": {
     "@rollup/plugin-image": "^3.0.3",
     "@types/gulp": "^4.0.14",
+    "dotenv": "^16.3.1",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^8.0.0",
     "gulp-clean-css": "^4.3.0",
     "gulp-postcss": "^9.0.1",
     "gulp-sass": "^5.1.0",
+    "minimist": "^1.2.8",
     "rollup-plugin-esbuild": "6.0.2",
     "ts-morph": "^20.0.0"
   }
