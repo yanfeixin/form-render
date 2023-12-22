@@ -2,7 +2,7 @@
  * @Author: caohao
  * @Date: 2023-11-06 19:57:56
  * @LastEditors: caohao
- * @LastEditTime: 2023-12-14 09:18:29
+ * @LastEditTime: 2023-12-22 15:08:17
  * @Description:
  */
 import { resolve } from 'path'
@@ -10,7 +10,7 @@ import { rollup } from 'rollup'
 import glob from 'fast-glob'
 
 import type { OutputOptions } from 'rollup'
-import { pkgRoot, epRoot, antdvRoot } from '../utils/paths'
+import { pkgRoot, getAntdvPath } from '../utils/paths'
 
 import { buildCdnConfig, buildConfigEntries, rollupBuildPlugins, generateExternal } from '../utils'
 // import { generateExternal, rollupBuildPlugins } from '../utils/rollup'
@@ -22,6 +22,7 @@ export const excludeFiles = (files: string[]) => {
 
 // node
 export const buildNodeModules = async () => {
+  const { antdvRoot } = getAntdvPath()
   const input = excludeFiles(
     await glob('**/*.{js,ts,vue}', {
       cwd: pkgRoot,
@@ -59,13 +60,13 @@ export const buildNodeModules = async () => {
 
 // cdn
 export const buildCdnModules = async () => {
+  const { antdvRoot } = getAntdvPath()
   const bundle = await rollup({
-    input: resolve(epRoot, 'index.ts'),
+    input: resolve(antdvRoot, 'index.ts'),
     plugins: rollupBuildPlugins(true),
     external: await generateExternal('cdn'),
     treeshake: false,
   })
-
   await Promise.all(
     buildCdnConfig.map((option) => {
       return bundle.write(option)

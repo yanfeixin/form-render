@@ -4,7 +4,7 @@
  * @Autor: caohao
  * @Date: 2023-10-04 01:08:42
  * @LastEditors: caohao
- * @LastEditTime: 2023-12-19 18:14:04
+ * @LastEditTime: 2023-12-22 11:17:11
  */
 import { resolve } from 'node:path'
 export const PKG_NAME = 'king-one'
@@ -18,7 +18,7 @@ export const pkgRoot = resolve(projRoot, 'packages')
 export const pkThemeRoot = resolve(pkgRoot, THEME_FILE_NAME)
 export const epRoot = resolve(pkgRoot, 'antdv')
 export const compsRoot = resolve(pkgRoot, 'components')
-export const antdvRoot = resolve(pkgRoot, 'antdv')
+// export const antdvRoot = resolve(pkgRoot, 'antdv')
 // dist
 export const buildOutput = resolve(projRoot, 'dist')
 
@@ -30,3 +30,16 @@ export const epOutputCdn = resolve(epOutput, 'cdn') /* 根目录/dist/king-one/c
 export const antdvOutput = resolve(buildOutput, 'antdv') /* 根目录/dist/antdv  */
 export const antdvOutputCdn = resolve(antdvOutput, 'cdn') /* 根目录/dist/antdv/cdn  */
 export const antdvOutThemeRoot = resolve(antdvOutput, THEME_FILE_NAME) /* 根目录/dist/antdv/theme-chalk  */
+export const getAntdvPath = () => {
+  const PKG_NAME = process.env.PKG_NAME
+  const antdvRoot = resolve(pkgRoot, 'antdv')
+  const antdvOutput = resolve(buildOutput, PKG_NAME) /* 根目录/dist/antdv  */
+  const antdvOutputCdn = resolve(antdvOutput, 'cdn') /* 根目录/dist/antdv/cdn  */
+  const antdvOutThemeRoot = resolve(antdvOutput, THEME_FILE_NAME) /* 根目录/dist/antdv/theme-chalk  */
+  return {
+    antdvOutput,
+    antdvOutputCdn,
+    antdvOutThemeRoot,
+    antdvRoot,
+  }
+}

@@ -1,4 +1,3 @@
-import process from 'process'
 import path from 'path'
 import { mkdir, readFile, writeFile } from 'fs/promises'
 import consola from 'consola'

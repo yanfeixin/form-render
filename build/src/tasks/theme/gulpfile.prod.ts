@@ -2,7 +2,7 @@
  * @Author: caohao
  * @Date: 2023-10-12 10:02:50
  * @LastEditors: caohao
- * @LastEditTime: 2023-10-12 13:53:04
+ * @LastEditTime: 2023-12-22 10:14:21
  * @Description:
  */
 import path from 'path'
@@ -15,11 +15,12 @@ import chalk from 'chalk'
 // 基础方法
 import dartSass from 'sass'
 import gulpSass from 'gulp-sass'
-import { copyfont, minifontCss, config } from './gulpfile.base'
+import { copyfont, minifontCss } from './gulpfile.base'
+import { getAntdvPath, pkThemeRoot, antdvOutThemeRoot } from '../../utils'
 const sass = gulpSass(dartSass)
 
 // 编译 SASS
-const compile = () =>
+const compile = (config) => () =>
   src(path.resolve(__dirname, `${config.input}/src/*.scss`))
     .pipe(sass())
     .pipe(
@@ -36,4 +37,12 @@ const compile = () =>
     )
     .pipe(dest(config.output))
 
-export const buildTheme = parallel(compile, copyfont, minifontCss)
+export const buildTheme = (done) => {
+  const { antdvOutThemeRoot } = getAntdvPath()
+  // 打包配置
+  const config = {
+    input: pkThemeRoot,
+    output: antdvOutThemeRoot,
+  }
+  parallel(compile(config), copyfont(config), minifontCss(config))(done)
+}
