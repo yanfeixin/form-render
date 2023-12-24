@@ -4,7 +4,7 @@
  * @Autor: caohao
  * @Date: 2023-10-04 01:08:42
  * @LastEditors: caohao
- * @LastEditTime: 2023-12-23 16:49:16
+ * @LastEditTime: 2023-12-24 19:03:10
  */
 import { resolve } from "node:path"
 export const PKG_NAME = "king-one"
@@ -20,7 +20,7 @@ export const pkThemeRoot = resolve(pkgRoot, THEME_FILE_NAME)
 export const buildOutput = resolve(projRoot, "dist")
 export const getAntdvPath = () => {
   const PKG_NAME = process.env.PKG_NAME
-  const antdvRoot = resolve(pkgRoot, "antdv")
+  const antdvRoot = resolve(pkgRoot, PKG_NAME)
   const antdvOutput = resolve(buildOutput, PKG_NAME) /* 根目录/dist/antdv  */
   const antdvOutputCdn = resolve(antdvOutput, "cdn") /* 根目录/dist/antdv/cdn  */
   const antdvOutThemeRoot = resolve(antdvOutput, THEME_FILE_NAME) /* 根目录/dist/antdv/theme-chalk  */

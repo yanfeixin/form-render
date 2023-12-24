@@ -4,7 +4,7 @@
  * @Autor: caohao
  * @Date: 2023-10-04 01:03:22
  * @LastEditors: caohao
- * @LastEditTime: 2023-12-23 16:25:46
+ * @LastEditTime: 2023-12-24 19:03:46
  */
 import { deleteSync } from "del"
 import type { TaskFunction } from "gulp"
@@ -13,7 +13,19 @@ import minimist from "minimist"
 import dotenv from "dotenv"
 // import { title } from './utils/message'
 // import { buildOutput, buildRoot } from './utils/paths'
-import { buildCdnModules, buildNodeModules, buildTheme, generateTypesDefinitions, run, title, buildOutput, buildRoot, withTaskName } from "./src"
+import {
+  buildCdnModules,
+  buildNodeModules,
+  buildTheme,
+  generateTypesDefinitions,
+  run,
+  title,
+  buildOutput,
+  buildRoot,
+  withTaskName,
+  copyThemeCdn,
+  copyComponentsPackages,
+} from "./src"
 import { copyTypesDefinitions } from "./src/tasks"
 import { resolve } from "node:path"
 
@@ -28,7 +40,6 @@ export const loadEnv: TaskFunction = (done) => {
   const argvs = minimist(process.argv.slice(2))
   const { mode } = argvs
   const envPath = resolve(buildRoot, `.env${mode ? `.${mode}` : ``}`)
-  console.log(envPath)
   dotenv.config({ path: envPath })
   done()
 }
@@ -47,4 +58,10 @@ export const testModel = async () => {
   console.log(111)
 }
 //  parallel(copyTypesDefinitions)
-export default series(clean, loadEnv, buildTheme, parallel(buildCdnModules, buildNodeModules, generateTypesDefinitions), parallel(copyTypesDefinitions))
+export default series(
+  clean,
+  loadEnv,
+  buildTheme,
+  parallel(buildCdnModules, buildNodeModules, generateTypesDefinitions),
+  parallel(copyTypesDefinitions, copyThemeCdn, copyComponentsPackages)
+)
