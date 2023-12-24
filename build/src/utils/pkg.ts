@@ -2,17 +2,17 @@
  * @Author: caohao
  * @Date: 2023-12-07 11:25:02
  * @LastEditors: caohao
- * @LastEditTime: 2023-12-19 15:08:59
+ * @LastEditTime: 2023-12-23 16:09:24
  * @Description:
  */
-import { PKG_NAME, PKG_PREFIX } from './paths'
-import { buildConfig } from './buildConfig'
+import { PKG_NAME, PKG_PREFIX } from "./paths"
+import { buildConfig } from "./buildConfig"
 
-import type { Module } from './buildConfig'
+import type { Module } from "./buildConfig"
 
 /** used for type generator */
 export const pathRewriter = (module: Module) => {
-  const config = buildConfig[module]
+  const config = buildConfig()[module]
 
   return (id: string) => {
     id = id.replaceAll(`${PKG_PREFIX}/theme-chalk`, `${PKG_NAME}/theme-chalk`)
