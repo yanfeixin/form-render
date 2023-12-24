@@ -22,10 +22,10 @@ export const copyTypesDefinitions: TaskFunction = (done) => {
   return parallel(copyTypes("esm"), copyTypes("cjs"))(done)
 }
 export const copyThemeCdn = () => {
-  const { antdvOutput, antdvOutputCdn } = getAntdvPath()
-  return copyFile(resolve(antdvOutput, "theme-chalk", "index.css"), join(antdvOutputCdn, "index.css"))
+  const { epOutput, epOutputCdn } = getAntdvPath()
+  return copyFile(resolve(epOutput, "theme-chalk", "index.css"), join(epOutputCdn, "index.css"))
 }
 export const copyComponentsPackages = () => {
-  const { antdvRoot, antdvOutput } = getAntdvPath()
-  return copyFile(resolve(antdvRoot, "package.json"), join(antdvOutput, "package.json"))
+  const { epRoot, epOutput } = getAntdvPath()
+  return copyFile(resolve(epRoot, "package.json"), join(epOutput, "package.json"))
 }

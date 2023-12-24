@@ -22,7 +22,7 @@ export const excludeFiles = (files: string[]) => {
 
 // node
 export const buildNodeModules = async () => {
-  const { antdvRoot } = getAntdvPath()
+  const { epRoot } = getAntdvPath()
   const input = excludeFiles(
     await glob("**/*.{js,ts,vue}", {
       cwd: pkgRoot,
@@ -44,7 +44,7 @@ export const buildNodeModules = async () => {
       dir: config.output.path,
       exports: module === "cjs" ? "named" : undefined,
       preserveModules: true,
-      preserveModulesRoot: antdvRoot,
+      preserveModulesRoot: epRoot,
       // preserveModulesRoot: pkgRoot,
       sourcemap: true,
       entryFileNames: `[name].${config.ext}`,
@@ -60,9 +60,9 @@ export const buildNodeModules = async () => {
 
 // cdn
 export const buildCdnModules = async () => {
-  const { antdvRoot } = getAntdvPath()
+  const { epRoot } = getAntdvPath()
   const bundle = await rollup({
-    input: resolve(antdvRoot, "index.ts"),
+    input: resolve(epRoot, "index.ts"),
     plugins: rollupBuildPlugins(true),
     external: await generateExternal("cdn"),
     treeshake: false,

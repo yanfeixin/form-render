@@ -71,7 +71,7 @@ export const generateTypesDefinitions = async () => {
 
 async function addSourceFiles(project: Project) {
   // project.addSourceFileAtPath(path.resolve(projRoot, 'typings/env.d.ts'))
-  const { antdvRoot } = getAntdvPath()
+  const { epRoot } = getAntdvPath()
   const globSourceFile = "**/*.{js?(x),ts?(x),vue}"
   const filePaths = excludeFiles(
     await glob([globSourceFile, "!antdv/**/*"], {
@@ -82,7 +82,7 @@ async function addSourceFiles(project: Project) {
   )
   const epPaths = excludeFiles(
     await glob(globSourceFile, {
-      cwd: antdvRoot,
+      cwd: epRoot,
       onlyFiles: true,
     })
   )
@@ -90,7 +90,7 @@ async function addSourceFiles(project: Project) {
   const sourceFiles: SourceFile[] = []
   await Promise.all([
     ...epPaths.map(async (file) => {
-      const content = await readFile(path.resolve(antdvRoot, file), "utf-8")
+      const content = await readFile(path.resolve(epRoot, file), "utf-8")
       if (file.endsWith(".vue")) {
         const hasTsNoCheck = content.includes("@ts-nocheck")
         const sfc = vueCompiler.parse(content)

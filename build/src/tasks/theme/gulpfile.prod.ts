@@ -16,12 +16,7 @@ import chalk from "chalk"
 import dartSass from "sass"
 import gulpSass from "gulp-sass"
 import { copyfont, minifontCss } from "./gulpfile.base"
-import {
-  getAntdvPath,
-  pkThemeRoot,
-  antdvOutThemeRoot,
-  withTaskName,
-} from "../../utils"
+import { getAntdvPath, pkThemeRoot, epOutThemeRoot, withTaskName } from "../../utils"
 const sass = gulpSass(dartSass)
 
 // 编译 SASS
@@ -36,20 +31,18 @@ const compile = (config) => () =>
     .pipe(
       cleanCSS({}, (details) => {
         consola.success(
-          `${chalk.cyan(details.name)}: ${chalk.yellow(
-            details.stats.originalSize / 1000
-          )} KB -> ${chalk.green(details.stats.minifiedSize / 1000)} KB`
+          `${chalk.cyan(details.name)}: ${chalk.yellow(details.stats.originalSize / 1000)} KB -> ${chalk.green(details.stats.minifiedSize / 1000)} KB`
         )
       })
     )
     .pipe(dest(config.output))
 
 export const buildTheme = (done) => {
-  const { antdvOutThemeRoot } = getAntdvPath()
+  const { epOutThemeRoot } = getAntdvPath()
   // 打包配置
   const config = {
     input: pkThemeRoot,
-    output: antdvOutThemeRoot,
+    output: epOutThemeRoot,
   }
   parallel(
     withTaskName("theme:compile", compile(config)),

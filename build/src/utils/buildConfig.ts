@@ -28,7 +28,7 @@ export interface BuildInfo {
   }
 }
 export const buildConfig = (): Record<Module, BuildInfo> => {
-  const { antdvOutput, PKG_NAME } = getAntdvPath()
+  const { epOutput, PKG_NAME } = getAntdvPath()
   return {
     esm: {
       module: "ESNext",
@@ -36,7 +36,7 @@ export const buildConfig = (): Record<Module, BuildInfo> => {
       ext: "mjs",
       output: {
         name: "es",
-        path: path.resolve(antdvOutput, "es"),
+        path: path.resolve(epOutput, "es"),
       },
       bundle: {
         path: `${PKG_NAME}/es`,
@@ -48,7 +48,7 @@ export const buildConfig = (): Record<Module, BuildInfo> => {
       ext: "js",
       output: {
         name: "lib",
-        path: path.resolve(antdvOutput, "lib"),
+        path: path.resolve(epOutput, "lib"),
       },
       bundle: {
         path: `${PKG_NAME}/lib`,
@@ -57,11 +57,11 @@ export const buildConfig = (): Record<Module, BuildInfo> => {
   }
 }
 export const buildCdnConfig = (): OutputOptions[] => {
-  const { antdvOutputCdn } = getAntdvPath()
+  const { epOutputCdn } = getAntdvPath()
   return [
     {
       format: "umd",
-      file: path.resolve(antdvOutputCdn, "index.cdn.js"),
+      file: path.resolve(epOutputCdn, "index.cdn.js"),
       exports: "named",
       name: PKG_HUMP_NAME,
       globals: {
@@ -72,7 +72,7 @@ export const buildCdnConfig = (): OutputOptions[] => {
     // https://github.com/vitejs/vite/issues/2204
     {
       format: "esm",
-      file: path.resolve(antdvOutputCdn, "index.cdn.mjs"),
+      file: path.resolve(epOutputCdn, "index.cdn.mjs"),
       sourcemap: true,
     },
   ]
