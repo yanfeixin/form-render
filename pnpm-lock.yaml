@@ -41,6 +41,9 @@ importers:
       del:
         specifier: ^7.1.0
         version: 7.1.0
+      fast-glob:
+        specifier: ^3.3.2
+        version: 3.3.2
       sass:
         specifier: ^1.69.3
         version: 1.69.5
