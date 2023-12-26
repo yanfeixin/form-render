@@ -50,7 +50,8 @@
     "dev": "pnpm run -C examples/vue3 dev",
     "rm": "node -r @esbuild-kit/cjs-loader scripts/del",
     "build": "pnpm run -C build build",
-    "stub": "pnpm run -r --parallel stub"
+    "stub": "pnpm run -r --parallel stub",
+    "docs:dev": "pnpm run -C docs dev"
   },
   "keywords": [],
   "author": "",
