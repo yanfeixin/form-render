@@ -2,12 +2,12 @@
  * @Author: caohao
  * @Date: 2023-12-18 10:15:35
  * @LastEditors: caohao
- * @LastEditTime: 2023-12-18 10:21:57
+ * @LastEditTime: 2023-12-27 16:54:27
  * @Description:
  */
-import type { App, Plugin } from 'vue'
+import type { App, Plugin } from "vue"
 
-import { KButton } from './components/button'
+import { KButton } from "./components/button"
 
 const component = [KButton] as Plugin[]
 

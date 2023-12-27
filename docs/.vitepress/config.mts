@@ -2,11 +2,12 @@
  * @Author: caohao
  * @Date: 2023-12-26 11:06:08
  * @LastEditors: caohao
- * @LastEditTime: 2023-12-26 18:47:39
+ * @LastEditTime: 2023-12-27 13:50:58
  * @Description:
  */
 import { defineConfig } from 'vitepress'
-
+import { sidebar } from './config/navigation'
+import nav from './navigation/nav.json'
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: 'My Awesome Project',
@@ -20,10 +21,11 @@ export default defineConfig({
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     logo: '/logo2.png',
-    nav: [
-      { text: '首页', link: '/' },
-      { text: '组件', link: '/markdown-examples' },
-    ],
+    // nav: [
+    //   { text: '首页', link: '/' },
+    //   { text: '组件', link: '/markdown-examples' },
+    // ],
+    nav,
     // 展示搜索框
     search: {
       provider: 'algolia',
@@ -41,16 +43,16 @@ export default defineConfig({
     // search: {
     //   provider: 'local',
     // },
-    sidebar: [
-      {
-        text: 'Examples',
-        items: [
-          { text: 'Markdown Examples', link: '/markdown-examples' },
-          { text: 'Runtime API Examples', link: '/api-examples' },
-        ],
-      },
-    ],
-
+    // sidebar: [
+    //   {
+    //     text: 'Examples',
+    //     items: [
+    //       { text: 'Markdown Examples', link: '/markdown-examples' },
+    //       { text: 'Runtime API Examples', link: '/api-examples' },
+    //     ],
+    //   },
+    // ],
+    sidebar,
     socialLinks: [{ icon: 'github', link: 'https://github.com/vuejs/vitepress' }],
   },
 })
