@@ -2,7 +2,7 @@
  * @Author: caohao
  * @Date: 2023-12-26 11:06:08
  * @LastEditors: caohao
- * @LastEditTime: 2023-12-28 17:29:05
+ * @LastEditTime: 2023-12-29 14:25:41
  * @Description:
  */
 import { defineConfig } from "vitepress"
@@ -12,13 +12,23 @@ import nav from "./navigation/nav.json"
 export default defineConfig({
   title: "My Awesome Project",
   description: "A VitePress Site",
-  head: [["link", { rel: "icon", type: "image/svg+xml", href: "https://cn.vitejs.dev/viteconf.svg" }]],
-  vite: {
-    server: {
-      host: true,
-    },
-    plugins: [],
-  },
+  // lastUpdated: true,
+  head: [
+    ["link", { rel: "icon", type: "image/svg+xml", href: "/favicon.ico" }],
+    [
+      "link",
+      {
+        rel: "manifest",
+        href: "/manifest.webmanifest",
+      },
+    ],
+    [
+      "script",
+      {
+        src: "/registerSW.js",
+      },
+    ],
+  ],
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     logo: "/logo2.png",
@@ -55,5 +65,8 @@ export default defineConfig({
     // ],
     sidebar,
     socialLinks: [{ icon: "github", link: "https://github.com/vuejs/vitepress" }],
+  },
+  markdown: {
+    // config: (md: markdownit) => mdPlugin(md),
   },
 })

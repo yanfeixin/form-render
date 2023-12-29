@@ -6,13 +6,15 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vitepress dev",
-    "docs:build": "vitepress build",
-    "docs:preview": "vitepress preview"
+    "build": "vitepress build",
+    "preview": "vitepress preview"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "vite-plugin-inspect": "^0.7.38",
+    "vite-plugin-pwa": "^0.16.4",
     "vitepress": "1.0.0-rc.4"
   }
 }
