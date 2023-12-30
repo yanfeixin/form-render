@@ -2,12 +2,13 @@
  * @Author: caohao
  * @Date: 2023-12-26 11:06:08
  * @LastEditors: caohao
- * @LastEditTime: 2023-12-29 14:25:41
+ * @LastEditTime: 2023-12-31 01:47:28
  * @Description:
  */
 import { defineConfig } from "vitepress"
 import { sidebar } from "./config/navigation"
 import nav from "./navigation/nav.json"
+import { mdPlugin } from "./config/plugins"
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: "My Awesome Project",
@@ -67,6 +68,6 @@ export default defineConfig({
     socialLinks: [{ icon: "github", link: "https://github.com/vuejs/vitepress" }],
   },
   markdown: {
-    // config: (md: markdownit) => mdPlugin(md),
+    config: (md) => mdPlugin(md),
   },
 })

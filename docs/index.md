@@ -1,9 +1,8 @@
 ---
-# https://vitepress.dev/reference/default-theme-home-page
 layout: home
 
 hero:
-  name: 'My Awesome Project'
+  name: "My Awesome Project"
   text: 风起于青萍之末
   tagline: Answer Explanation All
   image:

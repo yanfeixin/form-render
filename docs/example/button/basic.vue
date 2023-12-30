@@ -1,9 +1,10 @@
 <!--
- * @Author: caohao
- * @Date: 2023-12-27 14:59:41
- * @LastEditors: caohao
- * @LastEditTime: 2023-12-27 15:00:08
  * @Description: 
+ * @Version: 2.0
+ * @Autor: caohao
+ * @Date: 2023-12-31 00:19:26
+ * @LastEditors: caohao
+ * @LastEditTime: 2023-12-31 00:23:16
 -->
 <template>
   <k-button class="button" type="primary">按钮实例</k-button>

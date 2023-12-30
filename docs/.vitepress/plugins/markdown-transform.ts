@@ -4,12 +4,11 @@
  * @Autor: caohao
  * @Date: 2023-12-28 17:27:00
  * @LastEditors: caohao
- * @LastEditTime: 2023-12-29 13:44:24
+ * @LastEditTime: 2023-12-31 01:56:17
  */
 import fs from "fs"
 import path from "path"
 import glob from "fast-glob"
-
 import type { Plugin } from "vite"
 import { projRoot } from "../utils/paths"
 
@@ -20,9 +19,13 @@ export function MarkdownTransform(): Plugin {
     name: "md-transform-plus",
     enforce: "pre",
     async transform(code, id) {
+      //|| id.includes("index.md")
       if (!id.endsWith(".md")) return
-      console.log(id)
+      const IndexId = path.join(projRoot, "/index.md")
+      if (id === IndexId) return
+
       const componentId = path.basename(id, ".md")
+
       const filePath = path
         .relative(path.resolve(id, ".."), `${path.resolve(projRoot, "example", `${componentId}/*.vue`)}`)
         .split(path.sep)
@@ -32,7 +35,6 @@ export function MarkdownTransform(): Plugin {
         footers: [],
         scriptSetups: [`const demos = import.meta.globEager('${filePath.startsWith("../") ? filePath : `./${filePath}`}')`, `const path = '${filePath}'`],
       }
-
       return combineMarkdown(code, [combineScriptSetup(append.scriptSetups), ...append.headers], append.footers)
     },
   }
