@@ -2,7 +2,7 @@
  * @Author: caohao
  * @Date: 2023-12-18 10:08:36
  * @LastEditors: caohao
- * @LastEditTime: 2023-12-23 15:28:23
+ * @LastEditTime: 2024-01-02 11:12:56
  * @Description:
  */
 import path from "path"
@@ -18,12 +18,10 @@ export interface BuildInfo {
   output: {
     // es
     name: string
-    // dist/xs-components
     path: string
   }
 
   bundle: {
-    // xs-components/es
     path: string
   }
 }

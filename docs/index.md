@@ -1,8 +1,11 @@
 ---
 layout: home
 
+title: My Awesome Project
+titleTemplate: Next Generation Frontend Tooling
+
 hero:
-  name: "My Awesome Project"
+  name: My Awesome Project
   text: 风起于青萍之末
   tagline: Answer Explanation All
   image:
@@ -10,7 +13,7 @@ hero:
     alt: Vite
   actions:
     - theme: brand
-      text: Markdown Examples
+      text:  Markdown Examples
       link: /guide/getting-started
     - theme: alt
       text: Components
@@ -22,7 +25,7 @@ features:
     details: 打包器支持组件、Hooks、Utils，可按需引入，支持TypeScript，让所有注意力都能放在文档编写和组件开发上
   - icon: 🔗
     title: 支持CDN引入
-    details: 支持打包输出小巧的CDN模块，可同时支持UnPkg、JsDelivr CDN引入方式
+    details: 支持打包输出小巧的CDN模块，可同时支持UnPkg、JsDelivr CDN引入方式 
   - icon: ⚡️
     title: VitePress
     details: Vue官方文档主题：VitePress，免去写样式的烦恼，自带夜间模式，可自定义主题，你的风格由你自己定义
@@ -36,3 +39,4 @@ features:
     title: 规范检查
     details: 内置Eslint、Prettier、CommitLint工具更好统一你的代码风格，提交检查规范，方便你更好管理你的组件库，
 ---
+

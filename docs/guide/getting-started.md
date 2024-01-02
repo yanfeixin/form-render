@@ -1,3 +1,11 @@
+<!--
+ * @Description: 
+ * @Version: 2.0
+ * @Autor: caohao
+ * @Date: 2024-01-02 09:44:18
+ * @LastEditors: caohao
+ * @LastEditTime: 2024-01-02 10:58:45
+-->
 # 开始
 
 ## 开发环境
@@ -9,14 +17,6 @@ node -v
 # v16+
 ```
 
-## 代码拉取
-
-``` sh
-# （https or ssh）
-git clone https://github.com/jsxiaosi/xs-components-lib.git
-
-git clone git@github.com:jsxiaosi/xs-components-lib.git
-```
 
 ## 使用
 

@@ -1,26 +1,28 @@
 {
-  "name": "docs",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "@king-one/docs",
+  "version": "1.0.4",
+  "type": "module",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vitepress dev",
-    "build": "vitepress build",
+    "build": "vitepress build .",
     "preview": "vitepress preview"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "dependencies": {
+    "markdown-it": "^13.0.1",
+    "markdown-it-container": "^3.0.0"
+  },
   "devDependencies": {
     "@types/escape-html": "^1.0.2",
     "@types/markdown-it-container": "^2.0.6",
     "@types/prismjs": "^1.26.0",
+    "@vue/tsconfig": "^0.4.0",
+    "element-plus": "^2.4.4",
     "escape-html": "^1.0.3",
+    "fast-glob": "^3.3.1",
     "kolorist": "^1.8.0",
     "prismjs": "^1.29.0",
-    "markdown-it": "^13.0.1",
-    "markdown-it-container": "^3.0.0",
+    "vite": "4.3.9",
     "vite-plugin-inspect": "^0.7.38",
     "vite-plugin-pwa": "^0.16.4",
     "vitepress": "1.0.0-rc.4"

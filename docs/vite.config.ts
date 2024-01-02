@@ -1,31 +1,36 @@
 /*
- * @Description:
+ * @Description: 
  * @Version: 2.0
  * @Autor: caohao
- * @Date: 2023-12-29 09:49:05
+ * @Date: 2024-01-02 09:44:18
  * @LastEditors: caohao
- * @LastEditTime: 2023-12-31 00:48:52
+ * @LastEditTime: 2024-01-02 11:12:14
  */
 import path from "path"
 import type { UserConfig } from "vite"
 import Inspect from "vite-plugin-inspect"
+import vueJsx from "@vitejs/plugin-vue-jsx"
 import { VitePWA } from "vite-plugin-pwa"
 import { MarkdownTransform } from "./.vitepress/plugins/markdown-transform"
+
 export default (): UserConfig => {
   return {
+    base: "comdocs",
     resolve: {
       alias: [
         {
           find: "~/",
           replacement: `${path.resolve(__dirname, "./.vitepress")}/`,
         },
+       
       ],
     },
     server: {
       host: true,
     },
     plugins: [
-      Inspect(),
+      vueJsx(),
+      Inspect(), // only applies in dev mode
       MarkdownTransform(),
       VitePWA({
         includeAssets: ["favicon.svg", "favicon.ico", "robots.txt", "apple-touch-icon.png"],
