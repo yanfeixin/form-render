@@ -5,8 +5,11 @@
     <div class="example">
       <Example :file="pathName" :demo="formatPathDemos[pathName]" />
       <div class="op-btns">
-        <span class="op-btn" @click="copyCode">复制</span>
-        <span class="op-btn" @click="toggleSourceVisible">显示源代码</span>
+        <RiFileCopyLine  class="op-btn" @click="copyCode"></RiFileCopyLine>
+        <!-- <VIcon class="op-btn" name="icon-fuzhi" @click="copyCode"></VIcon> -->
+        <!-- <span class="op-btn" @click="copyCode">复制</span> -->
+        <RiCodeLine class="op-btn" @click="toggleSourceVisible"></RiCodeLine>
+        <!-- <span class="op-btn" @click="toggleSourceVisible">显示源代码</span> -->
         <!-- <VIcon class="op-btn" name="icon-github"></VIcon>
       <VIcon class="op-btn" name="icon-fuzhi" @click="copyCode"></VIcon>
       <VIcon class="op-btn" name="icon-zitidaima" @click="toggleSourceVisible"></VIcon> -->
@@ -29,6 +32,8 @@
   import Example from './v-example.vue';
   import SourceCode from './v-source-code.vue';
   import VTransition from './v-transition.vue';
+  import RiFileCopyLine from './icons/RiFileCopyLine.vue'
+  import RiCodeLine from './icons/RiCodeLine.vue'
   // import VIcon from './v-icon.vue';
   import message from './message';
 
