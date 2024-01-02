@@ -2,7 +2,7 @@
  * @Author: caohao
  * @Date: 2023-10-12 10:02:50
  * @LastEditors: caohao
- * @LastEditTime: 2023-12-23 14:46:43
+ * @LastEditTime: 2024-01-02 20:10:34
  * @Description:
  */
 import path from "path"
@@ -16,7 +16,7 @@ import chalk from "chalk"
 import dartSass from "sass"
 import gulpSass from "gulp-sass"
 import { copyfont, minifontCss } from "./gulpfile.base"
-import { getAntdvPath, pkThemeRoot, epOutThemeRoot, withTaskName } from "../../utils"
+import { getAntdvPath, pkThemeRoot, withTaskName } from "../../utils"
 const sass = gulpSass(dartSass)
 
 // 编译 SASS

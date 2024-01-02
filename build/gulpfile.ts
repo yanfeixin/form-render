@@ -4,7 +4,7 @@
  * @Autor: caohao
  * @Date: 2023-10-04 01:03:22
  * @LastEditors: caohao
- * @LastEditTime: 2023-12-24 19:03:46
+ * @LastEditTime: 2024-01-02 21:03:13
  */
 import { deleteSync } from "del"
 import type { TaskFunction } from "gulp"
@@ -59,6 +59,7 @@ export const testModel = async () => {
 }
 //  parallel(copyTypesDefinitions)
 export default series(
+  // runTask('testModel'),
   clean,
   loadEnv,
   buildTheme,
