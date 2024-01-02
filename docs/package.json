@@ -23,6 +23,7 @@
     "kolorist": "^1.8.0",
     "prismjs": "^1.29.0",
     "vite": "4.3.9",
+    "@vitejs/plugin-vue-jsx": "3.0.1",
     "vite-plugin-inspect": "^0.7.38",
     "vite-plugin-pwa": "^0.16.4",
     "vitepress": "1.0.0-rc.4"
