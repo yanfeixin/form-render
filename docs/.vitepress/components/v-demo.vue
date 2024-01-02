@@ -5,10 +5,16 @@
     <div class="example">
       <Example :file="pathName" :demo="formatPathDemos[pathName]" />
       <div class="op-btns">
-        <RiFileCopyLine  class="op-btn" @click="copyCode"></RiFileCopyLine>
+        <Tooltip  placement="top" content="复制代码">
+          <RiFileCopyLine  class="op-btn" @click="copyCode"></RiFileCopyLine>
+        </Tooltip>
+      
         <!-- <VIcon class="op-btn" name="icon-fuzhi" @click="copyCode"></VIcon> -->
         <!-- <span class="op-btn" @click="copyCode">复制</span> -->
-        <RiCodeLine class="op-btn" @click="toggleSourceVisible"></RiCodeLine>
+        <Tooltip  placement="top" content="显示源代码">
+          <RiCodeLine class="op-btn" @click="toggleSourceVisible"></RiCodeLine>
+        </Tooltip>
+      
         <!-- <span class="op-btn" @click="toggleSourceVisible">显示源代码</span> -->
         <!-- <VIcon class="op-btn" name="icon-github"></VIcon>
       <VIcon class="op-btn" name="icon-fuzhi" @click="copyCode"></VIcon>
@@ -27,6 +33,7 @@
   </ClientOnly>
 </template>
 <script setup lang="ts">
+  import Tooltip from './Tooltip.vue'
   import { computed, ref } from 'vue';
   import { useClipboard } from '@vueuse/core';
   import Example from './v-example.vue';
