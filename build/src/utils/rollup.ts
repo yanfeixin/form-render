@@ -2,7 +2,7 @@
  * @Author: caohao
  * @Date: 2023-11-06 20:17:06
  * @LastEditors: caohao
- * @LastEditTime: 2023-12-13 13:43:36
+ * @LastEditTime: 2024-01-02 21:28:02
  * @Description:
  */
 import { resolve } from 'path'
@@ -62,7 +62,7 @@ export const generateExternal = async (buildType: 'node' | 'cdn') => {
   if (buildType === 'cdn') {
     return [...peerDependencies]
   }
-  return [...dependencies, ...peerDependencies]
+  return [...dependencies, ...peerDependencies, 'vue']
 }
 
 /**
