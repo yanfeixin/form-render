@@ -2,29 +2,29 @@
  * @Author: caohao
  * @Date: 2023-11-06 19:57:56
  * @LastEditors: caohao
- * @LastEditTime: 2023-12-23 15:35:24
+ * @LastEditTime: 2024-01-03 17:13:15
  * @Description:
  */
-import { resolve } from "path"
-import { rollup } from "rollup"
-import glob from "fast-glob"
+import { resolve } from 'path'
+import { rollup } from 'rollup'
+import glob from 'fast-glob'
 
-import type { OutputOptions } from "rollup"
-import { pkgRoot, getAntdvPath } from "../utils/paths"
+import type { OutputOptions } from 'rollup'
+import { pkgRoot, getAntdvPath, epFiles } from '../utils/paths'
 
-import { buildCdnConfig, buildConfigEntries, rollupBuildPlugins, generateExternal } from "../utils"
+import { buildCdnConfig, buildConfigEntries, rollupBuildPlugins, generateExternal } from '../utils'
 // import { generateExternal, rollupBuildPlugins } from '../utils/rollup'
 
 export const excludeFiles = (files: string[]) => {
-  const excludes = ["node_modules", "test", "dist", "core"]
+  const excludes = ['node_modules', 'test', 'dist', 'core']
   return files.filter((path) => !excludes.some((exclude) => path.includes(exclude)))
 }
 
 // node
 export const buildNodeModules = async () => {
-  const { epRoot } = getAntdvPath()
+  const { epRoot, PKG_NAME } = getAntdvPath()
   const input = excludeFiles(
-    await glob("**/*.{js,ts,vue}", {
+    await glob([...epFiles, `${PKG_NAME}/**/*.{js,ts,vue}`], {
       cwd: pkgRoot,
       absolute: true,
       onlyFiles: true,
@@ -34,7 +34,7 @@ export const buildNodeModules = async () => {
   const bundle = await rollup({
     input,
     plugins: rollupBuildPlugins(),
-    external: await generateExternal("node"),
+    external: await generateExternal('node'),
     treeshake: false,
   })
   const buildConfigList = buildConfigEntries()
@@ -42,7 +42,7 @@ export const buildNodeModules = async () => {
     return {
       format: config.format,
       dir: config.output.path,
-      exports: module === "cjs" ? "named" : undefined,
+      exports: module === 'cjs' ? 'named' : undefined,
       preserveModules: true,
       preserveModulesRoot: epRoot,
       // preserveModulesRoot: pkgRoot,
@@ -62,9 +62,9 @@ export const buildNodeModules = async () => {
 export const buildCdnModules = async () => {
   const { epRoot } = getAntdvPath()
   const bundle = await rollup({
-    input: resolve(epRoot, "index.ts"),
+    input: resolve(epRoot, 'index.ts'),
     plugins: rollupBuildPlugins(true),
-    external: await generateExternal("cdn"),
+    external: await generateExternal('cdn'),
     treeshake: false,
   })
   const buildCdnConfigList = buildCdnConfig()

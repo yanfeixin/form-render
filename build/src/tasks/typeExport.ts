@@ -1,19 +1,19 @@
-import path from "path"
-import { mkdir, readFile, writeFile } from "fs/promises"
-import consola from "consola"
-import * as vueCompiler from "vue/compiler-sfc"
-import glob from "fast-glob"
-import chalk from "chalk"
-import { Project } from "ts-morph"
+import path from 'path'
+import { mkdir, readFile, writeFile } from 'fs/promises'
+import consola from 'consola'
+import * as vueCompiler from 'vue/compiler-sfc'
+import glob from 'fast-glob'
+import chalk from 'chalk'
+import { Project } from 'ts-morph'
 
-import type { CompilerOptions, SourceFile } from "ts-morph"
+import type { CompilerOptions, SourceFile } from 'ts-morph'
 // import { copyFile } from 'fs-extra';
-import { buildOutput, pkgRoot, projRoot, getAntdvPath } from "../utils/paths"
-import { excludeFiles } from "./buildModules"
+import { buildOutput, pkgRoot, projRoot, getAntdvPath } from '../utils/paths'
+import { excludeFiles } from './buildModules'
 
-const TSCONFIG_PATH = path.resolve(projRoot, "tsconfig.web.json")
-const outDir = path.resolve(buildOutput, "types")
-import { pathRewriter } from "../utils/pkg"
+const TSCONFIG_PATH = path.resolve(projRoot, 'tsconfig.web.json')
+const outDir = path.resolve(buildOutput, 'types')
+import { pathRewriter } from '../utils/pkg'
 /**
  * https://github.com/egoist/vue-dts-gen/blob/main/src/index.ts
  */
@@ -33,10 +33,10 @@ export const generateTypesDefinitions = async () => {
   })
 
   const sourceFiles = await addSourceFiles(project)
-  consola.success("Added source files")
+  consola.success('Added source files')
 
   typeCheck(project)
-  consola.success("Type check passed!")
+  consola.success('Type check passed!')
 
   await project.emit({
     emitOnlyDtsFiles: true,
@@ -58,7 +58,7 @@ export const generateTypesDefinitions = async () => {
         recursive: true,
       })
 
-      await writeFile(filepath, pathRewriter("esm")(outputFile.getText()), "utf8")
+      await writeFile(filepath, pathRewriter('esm')(outputFile.getText()), 'utf8')
 
       consola.success(chalk.green(`Definition for file: ${chalk.bold(relativePath)} generated`))
     })
@@ -71,10 +71,10 @@ export const generateTypesDefinitions = async () => {
 
 async function addSourceFiles(project: Project) {
   // project.addSourceFileAtPath(path.resolve(projRoot, 'typings/env.d.ts'))
-  const { epRoot } = getAntdvPath()
-  const globSourceFile = "**/*.{js?(x),ts?(x),vue}"
+  const { epRoot, PKG_NAME } = getAntdvPath()
+  const globSourceFile = '**/*.{js?(x),ts?(x),vue}'
   const filePaths = excludeFiles(
-    await glob([globSourceFile, "!antdv/**/*"], {
+    await glob([globSourceFile, `!${PKG_NAME}/**/*`], {
       cwd: pkgRoot,
       absolute: true,
       onlyFiles: true,
@@ -90,20 +90,20 @@ async function addSourceFiles(project: Project) {
   const sourceFiles: SourceFile[] = []
   await Promise.all([
     ...epPaths.map(async (file) => {
-      const content = await readFile(path.resolve(epRoot, file), "utf-8")
-      if (file.endsWith(".vue")) {
-        const hasTsNoCheck = content.includes("@ts-nocheck")
+      const content = await readFile(path.resolve(epRoot, file), 'utf-8')
+      if (file.endsWith('.vue')) {
+        const hasTsNoCheck = content.includes('@ts-nocheck')
         const sfc = vueCompiler.parse(content)
         const { script, scriptSetup } = sfc.descriptor
         if (script || scriptSetup) {
-          let content = (hasTsNoCheck ? "// @ts-nocheck\n" : "") + (script?.content ?? "")
+          let content = (hasTsNoCheck ? '// @ts-nocheck\n' : '') + (script?.content ?? '')
           if (scriptSetup) {
             const compiled = vueCompiler.compileScript(sfc.descriptor, {
-              id: "xxx",
+              id: 'xxx',
             })
             content += compiled.content
           }
-          const lang = scriptSetup?.lang || script?.lang || "js"
+          const lang = scriptSetup?.lang || script?.lang || 'js'
           const sourceFile = project.createSourceFile(path.resolve(pkgRoot, `${file}.${lang}`), content)
           sourceFiles.push(sourceFile)
         }
@@ -124,7 +124,7 @@ function typeCheck(project: Project) {
   const diagnostics = project.getPreEmitDiagnostics()
   if (diagnostics.length > 0) {
     consola.error(project.formatDiagnosticsWithColorAndContext(diagnostics))
-    const err = new Error("Failed to generate dts.")
+    const err = new Error('Failed to generate dts.')
     consola.error(err)
     throw err
   }
