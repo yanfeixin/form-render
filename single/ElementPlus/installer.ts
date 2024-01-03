@@ -4,14 +4,13 @@
  * @Autor: caohao
  * @Date: 2023-12-28 11:21:08
  * @LastEditors: caohao
- * @LastEditTime: 2024-01-02 23:49:22
+ * @LastEditTime: 2023-12-28 14:10:54
  */
-import type { App, Plugin } from 'vue'
+import type { App, Plugin } from "vue"
 
-import { KButton } from './components/button'
-import { KDemo } from './components/demo'
+import { KButton } from "./components/button"
 
-const component = [KButton, KDemo] as Plugin[]
+const component = [KButton] as Plugin[]
 
 // export type ObjectPlugin<Options = any[]> = {
 //   install: PluginInstallFunction<Options>
