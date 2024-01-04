@@ -1,5 +1,5 @@
 import path from 'path'
-import { mkdir, readFile, writeFile } from 'fs/promises'
+import { mkdir, readFile, writeFile, readdir } from 'fs/promises'
 import consola from 'consola'
 import * as vueCompiler from 'vue/compiler-sfc'
 import glob from 'fast-glob'
@@ -8,9 +8,8 @@ import { Project } from 'ts-morph'
 
 import type { CompilerOptions, SourceFile } from 'ts-morph'
 // import { copyFile } from 'fs-extra';
-import { buildOutput, pkgRoot, projRoot, getAntdvPath } from '../utils/paths'
+import { buildOutput, pkgRoot, projRoot, getAntdvPath, getDirs } from '../utils/paths'
 import { excludeFiles } from './buildModules'
-
 const TSCONFIG_PATH = path.resolve(projRoot, 'tsconfig.web.json')
 const outDir = path.resolve(buildOutput, 'types')
 import { pathRewriter } from '../utils/pkg'
@@ -71,17 +70,18 @@ export const generateTypesDefinitions = async () => {
 
 async function addSourceFiles(project: Project) {
   // project.addSourceFileAtPath(path.resolve(projRoot, 'typings/env.d.ts'))
-  const { epRoot, PKG_NAME } = getAntdvPath()
-  const globSourceFile = '**/*.{js?(x),ts?(x),vue}'
+  const { epRoot, PKG_NAME, epOutput } = getAntdvPath()
+  const dirs = await getDirs(path.resolve(epOutput, 'es'))
+  const globSourceFile = dirs.map((dir) => `${dir}/**/*.{js?(x),ts?(x),vue}`)
   const filePaths = excludeFiles(
-    await glob([globSourceFile, `!${PKG_NAME}/**/*`], {
+    await glob(globSourceFile, {
       cwd: pkgRoot,
       absolute: true,
       onlyFiles: true,
     })
   )
   const epPaths = excludeFiles(
-    await glob(globSourceFile, {
+    await glob('**/*.{js?(x),ts?(x),vue}', {
       cwd: epRoot,
       onlyFiles: true,
     })

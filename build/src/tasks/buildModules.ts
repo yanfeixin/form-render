@@ -2,7 +2,7 @@
  * @Author: caohao
  * @Date: 2023-11-06 19:57:56
  * @LastEditors: caohao
- * @LastEditTime: 2024-01-03 17:13:15
+ * @LastEditTime: 2024-01-03 17:46:13
  * @Description:
  */
 import { resolve } from 'path'
@@ -16,7 +16,7 @@ import { buildCdnConfig, buildConfigEntries, rollupBuildPlugins, generateExterna
 // import { generateExternal, rollupBuildPlugins } from '../utils/rollup'
 
 export const excludeFiles = (files: string[]) => {
-  const excludes = ['node_modules', 'test', 'dist', 'core']
+  const excludes = ['node_modules', 'test', 'dist'] //'core'
   return files.filter((path) => !excludes.some((exclude) => path.includes(exclude)))
 }
 
@@ -24,7 +24,8 @@ export const excludeFiles = (files: string[]) => {
 export const buildNodeModules = async () => {
   const { epRoot, PKG_NAME } = getAntdvPath()
   const input = excludeFiles(
-    await glob([...epFiles, `${PKG_NAME}/**/*.{js,ts,vue}`], {
+    // await glob([...epFiles, `${PKG_NAME}/**/*.{js,ts,vue}`], {
+    await glob(`${PKG_NAME}/**/*.{js,ts,vue}`, {
       cwd: pkgRoot,
       absolute: true,
       onlyFiles: true,

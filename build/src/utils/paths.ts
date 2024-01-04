@@ -4,9 +4,11 @@
  * @Autor: caohao
  * @Date: 2023-10-04 01:08:42
  * @LastEditors: caohao
- * @LastEditTime: 2024-01-03 17:13:24
+ * @LastEditTime: 2024-01-03 19:32:34
  */
 import { resolve } from 'node:path'
+import { readdir } from 'fs/promises'
+import { statSync } from 'fs'
 // export const PKG_NAME = "king-one"
 export const PKG_PREFIX = '@king-one'
 export const PKG_HUMP_NAME = 'KingUI'
@@ -32,4 +34,14 @@ export const getAntdvPath = () => {
     epOutThemeRoot,
     epRoot,
   }
+}
+export const getDirs = async (dir) => {
+  const files = await readdir(dir)
+  const dirs = []
+  files.forEach((file) => {
+    const path = resolve(dir, file)
+    var stats = statSync(path)
+    if (stats.isDirectory()) dirs.push(file)
+  })
+  return dirs
 }
