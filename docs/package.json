@@ -12,6 +12,9 @@
     "markdown-it": "^13.0.1",
     "markdown-it-container": "^3.0.0"
   },
+  "peerDependencies": {
+    "vue": "^3.4.0"
+  },
   "devDependencies": {
     "@floating-ui/vue": "^1.0.2",
     "@types/escape-html": "^1.0.2",

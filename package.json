@@ -59,6 +59,10 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "engines": {
+    "node": ">=18.12.0",
+    "pnpm": ">=8.1.0"
+  },
   "devDependencies": {
     "@astrojs/cli-kit": "^0.3.0",
     "@esbuild-kit/cjs-loader": "^2.4.4",
@@ -75,6 +79,6 @@
     "sass": "^1.69.3",
     "typescript": "^5.2.2",
     "unbuild": "^2.0.0",
-    "vue": "^3.3.4"
+    "vue": "^3.4.0"
   }
 }
