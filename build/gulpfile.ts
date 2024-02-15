@@ -4,7 +4,7 @@
  * @Autor: caohao
  * @Date: 2023-10-04 01:03:22
  * @LastEditors: caohao
- * @LastEditTime: 2024-01-03 22:50:51
+ * @LastEditTime: 2024-02-07 01:24:11
  */
 import { deleteSync } from 'del'
 import type { TaskFunction } from 'gulp'
@@ -25,6 +25,7 @@ import {
   withTaskName,
   copyThemeCdn,
   copyComponentsPackages,
+  setPkgRoot,
 } from './src'
 import { copyTypesDefinitions } from './src/tasks'
 import { resolve } from 'node:path'
@@ -41,6 +42,7 @@ export const loadEnv: TaskFunction = (done) => {
   const { mode } = argvs
   const envPath = resolve(buildRoot, `.env${mode ? `.${mode}` : ``}`)
   dotenv.config({ path: envPath })
+  setPkgRoot(process.env.PKG_ROOT_PATH)
   done()
 }
 

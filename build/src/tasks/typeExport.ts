@@ -33,7 +33,6 @@ export const generateTypesDefinitions = async () => {
 
   const sourceFiles = await addSourceFiles(project)
   consola.success('Added source files')
-
   typeCheck(project)
   consola.success('Type check passed!')
 
@@ -70,7 +69,7 @@ export const generateTypesDefinitions = async () => {
 
 async function addSourceFiles(project: Project) {
   // project.addSourceFileAtPath(path.resolve(projRoot, 'typings/env.d.ts'))
-  const { epRoot, PKG_NAME, epOutput } = getAntdvPath()
+  const { epRoot, epOutput } = getAntdvPath()
   const dirs = await getDirs(path.resolve(epOutput, 'es'))
   const globSourceFile = dirs.map((dir) => `${dir}/**/*.{js?(x),ts?(x),vue}`)
   const filePaths = excludeFiles(
@@ -105,16 +104,18 @@ async function addSourceFiles(project: Project) {
           }
           const lang = scriptSetup?.lang || script?.lang || 'js'
           const sourceFile = project.createSourceFile(path.resolve(pkgRoot, `${file}.${lang}`), content)
+          // const paksourceFile = project.createSourceFile(path.resolve(projRoot, 'node_modules', '@king-one/antdv', `${file}.${lang}`), content)
+          // sourceFiles.push(paksourceFile)
           sourceFiles.push(sourceFile)
         }
       } else {
         sourceFiles.push(project.createSourceFile(path.resolve(pkgRoot, file), content))
       }
     }),
-    ...filePaths.map(async (file) => {
-      const sourceFile = project.addSourceFileAtPath(file)
-      sourceFiles.push(sourceFile)
-    }),
+    // ...filePaths.map(async (file) => {
+    //   const sourceFile = project.addSourceFileAtPath(file)
+    //   sourceFiles.push(sourceFile)
+    // }),
   ])
 
   return sourceFiles

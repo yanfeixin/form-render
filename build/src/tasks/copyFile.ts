@@ -2,30 +2,30 @@
  * @Author: caohao
  * @Date: 2023-12-11 14:46:53
  * @LastEditors: caohao
- * @LastEditTime: 2023-12-24 19:03:17
+ * @LastEditTime: 2024-02-07 02:03:03
  * @Description:
  */
-import { resolve, join } from "path"
-import { copy, copyFile } from "fs-extra"
-import type { TaskFunction } from "gulp"
-import { parallel } from "gulp"
-import { buildOutput, buildConfig, getAntdvPath } from "../utils"
-import type { Module } from "../utils"
+import { resolve, join } from 'path'
+import { copy, copyFile } from 'fs-extra'
+import type { TaskFunction } from 'gulp'
+import { parallel } from 'gulp'
+import { buildOutput, buildConfig, getAntdvPath } from '../utils'
+import type { Module } from '../utils'
 export const copyTypesDefinitions: TaskFunction = (done) => {
-  const src = resolve(buildOutput, "types", "packages")
+  const src = resolve(buildOutput, 'types', process.env.PKG_ROOT_PATH)
   const config = buildConfig()
   const copyTypes = (module: Module) =>
     Object.assign(() => copy(src, config[module].output.path), {
       displayName: `copyTypes:${module}`,
     })
 
-  return parallel(copyTypes("esm"), copyTypes("cjs"))(done)
+  return parallel(copyTypes('esm'), copyTypes('cjs'))(done)
 }
 export const copyThemeCdn = () => {
   const { epOutput, epOutputCdn } = getAntdvPath()
-  return copyFile(resolve(epOutput, "theme-chalk", "index.css"), join(epOutputCdn, "index.css"))
+  return copyFile(resolve(epOutput, 'theme-chalk', 'index.css'), join(epOutputCdn, 'index.css'))
 }
 export const copyComponentsPackages = () => {
   const { epRoot, epOutput } = getAntdvPath()
-  return copyFile(resolve(epRoot, "package.json"), join(epOutput, "package.json"))
+  return copyFile(resolve(epRoot, 'package.json'), join(epOutput, 'package.json'))
 }

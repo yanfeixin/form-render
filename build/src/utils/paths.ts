@@ -4,7 +4,7 @@
  * @Autor: caohao
  * @Date: 2023-10-04 01:08:42
  * @LastEditors: caohao
- * @LastEditTime: 2024-01-03 19:32:34
+ * @LastEditTime: 2024-02-07 16:02:02
  */
 import { resolve } from 'node:path'
 import { readdir } from 'fs/promises'
@@ -15,9 +15,8 @@ export const PKG_HUMP_NAME = 'KingUI'
 const THEME_FILE_NAME = 'theme-chalk'
 export const projRoot = resolve(__dirname, '..', '..', '..')
 export const buildRoot = resolve(projRoot, 'build')
-export const epFiles = ['hooks/**/*.{js,ts,vue}', 'utils/**/*.{js,ts,vue}']
 // packages
-export const pkgRoot = resolve(projRoot, 'packages')
+export let pkgRoot = resolve(projRoot, 'packages')
 export const pkThemeRoot = resolve(pkgRoot, THEME_FILE_NAME)
 // dist
 export const buildOutput = resolve(projRoot, 'dist')
@@ -44,4 +43,7 @@ export const getDirs = async (dir) => {
     if (stats.isDirectory()) dirs.push(file)
   })
   return dirs
+}
+export const setPkgRoot = (root: string) => {
+  pkgRoot = resolve(projRoot, root)
 }

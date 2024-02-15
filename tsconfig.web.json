@@ -9,7 +9,7 @@
       "skipLibCheck": true,
       "paths": {
           // "@king-one/*": ["packages/*"],
-          // "@king-one/antdv/*":["packages/components/*"]
+          // "@king-one/antdv/*":["packages/antdv/*"]
       }
     },
     "include": ["packages", "typings/vue-shim.d.ts"],
