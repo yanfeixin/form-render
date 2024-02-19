@@ -51,6 +51,7 @@
     "rm": "node -r @esbuild-kit/cjs-loader scripts/del",
     "build": "pnpm run -C build build",
     "build:core": "pnpm run -C build core",
+    "build:path": "pnpm run -C build path",
     "stub": "pnpm run -r --parallel stub",
     "docs:dev": "pnpm run -C docs dev",
     "docs:preview": "pnpm run -C docs preview",
