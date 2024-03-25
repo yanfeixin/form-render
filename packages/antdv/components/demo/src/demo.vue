@@ -4,19 +4,20 @@
  * @Autor: caohao
  * @Date: 2024-01-02 23:27:19
  * @LastEditors: caohao
- * @LastEditTime: 2024-01-02 23:55:06
+ * @LastEditTime: 2024-03-25 13:38:40
 -->
 <template>
-  <a-space wrap>
-    <a-button type="primary">Primary Button</a-button>
-    <a-button>Default Button</a-button>
-    <a-button type="dashed">Dashed Button</a-button>
-    <a-button type="text">Text Button</a-button>
-    <a-button type="link">Link Button</a-button>
-  </a-space>
+  <Space wrap>
+    <Button type="primary">Primary Button</Button>
+    <Button>Default Button</Button>
+    <Button type="dashed">Dashed Button</Button>
+    <Button type="text">Text Button</Button>
+    <Button type="link">Link Button</Button>
+  </Space>
 </template>
 
 <script setup lang="ts">
+import { Space, Button } from 'ant-design-vue'
 defineOptions({
   name: 'Demo',
 })

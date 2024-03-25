@@ -2,7 +2,7 @@
  * @Author: caohao
  * @Date: 2023-11-06 20:17:06
  * @LastEditors: caohao
- * @LastEditTime: 2024-01-02 21:28:02
+ * @LastEditTime: 2024-03-12 13:49:57
  * @Description:
  */
 import { resolve } from 'path'
@@ -15,7 +15,6 @@ import esbuild from 'rollup-plugin-esbuild'
 import type { InputPluginOption } from 'rollup'
 import { pkgRoot } from './paths'
 import { KingPlusAlias } from '../plugins/king-one-alias'
-
 /**
  * TODO: ReferenceError: __name is not defined
  * https://github.com/vuejs/core/issues/8303
@@ -83,8 +82,6 @@ export const rollupBuildPlugins = (minify?: boolean): InputPluginOption => {
     nodeResolve({
       extensions: ['.mjs', '.js', '.json', '.ts'],
     }),
-    // Rollup 识别 commonjs
-    commonjs(),
     // Esm 编译器
     esbuild({
       target: 'es2019',
@@ -94,6 +91,8 @@ export const rollupBuildPlugins = (minify?: boolean): InputPluginOption => {
       minify,
       // keepNames: true,
     }),
+    // Rollup 识别 commonjs
+    commonjs(),
   ]
   return plugins
 }

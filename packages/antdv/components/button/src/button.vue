@@ -4,10 +4,10 @@
  * @Autor: caohao
  * @Date: 2023-10-04 19:27:03
  * @LastEditors: caohao
- * @LastEditTime: 2023-12-13 09:10:18
+ * @LastEditTime: 2024-03-25 13:34:41
 -->
 <template>
-  <div :class="classes">我是一个button</div>
+  <div :class="classes" style="width: 100px">我是一个button</div>
 </template>
 
 <script setup lang="ts">

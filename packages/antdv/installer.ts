@@ -4,7 +4,7 @@
  * @Autor: caohao
  * @Date: 2023-12-28 11:21:08
  * @LastEditors: caohao
- * @LastEditTime: 2024-01-02 23:49:22
+ * @LastEditTime: 2024-03-25 19:14:59
  */
 import type { App, Plugin } from 'vue'
 
@@ -21,7 +21,7 @@ const component = [KButton, KDemo] as Plugin[]
 export const install = (app: App): any => {
   component.forEach((i) => app.use(i))
 }
-const Plugin = {
+const plugin = {
   install,
 }
-export default Plugin
+export default plugin
