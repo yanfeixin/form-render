@@ -104,6 +104,10 @@ async function addSourceFiles(project: Project) {
           }
           const lang = scriptSetup?.lang || script?.lang || 'js'
           const sourceFile = project.createSourceFile(path.resolve(pkgRoot, `${file}.${lang}`), content)
+          sourceFile
+            .getImportDeclarations()
+            .filter((declaration) => declaration.getModuleSpecifierValue() === 'ant-design-vue')
+            .forEach((declaration) => declaration.remove())
           // const paksourceFile = project.createSourceFile(path.resolve(projRoot, 'node_modules', '@king-one/antdv', `${file}.${lang}`), content)
           // sourceFiles.push(paksourceFile)
           sourceFiles.push(sourceFile)
