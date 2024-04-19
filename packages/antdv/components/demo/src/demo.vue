@@ -1,50 +1,20 @@
 <template>
-  <Tree v-model:expandedKeys="expandedKeys" v-model:selectedKeys="selectedKeys" v-model:checkedKeys="checkedKeys" checkable :Tree-data="treeData">
-    <template #title="{ title, key }">
-      <span v-if="key === '0-0-1-0'" style="color: #1890ff">{{ title }}</span>
-      <template v-else>{{ title }}</template>
-    </template>
-  </Tree>
+  <div>
+    <Space wrap>
+      <Button type="primary">Primary Button</Button>
+      <Button>Default Button</Button>
+      <Button type="dashed">Dashed Button</Button>
+      <Button type="text">Text Button</Button>
+      <Button type="link">Link Button</Button>
+    </Space>
+  </div>
 </template>
-<script lang="ts" setup>
-// @ts-nocheck
-import { Tree } from 'ant-design-vue'
-import { ref, watch } from 'vue'
-import type { TreeProps } from 'ant-design-vue'
 
-const treeData: TreeProps['treeData'] = [
-  {
-    title: 'parent 1',
-    key: '0-0',
-    children: [
-      {
-        title: 'parent 1-0',
-        key: '0-0-0',
-        disabled: true,
-        children: [
-          { title: 'leaf', key: '0-0-0-0', disableCheckbox: true },
-          { title: 'leaf', key: '0-0-0-1' },
-        ],
-      },
-      {
-        title: 'parent 1-1',
-        key: '0-0-1',
-        children: [{ key: '0-0-1-0', title: 'sss' }],
-      },
-    ],
-  },
-]
-
-const expandedKeys = ref<string[]>(['0-0-0', '0-0-1'])
-const selectedKeys = ref<string[]>(['0-0-0', '0-0-1'])
-const checkedKeys = ref<string[]>(['0-0-0', '0-0-1'])
-watch(expandedKeys, () => {
-  console.log('expandedKeys', expandedKeys)
-})
-watch(selectedKeys, () => {
-  console.log('selectedKeys', selectedKeys)
-})
-watch(checkedKeys, () => {
-  console.log('checkedKeys', checkedKeys)
+<script setup lang="ts">
+import { Button, Space } from 'ant-design-vue'
+defineOptions({
+  name: 'Demo',
 })
 </script>
+
+<style></style>

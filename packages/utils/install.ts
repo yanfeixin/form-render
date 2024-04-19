@@ -4,13 +4,13 @@
  * @Autor: caohao
  * @Date: 2023-10-04 19:33:11
  * @LastEditors: caohao
- * @LastEditTime: 2023-12-06 20:19:50
+ * @LastEditTime: 2024-03-29 14:48:38
  */
 import type { App, Directive } from 'vue'
 import type { SFCWithInstall } from './types'
 const defaultNamePrefix: string = 'K'
 export const withInstall = <T>(main: T) => {
-  ;(main as SFCWithInstall<T>).install = (app): void => {
+  ;(main as SFCWithInstall<T>).install = (app: App): void => {
     const comp: Record<string, any> = main as Record<string, any>
     app.component(defaultNamePrefix + comp.name, comp)
   }
