@@ -4,7 +4,7 @@
  * @Autor: caohao
  * @Date: 2023-10-04 01:03:22
  * @LastEditors: caohao
- * @LastEditTime: 2024-02-07 01:24:11
+ * @LastEditTime: 2024-04-19 16:35:19
  */
 import { deleteSync } from 'del'
 import type { TaskFunction } from 'gulp'
@@ -68,7 +68,8 @@ const buildProject = (done) => {
       parallel(copyTypesDefinitions, copyThemeCdn, copyComponentsPackages)
     )(done)
   } else {
-    series(parallel(buildCdnModules, buildNodeModules), generateTypesDefinitions, parallel(copyTypesDefinitions, copyComponentsPackages))(done)
+    // buildCdnModules
+    series(parallel(buildNodeModules), generateTypesDefinitions, parallel(copyTypesDefinitions, copyComponentsPackages))(done)
   }
 }
 //  parallel(copyTypesDefinitions)

@@ -2,7 +2,7 @@
  * @Author: caohao
  * @Date: 2023-11-06 20:17:06
  * @LastEditors: caohao
- * @LastEditTime: 2024-03-12 13:49:57
+ * @LastEditTime: 2024-04-19 16:32:46
  * @Description:
  */
 import { resolve } from 'path'
@@ -13,7 +13,7 @@ import { nodeResolve } from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import esbuild from 'rollup-plugin-esbuild'
 import type { InputPluginOption } from 'rollup'
-import { pkgRoot } from './paths'
+import { pkgRoot, getAntdvPath } from './paths'
 import { KingPlusAlias } from '../plugins/king-one-alias'
 /**
  * TODO: ReferenceError: __name is not defined
@@ -25,8 +25,12 @@ const __defProp = Object.defineProperty
 const __name = (target: any, value: any) => __defProp(target, 'name', { value, configurable: true })
 ;(globalThis as any).__name = __name
 
-export const epPackage = resolve(pkgRoot, 'antdv', 'package.json')
+// export const epPackage = resolve(pkgRoot, 'antdv', 'package.json')
 
+export const epPackage = () => {
+  const { PKG_NAME } = getAntdvPath()
+  return resolve(pkgRoot, PKG_NAME, 'package.json')
+}
 /**
  * 获取package.json文件内容
  * @param pkgPath package.json路径
@@ -57,7 +61,8 @@ export const getPackageDependencies = (pkgPath: string): Record<'dependencies' |
  * @returns string[]
  */
 export const generateExternal = async (buildType: 'node' | 'cdn') => {
-  const { dependencies, peerDependencies } = getPackageDependencies(epPackage)
+  const PackagePath = epPackage()
+  const { dependencies, peerDependencies } = getPackageDependencies(PackagePath)
   if (buildType === 'cdn') {
     return [...peerDependencies]
   }

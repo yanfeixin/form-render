@@ -1,0 +1,25 @@
+{
+  "name": "@king-one/file",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lib/index.js",
+  "module": "es/index.mjs",
+  "types": "es/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "buffer": "6.0.3",
+    "minio": "7.1.3"
+  },
+  "peerDependencies": {
+    "axios": "^1.6.2"
+  }
+}
