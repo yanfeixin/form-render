@@ -14,3 +14,8 @@ export interface InterUploadUrlApi {
   }
   storageType: 'Minio'
 }
+export interface InterDownFileData {
+  fileId: string
+  url?: string
+  [x: string]: any
+}

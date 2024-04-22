@@ -18,3 +18,14 @@ export const removeFileApi = <T>(params: any): Promise<T> =>
     url: '/file/info',
     params,
   })
+/**
+ * 批量下载文件
+ * @param data 文件ids
+ * @returns
+ */
+export const batchDwonloadApi = <T>(data: { fileIds: string[] }): Promise<T> =>
+  server({
+    method: 'post',
+    url: '/file/manager/batch/download/url',
+    data,
+  })

@@ -2,7 +2,7 @@
  * @Author: caohao
  * @Date: 2023-12-05 19:45:03
  * @LastEditors: caohao
- * @LastEditTime: 2024-04-19 16:21:04
+ * @LastEditTime: 2024-04-19 19:26:15
  * @Description: 
 -->
 <template>
@@ -11,12 +11,12 @@
 </template>
 
 <script setup lang="ts">
-import { MinioClient } from '@king-one/file'
+import { MinioClient } from '@king-one/file/src/minio'
 import HelloWorld from './components/HelloWorld.vue'
 const client = new MinioClient({
   baseUrl: '/api',
   // token: '123',
-  token: '6621c9bfbf223314240eed09',
+  token: '66225466bf22a670bcf6ef45',
   bucket: 'sign',
   business: 'chtest',
 })

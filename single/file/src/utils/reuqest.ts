@@ -12,7 +12,6 @@ server.interceptors.response.use(
     if (status === 0 || status === 200) {
       return res.data.data
     }
-    debugger
     return Promise.reject(res.data)
   },
   (error) => {

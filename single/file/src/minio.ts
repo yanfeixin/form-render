@@ -1,9 +1,9 @@
-import type { MinioProps, InterUploadUrlApi } from '../types'
+import type { MinioProps, InterUploadUrlApi, InterDownFileData } from '../types'
 import { Client } from 'minio'
-import * as Buffer from 'buffer'
+import Buffer from 'node:buffer'
 
 import server from './utils/reuqest'
-import { getUploadUrlApi, getFileInfoApi, removeFileApi } from './api/file'
+import { getUploadUrlApi, getFileInfoApi, removeFileApi, batchDwonloadApi } from './api/file'
 export class MinioClient {
   protected options: MinioProps
   protected routerKye: string = 'minio'
@@ -35,7 +35,6 @@ export class MinioClient {
       const info = await getFileInfoApi(fileInfo)
       return info as { fileId: string; url: string }
     } catch (error) {
-      debugger
       console.log(error)
       return Promise.reject(error)
     }
@@ -44,6 +43,20 @@ export class MinioClient {
     try {
       const res = await removeFileApi({ id })
       return res
+    } catch (error) {
+      return Promise.reject(error)
+    }
+  }
+  async batchDownload(fileList: InterDownFileData[]): Promise<InterDownFileData[]> {
+    try {
+      const fileIds = fileList.map((item) => item.fileId)
+      const res = await batchDwonloadApi<{ batchDownloadUrl: Record<string, string> }>({ fileIds: fileIds })
+      const { batchDownloadUrl } = res
+      for (let [key, val] of Object.entries(batchDownloadUrl)) {
+        const file = fileList.find((item) => item.fileId === key)
+        if (file) file.url = val
+      }
+      return fileList
     } catch (error) {
       return Promise.reject(error)
     }
@@ -69,7 +82,7 @@ export class MinioClient {
       reader.readAsArrayBuffer(file)
       reader.onload = async (e: any) => {
         const bf = e.target.result
-        var buffer = Buffer.Buffer.from(bf)
+        var buffer = window.Buffer.from(bf)
         reslove(buffer)
       }
     })
