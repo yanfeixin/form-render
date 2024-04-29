@@ -1,9 +1,11 @@
 import type { MinioProps, InterUploadUrlApi, InterDownFileData } from '../types'
 import { Client } from 'minio'
-import Buffer from 'node:buffer'
+// import Buffer from 'node:buffer'
+import * as Buffer from 'buffer'
 
 import server from './utils/reuqest'
 import { getUploadUrlApi, getFileInfoApi, removeFileApi, batchDwonloadApi } from './api/file'
+window.Buffer = Buffer.Buffer
 export class MinioClient {
   protected options: MinioProps
   protected routerKye: string = 'minio'
@@ -28,7 +30,7 @@ export class MinioClient {
         size: size,
         storeName: `${fileRes.fileId}.${fileType}`,
         type: fileType,
-        business: 'chtest', // 项目标识
+        business: this.options.business, // 项目标识
         id: fileRes.fileId,
         storageType: fileRes.storageType,
       }

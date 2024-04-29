@@ -2,7 +2,7 @@
  * @Author: caohao
  * @Date: 2023-12-05 19:45:03
  * @LastEditors: caohao
- * @LastEditTime: 2024-04-19 19:26:15
+ * @LastEditTime: 2024-04-23 14:47:02
  * @Description: 
 -->
 <template>
@@ -16,7 +16,7 @@ import HelloWorld from './components/HelloWorld.vue'
 const client = new MinioClient({
   baseUrl: '/api',
   // token: '123',
-  token: '66225466bf22a670bcf6ef45',
+  token: '66275613bf22e782f874e9ef',
   bucket: 'sign',
   business: 'chtest',
 })
