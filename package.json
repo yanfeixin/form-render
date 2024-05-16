@@ -53,6 +53,7 @@
     "build:core": "pnpm run -C build core",
     "build:path": "pnpm run -C build path",
     "build:file": "pnpm run -C build file",
+    "build:tapable": "pnpm run -C build tapable",
     "stub": "pnpm run -r --parallel stub",
     "docs:dev": "pnpm run -C docs dev",
     "docs:preview": "pnpm run -C docs preview",

@@ -17,18 +17,21 @@ import { pathRewriter } from '../utils/pkg'
  * https://github.com/egoist/vue-dts-gen/blob/main/src/index.ts
  */
 export const generateTypesDefinitions = async () => {
+  if (process.env.GENERATE_TYPE_DEFINITIONS === '0') {
+    return
+  }
   const compilerOptions: CompilerOptions = {
     emitDeclarationOnly: true,
     outDir,
     baseUrl: projRoot,
     preserveSymlinks: true,
     skipLibCheck: true,
-    noImplicitAny: false,
+    noImplicitAny: false
   }
   const project = new Project({
     compilerOptions,
     tsConfigFilePath: TSCONFIG_PATH,
-    skipAddingFilesFromTsConfig: true,
+    skipAddingFilesFromTsConfig: true
   })
 
   const sourceFiles = await addSourceFiles(project)
@@ -37,7 +40,7 @@ export const generateTypesDefinitions = async () => {
   consola.success('Type check passed!')
 
   await project.emit({
-    emitOnlyDtsFiles: true,
+    emitOnlyDtsFiles: true
   })
 
   const tasks = sourceFiles.map(async (sourceFile) => {
@@ -53,7 +56,7 @@ export const generateTypesDefinitions = async () => {
     const subTasks = emitFiles.map(async (outputFile) => {
       const filepath = outputFile.getFilePath()
       await mkdir(path.dirname(filepath), {
-        recursive: true,
+        recursive: true
       })
 
       await writeFile(filepath, pathRewriter('esm')(outputFile.getText()), 'utf8')
@@ -76,13 +79,13 @@ async function addSourceFiles(project: Project) {
     await glob(globSourceFile, {
       cwd: pkgRoot,
       absolute: true,
-      onlyFiles: true,
+      onlyFiles: true
     })
   )
   const epPaths = excludeFiles(
     await glob('**/*.{js?(x),ts?(x),vue}', {
       cwd: epRoot,
-      onlyFiles: true,
+      onlyFiles: true
     })
   )
 
@@ -98,7 +101,7 @@ async function addSourceFiles(project: Project) {
           let content = (hasTsNoCheck ? '// @ts-nocheck\n' : '') + (script?.content ?? '')
           if (scriptSetup) {
             const compiled = vueCompiler.compileScript(sfc.descriptor, {
-              id: 'xxx',
+              id: 'xxx'
             })
             content += compiled.content
           }
@@ -119,7 +122,7 @@ async function addSourceFiles(project: Project) {
     ...filePaths.map(async (file) => {
       const sourceFile = project.addSourceFileAtPath(file)
       sourceFiles.push(sourceFile)
-    }),
+    })
   ])
 
   return sourceFiles
