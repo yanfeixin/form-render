@@ -19,12 +19,24 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Ts Debug",
+            "name": "TS Debug",
             "skipFiles": [
                 "<node_internals>/**"
             ],
             "program": "${file}",
             "runtimeArgs": ["-r", "ts-node/register"]
-        }
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "TS ESM Debug",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "cwd": "${workspaceFolder}/examples/tapable",
+            "program": "${file}",
+            "runtimeArgs": ["--loader", "ts-node/esm"]
+        },
+      
     ]
 }

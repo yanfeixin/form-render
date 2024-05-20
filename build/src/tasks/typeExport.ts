@@ -17,9 +17,6 @@ import { pathRewriter } from '../utils/pkg'
  * https://github.com/egoist/vue-dts-gen/blob/main/src/index.ts
  */
 export const generateTypesDefinitions = async () => {
-  if (process.env.GENERATE_TYPE_DEFINITIONS === '0') {
-    return
-  }
   const compilerOptions: CompilerOptions = {
     emitDeclarationOnly: true,
     outDir,

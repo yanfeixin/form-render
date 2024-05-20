@@ -4,9 +4,9 @@
  * @Autor: caohao
  * @Date: 2024-05-14 10:54:53
  * @LastEditors: caohao
- * @LastEditTime: 2024-05-16 16:36:57
+ * @LastEditTime: 2024-05-20 14:28:47
  */
-import { SyncWaterfallHook } from '@king-one/tapable'
+const { SyncWaterfallHook } = require('@king-one/tapable')
 
 interface InterPlugin {
   name: string

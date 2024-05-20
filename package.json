@@ -72,6 +72,7 @@
     "@king-one/antdv": "workspace:^",
     "@king-one/core": "workspace:^",
     "@king-one/hooks": "workspace:^",
+    "@king-one/tapable": "workspace:^",
     "@king-one/theme-chalk": "workspace:^",
     "@king-one/utils": "workspace:^",
     "@types/node": "^20.8.2",

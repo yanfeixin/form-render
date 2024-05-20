@@ -2,7 +2,7 @@
  * @Author: caohao
  * @Date: 2023-11-06 19:57:56
  * @LastEditors: caohao
- * @LastEditTime: 2024-02-07 16:01:59
+ * @LastEditTime: 2024-05-20 14:48:31
  * @Description:
  */
 import { resolve } from 'path'
@@ -16,7 +16,7 @@ import { buildCdnConfig, buildConfigEntries, rollupBuildPlugins, generateExterna
 // import { generateExternal, rollupBuildPlugins } from '../utils/rollup'
 
 export const excludeFiles = (files: string[]) => {
-  const excludes = ['node_modules', 'test', 'dist'] //'core'
+  const excludes = ['node_modules', 'test', 'dist', 'build.config.ts'] //'core'
   return files.filter((path) => !excludes.some((exclude) => path.includes(exclude)))
 }
 
@@ -28,7 +28,7 @@ export const buildNodeModules = async () => {
     await glob(`${PKG_NAME}/**/*.{js,ts,vue}`, {
       cwd: pkgRoot,
       absolute: true,
-      onlyFiles: true,
+      onlyFiles: true
     })
   )
 
@@ -36,7 +36,7 @@ export const buildNodeModules = async () => {
     input,
     plugins: rollupBuildPlugins(),
     external: await generateExternal('node'),
-    treeshake: false,
+    treeshake: false
   })
   const buildConfigList = buildConfigEntries()
   const options = buildConfigList.map(([module, config]): OutputOptions => {
@@ -48,7 +48,7 @@ export const buildNodeModules = async () => {
       preserveModulesRoot: epRoot,
       // preserveModulesRoot: pkgRoot,
       sourcemap: true,
-      entryFileNames: `[name].${config.ext}`,
+      entryFileNames: `[name].${config.ext}`
     }
   })
 
@@ -66,7 +66,7 @@ export const buildCdnModules = async () => {
     input: resolve(epRoot, 'index.ts'),
     plugins: rollupBuildPlugins(true),
     external: await generateExternal('cdn'),
-    treeshake: false,
+    treeshake: false
   })
   const buildCdnConfigList = buildCdnConfig()
   await Promise.all(
