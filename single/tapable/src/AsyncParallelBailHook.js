@@ -65,7 +65,7 @@ const COMPILE = function (options) {
   return factory.create(options)
 }
 
-function AsyncParallelBailHook(args = [], name = undefined) {
+export function AsyncParallelBailHook(args = [], name = undefined) {
   const hook = new Hook(args, name)
   hook.constructor = AsyncParallelBailHook
   hook.compile = COMPILE
@@ -75,5 +75,3 @@ function AsyncParallelBailHook(args = [], name = undefined) {
 }
 
 AsyncParallelBailHook.prototype = null
-
-module.exports = AsyncParallelBailHook

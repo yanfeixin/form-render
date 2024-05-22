@@ -2,7 +2,7 @@ import { deprecate } from './util-browser.js'
 
 const defaultFactory = (key, hook) => hook
 
-class HookMap {
+export class HookMap {
   constructor(factory, name = undefined) {
     this._map = new Map()
     this.name = name
@@ -51,5 +51,3 @@ HookMap.prototype.tapAsync = deprecate(function (key, options, fn) {
 HookMap.prototype.tapPromise = deprecate(function (key, options, fn) {
   return this.for(key).tapPromise(options, fn)
 }, 'HookMap#tapPromise(key,…) is deprecated. Use HookMap#for(key).tapPromise(…) instead.')
-
-module.exports = HookMap

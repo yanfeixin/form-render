@@ -42,5 +42,3 @@ export class MultiHook {
     )
   }
 }
-
-module.exports = MultiHook
