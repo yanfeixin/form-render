@@ -1,13 +1,12 @@
 import path from 'path'
-import { mkdir, readFile, writeFile, readdir } from 'fs/promises'
+import { mkdir, readFile, writeFile } from 'fs/promises'
 import consola from 'consola'
-import * as vueCompiler from 'vue/compiler-sfc'
+// import * as vueCompiler from 'vue/compiler-sfc'
 import glob from 'fast-glob'
 import chalk from 'chalk'
 import { Project } from 'ts-morph'
 
 import type { CompilerOptions, SourceFile } from 'ts-morph'
-// import { copyFile } from 'fs-extra';
 import { buildOutput, pkgRoot, projRoot, getAntdvPath, getDirs } from '../utils/paths'
 import { excludeFiles } from './buildModules'
 const TSCONFIG_PATH = path.resolve(projRoot, 'tsconfig.web.json')
@@ -89,32 +88,38 @@ async function addSourceFiles(project: Project) {
   const sourceFiles: SourceFile[] = []
   await Promise.all([
     ...epPaths.map(async (file) => {
-      const content = await readFile(path.resolve(epRoot, file), 'utf-8')
+      // const content = await readFile(path.resolve(epRoot, file), 'utf-8')
+      // if (file.endsWith('.vue')) {
+      //   const hasTsNoCheck = content.includes('@ts-nocheck')
+      //   const sfc = vueCompiler.parse(content)
+      //   const { script, scriptSetup } = sfc.descriptor
+      //   if (script || scriptSetup) {
+      //     let content = (hasTsNoCheck ? '// @ts-nocheck\n' : '') + (script?.content ?? '')
+      //     if (scriptSetup) {
+      //       const compiled = vueCompiler.compileScript(sfc.descriptor, {
+      //         id: 'xxx'
+      //       })
+      //       content += compiled.content
+      //     }
+      //     const lang = scriptSetup?.lang || script?.lang || 'js'
+      //     const sourceFile = project.createSourceFile(path.resolve(pkgRoot, `${file}.${lang}`), content)
+      //     sourceFile
+      //       .getImportDeclarations()
+      //       .filter((declaration) => declaration.getModuleSpecifierValue() === 'ant-design-vue')
+      //       .forEach((declaration) => declaration.remove())
+      //     sourceFiles.push(sourceFile)
+      //   }
+      // } else {
+      //   sourceFiles.push(project.createSourceFile(path.resolve(pkgRoot, file), content))
+      // }
+      let content = await readFile(path.resolve(epRoot, file), 'utf-8')
+      let filePath = path.resolve(pkgRoot, file)
+      // 不处理 .vue 文件
       if (file.endsWith('.vue')) {
-        const hasTsNoCheck = content.includes('@ts-nocheck')
-        const sfc = vueCompiler.parse(content)
-        const { script, scriptSetup } = sfc.descriptor
-        if (script || scriptSetup) {
-          let content = (hasTsNoCheck ? '// @ts-nocheck\n' : '') + (script?.content ?? '')
-          if (scriptSetup) {
-            const compiled = vueCompiler.compileScript(sfc.descriptor, {
-              id: 'xxx'
-            })
-            content += compiled.content
-          }
-          const lang = scriptSetup?.lang || script?.lang || 'js'
-          const sourceFile = project.createSourceFile(path.resolve(pkgRoot, `${file}.${lang}`), content)
-          // sourceFile
-          //   .getImportDeclarations()
-          //   .filter((declaration) => declaration.getModuleSpecifierValue() === 'ant-design-vue')
-          //   .forEach((declaration) => declaration.remove())
-          // const paksourceFile = project.createSourceFile(path.resolve(projRoot, 'node_modules', '@king-one/antdv', `${file}.${lang}`), content)
-          // sourceFiles.push(paksourceFile)
-          sourceFiles.push(sourceFile)
-        }
-      } else {
-        sourceFiles.push(project.createSourceFile(path.resolve(pkgRoot, file), content))
+        content = 'export default {} as any' // 确保你得 .vue 文件只有一个默认导出 否则会报错
+        filePath = path.resolve(pkgRoot, `${file}.ts`)
       }
+      sourceFiles.push(project.createSourceFile(filePath, content))
     }),
     ...filePaths.map(async (file) => {
       const sourceFile = project.addSourceFileAtPath(file)

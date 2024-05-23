@@ -11,9 +11,10 @@
 </template>
 
 <script setup lang="ts">
+// @ts-nocheck
 import { Button, Space } from 'ant-design-vue'
 defineOptions({
-  name: 'Demo',
+  name: 'Demo'
 })
 </script>
 
