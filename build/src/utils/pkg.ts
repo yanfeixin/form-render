@@ -5,7 +5,7 @@
  * @LastEditTime: 2024-03-13 14:34:27
  * @Description:
  */
-import { getAntdvPath, PKG_PREFIX } from './paths'
+import { getLibPath, PKG_PREFIX } from './paths'
 import { buildConfig } from './buildConfig'
 
 import type { Module } from './buildConfig'
@@ -13,7 +13,7 @@ import type { Module } from './buildConfig'
 /** used for type generator */
 export const pathRewriter = (module: Module) => {
   const config = buildConfig()[module]
-  const { PKG_NAME } = getAntdvPath()
+  const { PKG_NAME } = getLibPath()
   return (id: string) => {
     id = id.replaceAll(`/${PKG_NAME}`, ``)
     id = id.replaceAll(`${PKG_PREFIX}/`, `${PKG_PREFIX}/${config.bundle.path}/`)

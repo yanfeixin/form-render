@@ -10,7 +10,7 @@ import { rollup } from 'rollup'
 import glob from 'fast-glob'
 
 import type { OutputOptions } from 'rollup'
-import { pkgRoot, getAntdvPath } from '../utils/paths'
+import { pkgRoot, getLibPath } from '../utils/paths'
 
 import { buildCdnConfig, buildConfigEntries, rollupBuildPlugins, generateExternal } from '../utils'
 // import { generateExternal, rollupBuildPlugins } from '../utils/rollup'
@@ -22,7 +22,7 @@ export const excludeFiles = (files: string[]) => {
 
 // node
 export const buildNodeModules = async () => {
-  const { epRoot, PKG_NAME } = getAntdvPath()
+  const { epRoot, PKG_NAME } = getLibPath()
   const input = excludeFiles(
     // await glob([...epFiles, `${PKG_NAME}/**/*.{js,ts,vue}`], {
     await glob(`${PKG_NAME}/**/*.{js,ts,vue}`, {
@@ -61,7 +61,7 @@ export const buildNodeModules = async () => {
 
 // cdn
 export const buildCdnModules = async () => {
-  const { epRoot } = getAntdvPath()
+  const { epRoot } = getLibPath()
   const bundle = await rollup({
     input: resolve(epRoot, 'index.ts'),
     plugins: rollupBuildPlugins(true),

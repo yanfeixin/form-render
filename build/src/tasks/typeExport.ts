@@ -7,7 +7,7 @@ import chalk from 'chalk'
 import { Project } from 'ts-morph'
 
 import type { CompilerOptions, SourceFile } from 'ts-morph'
-import { buildOutput, pkgRoot, projRoot, getAntdvPath, getDirs } from '../utils/paths'
+import { buildOutput, pkgRoot, projRoot, getLibPath, getDirs } from '../utils/paths'
 import { excludeFiles } from './buildModules'
 const TSCONFIG_PATH = path.resolve(projRoot, 'tsconfig.web.json')
 const outDir = path.resolve(buildOutput, 'types')
@@ -68,7 +68,7 @@ export const generateTypesDefinitions = async () => {
 
 async function addSourceFiles(project: Project) {
   // project.addSourceFileAtPath(path.resolve(projRoot, 'typings/env.d.ts'))
-  const { epRoot, epOutput } = getAntdvPath()
+  const { epRoot, epOutput } = getLibPath()
   const dirs = await getDirs(path.resolve(epOutput, 'es'))
   const globSourceFile = dirs.map((dir) => `${dir}/**/*.{js?(x),ts?(x),vue}`)
   const filePaths = excludeFiles(

@@ -7,23 +7,23 @@
  */
 // import { PKG_NAME, PKG_PREFIX } from '@element-plus/build-constants'
 
-import type { Plugin } from "rollup"
-import { getAntdvPath, PKG_PREFIX } from "../utils/paths"
+import type { Plugin } from 'rollup'
+import { getLibPath, PKG_PREFIX } from '../utils/paths'
 
 export function KingPlusAlias(): Plugin {
-  const { PKG_NAME } = getAntdvPath()
-  const themeChalk = "theme-chalk"
+  const { PKG_NAME } = getLibPath()
+  const themeChalk = 'theme-chalk'
   const sourceThemeChalk = `${PKG_PREFIX}/${themeChalk}` as const
   const bundleThemeChalk = `${PKG_NAME}/${themeChalk}` as const
 
   return {
-    name: "king-one-alias",
+    name: 'king-one-alias',
     resolveId(id) {
       if (!id.startsWith(sourceThemeChalk)) return
       return {
         id: id.replaceAll(sourceThemeChalk, bundleThemeChalk),
-        external: "absolute",
+        external: 'absolute'
       }
-    },
+    }
   }
 }

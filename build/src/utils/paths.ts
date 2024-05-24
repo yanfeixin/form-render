@@ -20,7 +20,7 @@ export let pkgRoot = resolve(projRoot, 'packages')
 export const pkThemeRoot = resolve(pkgRoot, THEME_FILE_NAME)
 // dist
 export const buildOutput = resolve(projRoot, 'dist')
-export const getAntdvPath = () => {
+export const getLibPath = () => {
   const PKG_NAME = process.env.PKG_NAME // antdv
   const epRoot = resolve(pkgRoot, PKG_NAME)
   const epOutput = resolve(buildOutput, PKG_NAME) /* 根目录/dist/antdv  */
@@ -31,7 +31,7 @@ export const getAntdvPath = () => {
     epOutput,
     epOutputCdn,
     epOutThemeRoot,
-    epRoot,
+    epRoot
   }
 }
 export const getDirs = async (dir) => {

@@ -5,16 +5,16 @@
  * @LastEditTime: 2024-01-02 11:12:56
  * @Description:
  */
-import path from "path"
-import type { ModuleFormat, OutputOptions } from "rollup"
-import { PKG_HUMP_NAME, getAntdvPath } from "./paths"
+import path from 'path'
+import type { ModuleFormat, OutputOptions } from 'rollup'
+import { PKG_HUMP_NAME, getLibPath } from './paths'
 
-export const modules = ["esm", "cjs"] as const
+export const modules = ['esm', 'cjs'] as const
 export type Module = (typeof modules)[number]
 export interface BuildInfo {
-  module: "ESNext" | "CommonJS"
+  module: 'ESNext' | 'CommonJS'
   format: ModuleFormat
-  ext: "mjs" | "cjs" | "js"
+  ext: 'mjs' | 'cjs' | 'js'
   output: {
     // es
     name: string
@@ -26,53 +26,53 @@ export interface BuildInfo {
   }
 }
 export const buildConfig = (): Record<Module, BuildInfo> => {
-  const { epOutput, PKG_NAME } = getAntdvPath()
+  const { epOutput, PKG_NAME } = getLibPath()
   return {
     esm: {
-      module: "ESNext",
-      format: "esm",
-      ext: "mjs",
+      module: 'ESNext',
+      format: 'esm',
+      ext: 'mjs',
       output: {
-        name: "es",
-        path: path.resolve(epOutput, "es"),
+        name: 'es',
+        path: path.resolve(epOutput, 'es')
       },
       bundle: {
-        path: `${PKG_NAME}/es`,
-      },
+        path: `${PKG_NAME}/es`
+      }
     },
     cjs: {
-      module: "CommonJS",
-      format: "cjs",
-      ext: "js",
+      module: 'CommonJS',
+      format: 'cjs',
+      ext: 'js',
       output: {
-        name: "lib",
-        path: path.resolve(epOutput, "lib"),
+        name: 'lib',
+        path: path.resolve(epOutput, 'lib')
       },
       bundle: {
-        path: `${PKG_NAME}/lib`,
-      },
-    },
+        path: `${PKG_NAME}/lib`
+      }
+    }
   }
 }
 export const buildCdnConfig = (): OutputOptions[] => {
-  const { epOutputCdn } = getAntdvPath()
+  const { epOutputCdn } = getLibPath()
   return [
     {
-      format: "umd",
-      file: path.resolve(epOutputCdn, "index.cdn.js"),
-      exports: "named",
+      format: 'umd',
+      file: path.resolve(epOutputCdn, 'index.cdn.js'),
+      exports: 'named',
       name: PKG_HUMP_NAME,
       globals: {
-        vue: "Vue",
+        vue: 'Vue'
       },
-      sourcemap: true,
+      sourcemap: true
     },
     // https://github.com/vitejs/vite/issues/2204
     {
-      format: "esm",
-      file: path.resolve(epOutputCdn, "index.cdn.mjs"),
-      sourcemap: true,
-    },
+      format: 'esm',
+      file: path.resolve(epOutputCdn, 'index.cdn.mjs'),
+      sourcemap: true
+    }
   ]
 }
 export type BuildConfigEntries = [Module, BuildInfo][]

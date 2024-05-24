@@ -2,7 +2,7 @@
  * @Author: caohao
  * @Date: 2023-11-06 20:17:06
  * @LastEditors: caohao
- * @LastEditTime: 2024-04-19 16:32:46
+ * @LastEditTime: 2024-05-23 13:50:53
  * @Description:
  */
 import { resolve } from 'path'
@@ -13,7 +13,7 @@ import { nodeResolve } from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import esbuild from 'rollup-plugin-esbuild'
 import type { InputPluginOption } from 'rollup'
-import { pkgRoot, getAntdvPath } from './paths'
+import { pkgRoot, getLibPath } from './paths'
 import { KingPlusAlias } from '../plugins/king-one-alias'
 /**
  * TODO: ReferenceError: __name is not defined
@@ -28,7 +28,7 @@ const __name = (target: any, value: any) => __defProp(target, 'name', { value, c
 // export const epPackage = resolve(pkgRoot, 'antdv', 'package.json')
 
 export const epPackage = () => {
-  const { PKG_NAME } = getAntdvPath()
+  const { PKG_NAME } = getLibPath()
   return resolve(pkgRoot, PKG_NAME, 'package.json')
 }
 /**
@@ -51,7 +51,7 @@ export const getPackageDependencies = (pkgPath: string): Record<'dependencies' |
 
   return {
     dependencies: Object.keys(dependencies),
-    peerDependencies: Object.keys(peerDependencies),
+    peerDependencies: Object.keys(peerDependencies)
   }
 }
 
@@ -78,26 +78,26 @@ export const rollupBuildPlugins = (minify?: boolean): InputPluginOption => {
   const plugins: InputPluginOption = [
     KingPlusAlias(),
     vue({
-      isProduction: true,
+      isProduction: true
     }),
     vueJsx(),
     // 图片处理
     image(),
     // Rollup 处理外部模块
     nodeResolve({
-      extensions: ['.mjs', '.js', '.json', '.ts'],
+      extensions: ['.mjs', '.js', '.json', '.ts']
     }),
     // Esm 编译器
     esbuild({
       target: 'es2019',
       loaders: {
-        '.vue': 'ts',
+        '.vue': 'ts'
       },
-      minify,
+      minify
       // keepNames: true,
     }),
     // Rollup 识别 commonjs
-    commonjs(),
+    commonjs()
   ]
   return plugins
 }

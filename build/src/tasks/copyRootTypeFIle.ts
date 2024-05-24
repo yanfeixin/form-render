@@ -1,11 +1,11 @@
 import { parallel } from 'gulp'
 import { copyFile } from 'fs-extra'
 import type { TaskFunction } from 'gulp'
-import { buildConfig, getAntdvPath } from '../utils'
+import { buildConfig, getLibPath } from '../utils'
 import type { Module } from '../utils'
 import { resolve } from 'path'
 export const copyRootTypesDefinitions: TaskFunction = (done) => {
-  const { epRoot } = getAntdvPath()
+  const { epRoot } = getLibPath()
   const src = resolve(epRoot, 'index.d.ts')
   const config = buildConfig()
   const copyTypes = (module: Module) =>

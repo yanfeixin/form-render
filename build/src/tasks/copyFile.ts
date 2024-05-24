@@ -9,7 +9,7 @@ import { resolve, join } from 'path'
 import { copy, copyFile } from 'fs-extra'
 import type { TaskFunction } from 'gulp'
 import { parallel } from 'gulp'
-import { buildOutput, buildConfig, getAntdvPath } from '../utils'
+import { buildOutput, buildConfig, getLibPath } from '../utils'
 import type { Module } from '../utils'
 export const copyTypesDefinitions: TaskFunction = (done) => {
   const src = resolve(buildOutput, 'types', process.env.PKG_ROOT_PATH)
@@ -22,10 +22,10 @@ export const copyTypesDefinitions: TaskFunction = (done) => {
   return parallel(copyTypes('esm'), copyTypes('cjs'))(done)
 }
 export const copyThemeCdn = () => {
-  const { epOutput, epOutputCdn } = getAntdvPath()
+  const { epOutput, epOutputCdn } = getLibPath()
   return copyFile(resolve(epOutput, 'theme-chalk', 'index.css'), join(epOutputCdn, 'index.css'))
 }
 export const copyComponentsPackages = () => {
-  const { epRoot, epOutput } = getAntdvPath()
+  const { epRoot, epOutput } = getLibPath()
   return copyFile(resolve(epRoot, 'package.json'), join(epOutput, 'package.json'))
 }
