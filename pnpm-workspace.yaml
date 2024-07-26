@@ -1,0 +1,6 @@
+packages:
+  - docs/*
+  - internal/*
+  - packages/*
+  - examples/*
+  - single/*

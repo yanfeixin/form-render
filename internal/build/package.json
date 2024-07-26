@@ -1,0 +1,28 @@
+{
+  "name": "@king-one/build",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "",
+  "author": "",
+  "license": "ISC",
+  "keywords": [],
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "render": "gulp --require @esbuild-kit/cjs-loader -f ./gulpfile.ts --mode antdv"
+  },
+  "devDependencies": {
+    "@rollup/plugin-image": "^3.0.3",
+    "@types/gulp": "^4.0.17",
+    "dotenv": "^16.4.5",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^9.0.0",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-postcss": "^10.0.0",
+    "gulp-sass": "^5.1.0",
+    "minimist": "^1.2.8",
+    "rollup-plugin-esbuild": "^6.1.1",
+    "sass": "^1.77.8",
+    "ts-morph": "^23.0.0"
+  }
+}

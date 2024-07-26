@@ -1,0 +1,41 @@
+{
+  "name": "king-one",
+  "version": "1.0.0",
+  "description": "",
+  "author": "",
+  "license": "ISC",
+  "keywords": [],
+  "main": "index.js",
+  "engines": {
+    "node": ">=20",
+    "pnpm": "^8.1.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "rm": "node -r @esbuild-kit/cjs-loader scripts/del",
+    "demo": "node -r @esbuild-kit/cjs-loader scripts/demo",
+    "lint:fix": "eslint . --fix",
+    "build:antdv": "pnpm run -C internal/build render"
+  },
+  "dependencies": {
+    "vue": "^3.4.33"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^2.23.2",
+    "@esbuild-kit/cjs-loader": "^2.4.4",
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "^20.14.11",
+    "@vitejs/plugin-vue": "^5.0.5",
+    "@vitejs/plugin-vue-jsx": "^4.0.0",
+    "fast-glob": "^3.3.2",
+    "fs-extra": "^11.2.0",
+    "typescript": "^5.5.4",
+    "vite": "^5.3.4",
+    "vitepress": "^1.3.1"
+  },
+  "pnpm": {
+    "overrides": {
+      "eslint": "^8.56.0"
+    }
+  }
+}

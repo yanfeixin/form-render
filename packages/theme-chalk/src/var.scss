@@ -1,0 +1,9 @@
+//CSS 变量配置文件
+@use 'mixins/index.scss' as *;
+@use 'common/var' as *;
+:root {
+  @include set-css-var-value('color-white', $color-white);
+  @each $type in $types {
+    @include set-css-color-type($colors, $type);
+  }
+}

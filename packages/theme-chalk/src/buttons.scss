@@ -1,0 +1,11 @@
+@use 'common/var' as *;
+@use 'mixins/index' as *;
+@each $type in $types {
+  .#{bem('button', '', $type)} {
+    // --el-button-text-color: var(--el-color-#{$type});
+    @include css-var-from-global(('button', 'text-color'), ('color', $type));
+  }
+}
+.#{bem('button')} {
+  color: getCssVar('button', 'text-color');
+}
