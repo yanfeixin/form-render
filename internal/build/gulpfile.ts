@@ -1,7 +1,7 @@
 import { resolve } from 'node:path'
 import { remove } from 'fs-extra'
 import type { TaskFunction } from 'gulp'
-import { parallel, series } from 'gulp'
+import { series } from 'gulp'
 import minimist from 'minimist'
 import dotenv from 'dotenv'
 import { buildOutput, buildRoot, setPkgRoot, title } from './src/utils'
