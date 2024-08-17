@@ -1,6 +1,6 @@
 {
   "name": "@king-one/antdv-docs",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "",
   "author": "",
   "license": "ISC",
@@ -12,6 +12,5 @@
     "docs:build": "vitepress build",
     "docs:preview": "vitepress preview"
   },
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }
