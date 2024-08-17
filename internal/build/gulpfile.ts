@@ -4,7 +4,7 @@ import type { TaskFunction } from 'gulp'
 import { series } from 'gulp'
 import minimist from 'minimist'
 import dotenv from 'dotenv'
-import { buildOutput, buildRoot, setPkgRoot, title } from './src/utils'
+import { buildEnv, buildOutput, setPkgRoot, title } from './src/utils'
 import { buildTheme } from './src/tasks'
 
 // eslint-disable-next-line no-console
@@ -16,7 +16,7 @@ export const loadEnv: TaskFunction = (done) => {
   const argvs = minimist(process.argv.slice(2))
 
   const { mode } = argvs
-  const envPath = resolve(buildRoot, `.env${mode ? `.${mode}` : ``}`)
+  const envPath = resolve(buildEnv, `.env${mode ? `.${mode}` : ``}`)
   dotenv.config({ path: envPath })
   setPkgRoot(process.env.PKG_ROOT_PATH as string)
   done()

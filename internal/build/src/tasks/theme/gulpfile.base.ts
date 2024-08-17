@@ -20,7 +20,7 @@ export function minifontCss(config) {
       .pipe(
         cleanCSS({}, (details) => {
           consola.success(
-          `${chalk.cyan(details.name)}: ${chalk.yellow(details.stats.originalSize / 1000)} KB -> ${chalk.green(details.stats.minifiedSize / 1000)} KB`
+            `${chalk.cyan(details.name)}: ${chalk.yellow(details.stats.originalSize / 1000)} KB -> ${chalk.green(details.stats.minifiedSize / 1000)} KB`
           )
         })
       )

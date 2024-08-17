@@ -4,7 +4,7 @@ import type { Theme } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 import '@king-one/shared-docs/src/component/styles/theme.scss'
 // import { Demo } from '@king-one/shared-docs/src/components'
-import { AntDesignContainer, NaiveUIContainer } from '@king-one/shared-docs/src/component'
+import { AntDesignContainer } from '@king-one/shared-docs/src/component'
 
 export default {
   extends: DefaultTheme,
