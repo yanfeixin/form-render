@@ -11,12 +11,12 @@
     "pnpm": "^8.1.0"
   },
   "scripts": {
-    "log": "changeset",
+    "add": "changeset  && git add .",
     "version": "changeset version",
     "preinstall": "npx only-allow pnpm",
     "test": "echo \"Error: no test specified\" && exit 1",
     "rm": "node -r @esbuild-kit/cjs-loader scripts/del",
-    "demo": "node -r @esbuild-kit/cjs-loader scripts/demo",
+    "publish": "pnpm run version && node scripts/publish.mjs",
     "lint:fix": "eslint . --fix",
     "build:antdv": "pnpm run -C internal/build antdv",
     "build:tapable": "pnpm run -C internal/build tapable"

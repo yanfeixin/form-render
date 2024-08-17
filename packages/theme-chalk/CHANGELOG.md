@@ -1,5 +1,11 @@
 # @king-one/theme-chalk
 
+## 2.0.1
+
+### Patch Changes
+
+- c22cff9: feat：增加 changelog
+
 ## 2.0.0
 
 ### Major Changes
