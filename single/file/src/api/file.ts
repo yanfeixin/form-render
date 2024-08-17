@@ -21,11 +21,6 @@ export function removeFileApi<T>(params: any): Promise<T> {
     params
   })
 }
-/**
- * 批量下载文件
- * @param data 文件ids
- * @returns
- */
 export function batchDwonloadApi<T>(data: { fileIds: string[] }): Promise<T> {
   return server({
     method: 'post',

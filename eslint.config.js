@@ -2,7 +2,7 @@ const { antfu } = require('@antfu/eslint-config')
 
 module.exports = antfu(
   {
-    ignores: ['scripts', 'internal/build/src/utils/message.ts']
+    ignores: ['scripts', 'internal/build/src/utils/message.ts', 'docs/shared-docs']
   },
   {
     rules: {
