@@ -11,7 +11,7 @@ import { buildOutput, getDirs, getLibPath, pkgRoot, projRoot } from '../utils/pa
 import { pathRewriter } from '../utils/pkg'
 import { excludeFiles } from './buildModules'
 
-const TSCONFIG_PATH = path.resolve(projRoot, 'tsconfig.web.json')
+const TSCONFIG_PATH = path.resolve(projRoot, 'tsconfig.esnext.json')
 const outDir = path.resolve(buildOutput, 'types')
 /**
  * https://github.com/egoist/vue-dts-gen/blob/main/src/index.ts

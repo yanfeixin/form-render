@@ -27,7 +27,7 @@ const run = async (command, cwd = DistRoot) =>
         process.on("exit", onProcessExit)
     })
 const getPkgDirPath = async () => {
-    const pkgdir = readdirSync(DistRoot)[0]
+    const pkgdir = readdirSync(DistRoot).find(dir => !dir.includes('types'))
     const pkgPath = resolve(DistRoot, pkgdir)
     const data = readFileSync(resolve(pkgPath, 'package.json'), 'utf8');
 
@@ -41,6 +41,7 @@ const getPkgDirPath = async () => {
     const workLogPath = resolve(workDir.dir, 'CHANGELOG.md')
     const pkgLogPaht = resolve(pkgPath, 'CHANGELOG.md')
     copyFileSync(workLogPath, pkgLogPaht)
-    await run('pnpm publish --access public', pkgPath)
+    copyFileSync(resolve(workDir.dir, 'package.json'),  resolve(pkgPath, 'package.json'))
+    await run('npm publish', pkgPath)
 }
 await getPkgDirPath()

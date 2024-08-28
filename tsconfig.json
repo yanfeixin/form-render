@@ -7,7 +7,7 @@
       "path": "./tsconfig.build.json"
     },
     {
-      "path": "./tsconfig.pkg.json"
+      "path": "./tsconfig.esnext.json"
     }
   ],
   "files": []

@@ -1,3 +1,5 @@
+import { statSync } from 'node:fs'
+import { readdir } from 'node:fs/promises'
 import { resolve } from 'node:path'
 
 export const projRoot = resolve(__dirname, '..', '..', '..', '..')
@@ -30,4 +32,15 @@ export function getLibPath() {
 }
 export function setPkgRoot(root: string) {
   pkgRoot = resolve(projRoot, root)
+}
+export async function getDirs(dir) {
+  const files = await readdir(dir)
+  const dirs: string[] = []
+  files.forEach((file) => {
+    const path = resolve(dir, file)
+    const stats = statSync(path)
+    if (stats.isDirectory())
+      dirs.push(file)
+  })
+  return dirs
 }

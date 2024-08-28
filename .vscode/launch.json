@@ -9,7 +9,7 @@
       "request": "launch",
       "runtimeArgs": [
         "run-script",
-        "build:antdv"
+        "publish"
       ],
       "runtimeExecutable": "npm",
       "skipFiles": [
