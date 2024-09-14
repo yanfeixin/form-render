@@ -317,3 +317,15 @@ export function move<T>(
   }
   return array
 }
+// 数组里面的元素 随机排序
+export function shuffleArray(array: any[]) {
+  // 创建数组副本，避免修改原数组
+  const arr = array.slice()
+  for (let i = arr.length - 1; i > 0; i--) {
+    // 随机选择一个小于当前索引的数
+    const j = Math.floor(Math.random() * (i + 1));
+    // 交换当前元素与随机选中的元素
+    [arr[i], arr[j]] = [arr[j], arr[i]]
+  }
+  return arr
+}
