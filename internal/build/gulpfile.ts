@@ -1,11 +1,19 @@
+/*
+ * @Description:
+ * @Version: 2.0
+ * @Autor: caohao
+ * @Date: 2024-09-16 16:54:56
+ * @LastEditors: caohao
+ * @LastEditTime: 2024-09-17 00:42:05
+ */
 import { resolve } from 'node:path'
 import { remove } from 'fs-extra'
 import type { TaskFunction } from 'gulp'
-import { series } from 'gulp'
+import { parallel, series } from 'gulp'
 import minimist from 'minimist'
 import dotenv from 'dotenv'
 import { buildEnv, buildOutput, setPkgRoot, title } from './src/utils'
-import { buildTheme } from './src/tasks'
+import { buildCdnModules, buildNodeModules, buildTheme, copyComponentsPackages, copyThemeCdn, copyTypesDefinitions, generateTypesDefinitions } from './src/tasks'
 
 // eslint-disable-next-line no-console
 console.log(title('开始构建～～！'))
@@ -25,5 +33,8 @@ export default series(
   // runTask('testModel'),
   clean,
   loadEnv,
-  buildTheme
+  buildTheme,
+  parallel(buildCdnModules, buildNodeModules),
+  generateTypesDefinitions,
+  parallel(copyTypesDefinitions, copyThemeCdn, copyComponentsPackages)
 )
