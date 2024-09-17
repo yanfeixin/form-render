@@ -104,10 +104,10 @@ async function addSourceFiles(project: Project) {
           }
           const lang = scriptSetup?.lang || script?.lang || 'js'
           const sourceFile = project.createSourceFile(path.resolve(pkgRoot, `${file}.${lang}`), content)
-          sourceFile
-            .getImportDeclarations()
-            .filter(declaration => declaration.getModuleSpecifierValue() === 'ant-design-vue')
-            .forEach(declaration => declaration.remove())
+          // sourceFile
+          //   .getImportDeclarations()
+          //   .filter(declaration => declaration.getModuleSpecifierValue() === 'ant-design-vue')
+          //   .forEach(declaration => declaration.remove())
           sourceFiles.push(sourceFile)
         }
       }
