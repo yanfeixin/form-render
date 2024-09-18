@@ -5,5 +5,6 @@
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "types": ["vite/client"]
   },
-  "include": ["single/**/*", "typings/*.d.ts"]
+  "include": ["single/**/*", "packages/**/*", "typings/*.d.ts"],
+  "exclude": ["node_modules", "dist", "*.js", "build"]
 }
