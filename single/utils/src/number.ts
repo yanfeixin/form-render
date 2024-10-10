@@ -1,5 +1,5 @@
 export function rangeNumber(range: string) {
-  const pages = range.split(',').map(pageRange => pageRange.trim())
+  const pages = range.split(/[,，]/).map(pageRange => pageRange.trim())
 
   const result: number[] = []
   pages.forEach((pageRange) => {

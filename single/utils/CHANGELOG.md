@@ -1,5 +1,29 @@
 # @king-one/utils
 
+## 1.0.12
+
+### Patch Changes
+
+- fix：修复，完善页码相关函数
+
+## 1.0.11
+
+### Patch Changes
+
+- fix：修改 base64ToFile 方法
+
+## 1.0.10
+
+### Patch Changes
+
+- feat：增加方法 base64 转 file 对象
+
+## 1.0.9
+
+### Patch Changes
+
+- fix：增加页码验证函数
+
 ## 1.0.8
 
 ### Patch Changes
