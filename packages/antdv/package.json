@@ -1,5 +1,6 @@
 {
   "name": "@king-one/antdv",
+  "type": "module",
   "version": "2.0.1",
   "description": "",
   "author": "",
@@ -8,5 +9,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "peerDependencies": {
+    "ant-design-vue": "^4.2.4",
+    "async-validator": "^4.2.5",
+    "vue": "^3.4.34"
+  },
+  "dependencies": {
+    "@king-one/utils": "workspace:^"
   }
 }
