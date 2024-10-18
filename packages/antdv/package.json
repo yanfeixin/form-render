@@ -16,6 +16,7 @@
     "vue": "^3.4.34"
   },
   "dependencies": {
-    "@king-one/utils": "workspace:^"
+    "@king-one/utils": "workspace:^",
+    "vueuc": "^0.4.64"
   }
 }

@@ -11,12 +11,12 @@ import type { App, Directive, Plugin } from 'vue'
 export type SFCWithInstall<T> = T & Plugin
 
 const defaultNamePrefix: string = 'K'
-export function withInstall<T>(main: any) {
-  ;(main as SFCWithInstall<T>).install = (app: App): void => {
+export function withInstall<T>(main: T) {
+  (main as SFCWithInstall<T>).install = (app): void => {
     const comp: Record<string, any> = main as Record<string, any>
     app.component(defaultNamePrefix + comp.name, comp)
   }
-  return main as any
+  return main as SFCWithInstall<T>
 }
 
 // 注册指令

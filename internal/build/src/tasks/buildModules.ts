@@ -1,8 +1,8 @@
 /*
  * @Author: caohao
  * @Date: 2023-11-06 19:57:56
- * @LastEditors: caohao
- * @LastEditTime: 2024-05-20 14:48:31
+ * @LastEditors: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
+ * @LastEditTime: 2024-10-16 11:30:18
  * @Description:
  */
 import { resolve } from 'node:path'
@@ -25,7 +25,7 @@ export async function buildNodeModules() {
   const { epRoot, PKG_NAME } = getLibPath()
   const input = excludeFiles(
     // await glob([...epFiles, `${PKG_NAME}/**/*.{js,ts,vue}`], {
-    await glob(`${PKG_NAME}/**/*.{js,ts,vue}`, {
+    await glob(`${PKG_NAME}/**/*.{js,ts,vue,tsx}`, {
       cwd: pkgRoot,
       absolute: true,
       onlyFiles: true

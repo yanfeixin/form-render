@@ -2,5 +2,5 @@ packages:
   - docs/*
   - internal/*
   - packages/*
-  - examples/*
+  - playground/*
   - single/*
