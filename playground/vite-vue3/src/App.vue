@@ -1,6 +1,9 @@
 <script setup lang='ts'>
-import { KVirtualList } from '@king-one/antdv/src/virtual-list'
+import { KVirtualList } from '@king-one/antdv/components/virtual-list'
 
+function getRandomNumber(): number {
+  return Math.floor(Math.random() * (100 - 50 + 1)) + 100
+}
 const avatars = [
   'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg',
   'https://avatars.githubusercontent.com/u/20943608?s=60&v=4',
@@ -17,10 +20,11 @@ const messages = [
   '弗洛伊德阅读梦，发现一条直达潜意识的秘密通道。海明威阅读海，发现生命是一条要花一辈子才会上钩的鱼。凡高阅读麦田，发现艺术躲在太阳的背后乘凉。罗丹阅读人体，发现哥伦布没有发现的美丽海岸线。加缪阅读卡夫卡，发现真理已经被讲完一半'
 ]
 
-const items = Array.from({ length: 10000 }, (_, i) => ({
+const items = Array.from({ length: 10 }, (_, i) => ({
   key: `${i}`,
   value: i,
   avatar: avatars[i % avatars.length],
+  height: getRandomNumber(),
   message: messages[Math.floor(Math.random() * messages.length)]
 }))
 </script>
@@ -28,22 +32,24 @@ const items = Array.from({ length: 10000 }, (_, i) => ({
 <template>
   <KVirtualList style="max-height: 240px" :item-size="100" :items="items" item-resizable>
     <template #default="{ item, index }">
-      <div :key="item.key" class="item" :data-index="index">
-        <img class="avatar" :src="item.avatar" width="100%" height="100%" alt="">
+      <div :key="item.key" class="item" :style="{ height: `${item.height}px` }">
+        <img class="avatar" :data-index="index" :src="item.avatar" alt="" width="100%" height="100%">
+        <div>{{ item.message }}</div>
       </div>
     </template>
   </KVirtualList>
 </template>
 
-<style>
+<style lang="scss">
 .item {
   display: flex;
   align-items: flex-start;
+  border: 1px solid red;
 }
 .avatar {
   width: 28px;
   height: 28px;
-  border-radius: 50%;
+  /* border-radius: 50%; */
   margin-right: 10px;
 }
 </style>

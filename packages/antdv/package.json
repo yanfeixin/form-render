@@ -1,12 +1,14 @@
 {
   "name": "@king-one/antdv",
   "type": "module",
-  "version": "2.0.1",
+  "version": "1.0.0",
   "description": "",
   "author": "",
   "license": "ISC",
   "keywords": [],
-  "main": "index.js",
+  "main": "lib/index.js",
+  "module": "es/index.mjs",
+  "types": "es/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -15,8 +17,13 @@
     "async-validator": "^4.2.5",
     "vue": "^3.4.34"
   },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "dependencies": {
     "@king-one/utils": "workspace:^",
+    "evtd": "^0.2.4",
     "vueuc": "^0.4.64"
   }
 }

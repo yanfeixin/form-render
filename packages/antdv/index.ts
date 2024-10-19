@@ -1,4 +1,4 @@
 import installer from './installer'
 
-export * from './src'
+export * from './components'
 export default installer

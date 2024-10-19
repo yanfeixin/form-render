@@ -1,7 +1,5 @@
+import type { VirtualListItemData } from 'vueuc'
 import type { PropType } from 'vue'
-import type {
-  VirtualListItemData
-} from 'vueuc'
 
 export const virtualListProps = {
   items: {
@@ -12,10 +10,7 @@ export const virtualListProps = {
     type: Number,
     required: true
   },
-  keyField: {
-    type: String,
-    default: 'key'
-  },
+  itemResizable: Boolean,
   paddingTop: {
     type: [Number, String] as PropType<number | string>,
     default: 0
@@ -24,5 +19,11 @@ export const virtualListProps = {
     type: [Number, String] as PropType<number | string>,
     default: 0
   },
-  itemResizable: Boolean
+  keyField: {
+    type: String,
+    default: 'key'
+  },
+  onScroll: Function as PropType<() => void>,
+  onWheel: Function as PropType<(event: WheelEvent) => void>,
+  onResize: Function as PropType<(entry: ResizeObserverEntry) => void>
 } as const
