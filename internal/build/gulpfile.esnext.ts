@@ -6,12 +6,10 @@ import minimist from 'minimist'
 import dotenv from 'dotenv'
 
 import { buildEnv, buildOutput, setPkgRoot, title } from './src/utils'
-import { buildNodeModules, copyComponentsPackages, copyTypesDefinitions, generateTypesDefinitions } from './src/tasks'
+import { buildNodeModules, clean, copyComponentsPackages, copyTypesDefinitions, generateTypesDefinitions } from './src/tasks'
 // eslint-disable-next-line no-console
 console.log(title('开始构建～～！'))
-export const clean: TaskFunction = async () => {
-  return remove(buildOutput)
-}
+
 export const loadEnv: TaskFunction = (done) => {
   const argvs = minimist(process.argv.slice(2))
 
@@ -21,4 +19,4 @@ export const loadEnv: TaskFunction = (done) => {
   setPkgRoot(process.env.PKG_ROOT_PATH as string)
   done()
 }
-export default series(clean, loadEnv, series(parallel(buildNodeModules), generateTypesDefinitions, parallel(copyTypesDefinitions, copyComponentsPackages)))
+export default series(loadEnv, clean, series(parallel(buildNodeModules), generateTypesDefinitions, parallel(copyTypesDefinitions, copyComponentsPackages)))

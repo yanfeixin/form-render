@@ -79,10 +79,14 @@ async function addSourceFiles(project: Project) {
       onlyFiles: true
     })
   )
+  consola.warn(1)
+  // eslint-disable-next-line no-console
+  console.log(filePaths)
   const epPaths = excludeFiles(
     await glob('**/*.{js?(x),ts?(x),vue}', {
       cwd: epRoot,
-      onlyFiles: true
+      onlyFiles: true,
+      ignore: ['**/style/**', '**/styles/**']
     })
   )
 

@@ -1,14 +1,19 @@
 {
   "name": "@king-one/antdv",
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.0.8",
   "description": "",
   "author": "",
   "license": "ISC",
   "keywords": [],
-  "main": "lib/index.js",
-  "module": "es/index.mjs",
-  "types": "es/index.d.ts",
+  "main": "dist/lib/index.js",
+  "module": "dist/es/index.mjs",
+  "types": "dist/es/index.d.ts",
+  "files": [
+    "CHANGELOG.md",
+    "README.md",
+    "dist"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

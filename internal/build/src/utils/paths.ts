@@ -18,9 +18,9 @@ export const pkThemeRoot = resolve(pkgRoot, THEME_FILE_NAME)
 
 export function getLibPath() {
   const PKG_NAME = process.env.PKG_NAME as string // antdv
-  const epRoot = resolve(pkgRoot, PKG_NAME)
-  const epOutput = resolve(buildOutput, PKG_NAME) /* 根目录/dist/antdv  */
-  const epOutputCdn = resolve(epOutput, 'cdn') /* 根目录/dist/antdv/cdn  */
+  const epRoot = resolve(pkgRoot, PKG_NAME) // 根目录/packages/antdv
+  const epOutput = resolve(epRoot, 'dist') /* 根目录/packages/antdv/dist  */
+  const epOutputCdn = resolve(epOutput, 'cdn') /* 根目录/packages/antdv/dist/cdn  */
   const epOutThemeRoot = resolve(epOutput, THEME_FILE_NAME) /* 根目录/dist/antdv/theme-chalk  */
   return {
     PKG_NAME,
