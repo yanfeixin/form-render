@@ -1,7 +1,7 @@
 {
   "name": "@king-one/antdv",
   "type": "module",
-  "version": "1.0.8",
+  "version": "1.0.21",
   "description": "",
   "author": "",
   "license": "ISC",
@@ -20,6 +20,7 @@
   "peerDependencies": {
     "ant-design-vue": "^4.2.4",
     "async-validator": "^4.2.5",
+    "lodash-es": "^4.17.21",
     "vue": "^3.4.34"
   },
   "publishConfig": {

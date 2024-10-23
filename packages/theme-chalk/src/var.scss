@@ -6,4 +6,5 @@
   @each $type in $types {
     @include set-css-color-type($colors, $type);
   }
+  --king-transition-duration: 0.3s;
 }

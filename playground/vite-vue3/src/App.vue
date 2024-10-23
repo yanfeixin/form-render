@@ -32,7 +32,7 @@ const items = Array.from({ length: 10 }, (_, i) => ({
 <template>
   <KVirtualList style="max-height: 240px" :item-size="100" :items="items" item-resizable>
     <template #default="{ item, index }">
-      <div :key="item.key" class="item" :style="{ height: `${item.height}px` }">
+      <div :key="item.key" class="item" :style="{ height: `${item.height}px` }" :data-index="index">
         <img class="avatar" :data-index="index" :src="item.avatar" alt="" width="100%" height="100%">
         <div>{{ item.message }}</div>
       </div>
@@ -45,6 +45,7 @@ const items = Array.from({ length: 10 }, (_, i) => ({
   display: flex;
   align-items: flex-start;
   border: 1px solid red;
+  margin-bottom: 10px;
 }
 .avatar {
   width: 28px;

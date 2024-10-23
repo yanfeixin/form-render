@@ -163,6 +163,9 @@ importers:
       evtd:
         specifier: ^0.2.4
         version: 0.2.4
+      lodash-es:
+        specifier: ^4.17.21
+        version: 4.17.21
       vue:
         specifier: ^3.4.34
         version: 3.4.38(typescript@5.5.4)

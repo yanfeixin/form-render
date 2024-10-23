@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { VVirtualList, type VirtualListInst } from 'vueuc'
+import { onMounted, ref, toRaw } from 'vue'
+import { VVirtualList, type VirtualListScrollToOptions } from 'vueuc'
+import { debounce } from 'lodash-es'
 import scrollbar from '../../scroll-bar'
-import { virtualListProps } from './types'
+import { type VirtualListRef, virtualListProps } from './types'
 
 const props = defineProps(virtualListProps)
-const virtualListInstRef = ref<VirtualListInst | null>(null)
+const virtualListInstRef = ref<VirtualListRef | null>(null)
 const scrollbarInstRef = ref<InstanceType<typeof scrollbar> | null>(null)
 function getScrollContainer(): HTMLElement | null | undefined {
   return virtualListInstRef.value?.listElRef
@@ -14,17 +15,48 @@ function getScrollContent(): HTMLElement | null | undefined {
   return virtualListInstRef.value?.itemsElRef
 }
 const syncScrollbar = () => scrollbarInstRef.value?.sync()
+const debouncedLogViewportItems = debounce(() => {
+  if (virtualListInstRef.value) {
+    const scrollTop = virtualListInstRef.value.listElRef.scrollTop
+    const viewportItems = virtualListInstRef.value.viewportItems.map(item => toRaw(item))
+
+    props.onScroll?.({ viewportItems, scrollTop })
+  }
+}, 100)
 function handleScroll() {
-  props.onScroll?.()
+  debouncedLogViewportItems()
   syncScrollbar()
 }
+onMounted(() => {
+  setTimeout(() => {
+    syncScrollbar()
+  }, 100)
+})
+// 使用防抖函数包裹 console.log
+
 function handleResize() {
   syncScrollbar()
 }
+function scrollTo(
+  options: VirtualListScrollToOptions | number,
+  y?: number
+): void {
+  if (typeof options === 'number') {
+    virtualListInstRef.value?.scrollTo(options, y ?? 0)
+  }
+  else {
+    virtualListInstRef.value?.scrollTo(options)
+  }
+}
+defineExpose({
+  getScrollContainer,
+  getScrollContent,
+  scrollTo
+})
 </script>
 
 <template>
-  <scrollbar ref="scrollbarInstRef" style="max-height: 300px" :container="getScrollContainer" :content="getScrollContent">
+  <scrollbar ref="scrollbarInstRef" style="max-height: 300px" :x-scrollable="xScrollable" :container="getScrollContainer" :content="getScrollContent">
     <VVirtualList
       ref="virtualListInstRef"
       :items="items"

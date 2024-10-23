@@ -1,0 +1,15 @@
+.king-vertical-transition-leave-active,
+.king-vertical-transition-enter-active {
+  transition:
+    var(--king-transition-duration) max-height linear,
+    var(--king-transition-duration) padding-top linear,
+    var(--king-transition-duration) padding-bottom linear;
+}
+.king-horizontal-transition-leave-active,
+.king-horizontal-transition-enter-active {
+  transition:
+    var(--king-transition-duration) max-width linear,
+    var(--king-transition-duration) padding-left linear,
+    var(--king-transition-duration) padding-right linear;
+}
+

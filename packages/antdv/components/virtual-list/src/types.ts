@@ -1,6 +1,10 @@
-import type { VirtualListItemData } from 'vueuc'
+import type { VirtualListInst, VirtualListItemData } from 'vueuc'
 import type { PropType } from 'vue'
 
+export interface InterScrollParams {
+  viewportItems: any[]
+  scrollTop: number
+}
 export const virtualListProps = {
   items: {
     type: Array as PropType<VirtualListItemData[]>,
@@ -23,7 +27,14 @@ export const virtualListProps = {
     type: String,
     default: 'key'
   },
-  onScroll: Function as PropType<() => void>,
+  xScrollable: Boolean,
+  onScroll: Function as PropType<(params: InterScrollParams) => void>,
   onWheel: Function as PropType<(event: WheelEvent) => void>,
   onResize: Function as PropType<(entry: ResizeObserverEntry) => void>
 } as const
+export interface VirtualListRef extends VirtualListInst {
+  viewportItems: any[]
+  visibleItemsStyle: {
+    transform: string
+  }
+}

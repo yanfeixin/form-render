@@ -1,8 +1,8 @@
 /*
  * @Author: caohao
  * @Date: 2023-12-18 10:08:36
- * @LastEditors: caohao
- * @LastEditTime: 2024-01-02 11:12:56
+ * @LastEditors: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
+ * @LastEditTime: 2024-10-23 09:09:29
  * @Description:
  */
 import path from 'node:path'
@@ -63,7 +63,8 @@ export function buildCdnConfig(): OutputOptions[] {
       exports: 'named',
       name: PKG_HUMP_NAME,
       globals: {
-        vue: 'Vue'
+        'vue': 'Vue',
+        'lodash-es': 'lodashEs'
       },
       sourcemap: true
     },

@@ -7,7 +7,8 @@
     z-index: auto;
     height: 100%;
     width: 100%;
-    .#{bem('scrollbar-container')}{
+
+    .#{bem('scrollbar-container')} {
         width: 100%;
         overflow: scroll;
         height: 100%;
@@ -15,19 +16,48 @@
         max-height: inherit;
         scrollbar-width: none;
     }
-    .#{bem('scrollbar-rail')}{ 
+
+    .#{bem('scrollbar-content')} {
+        width: fit-content;
+    }
+
+    .#{bem('scrollbar-rail')} {
         position: absolute;
+    }
+
+    .#{bem('scrollbar-rail--vertical')} {
         right: 0;
         width: 5px;
+        /* background: rgb(225, 225, 225); */
         top: 2px;
         bottom: 2px;
         right: 4px;
     }
-    .#{bem('scrollbar-rail__scrollbar')}{
-        background: rgba(0, 0, 0,0.25);
+
+    .#{bem('scrollbar-rail--horizontal')} {
+        bottom: 2px;
+        height: 5px;
+        left: 2px;
+        right: 2px;
+    }
+
+    .#{bem('scrollbar-rail__scrollbar--vertical')} {
+        background: rgba(0, 0, 0, 0.25);
         position: absolute;
         border-radius: 5px;
         width: 100%;
         cursor: pointer;
     }
+
+    .#{bem('scrollbar-rail__scrollbar--horizontal')} {
+        background: rgba(0, 0, 0, 0.25);
+        position: absolute;
+        border-radius: 5px;
+        height: 100%;
+        cursor: pointer;
+    }
+}
+
+.v-vl-items {
+    width: fit-content;
 }
