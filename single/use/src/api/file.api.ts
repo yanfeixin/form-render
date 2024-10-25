@@ -6,7 +6,5 @@ export const fileUrl = {
 }
 export const fileApi = {
   batchDownload: (config: AxiosRequestConfig): any =>
-    globalThis.$http.post(`${ApiPrefixEnum.FILE}/aio/download/url`, config.data, config),
-  passBatchDownload: (config: AxiosRequestConfig): any =>
-    globalThis.$http.post(config.url, config.data, config)
+    window.$http.post(`${ApiPrefixEnum.FILE}/aio/download/url`, config.data, config)
 }

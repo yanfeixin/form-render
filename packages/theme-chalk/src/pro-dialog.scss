@@ -1,0 +1,34 @@
+@use 'common/var' as *;
+@use 'mixins/index' as *;
+
+.#{bem('pro-dialog')} {
+    .ant-modal-content {
+        padding: 0;
+    }
+
+    .ant-modal-header {
+        height: 56px;
+        padding-left: 32px;
+        padding-right: 24px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #f1f7ff;
+        border-bottom: 1px solid #e6e8ea;
+    }
+
+    .ant-modal-body {
+        padding: 10px 20px;
+        max-height: 65vh;
+        overflow: auto;
+    }
+
+    .ant-modal-footer {
+        height: 56px;
+        display: flex;
+        padding: 0 16px;
+        justify-content: flex-end;
+        align-items: center;
+        border-top: 1px solid #e6e8ea;
+    }
+}

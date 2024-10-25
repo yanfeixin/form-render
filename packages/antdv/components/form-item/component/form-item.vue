@@ -2,6 +2,9 @@
 <script lang="ts" setup>
 import type { TableProps } from 'ant-design-vue'
 
+const model = defineModel('value', {
+  type: String
+})
 const columns: TableProps['columns'] = [
   {
     title: 'Name',
@@ -102,5 +105,8 @@ function onChange(pagination, filters, sorter, extra) {
 </script>
 
 <template>
-  <a-table :columns="columns" :data-source="data" @change="onChange" />
+  <div>
+    <a-table :columns="columns" :data-source="data" @change="onChange" />
+    {{ model }}
+  </div>
 </template>

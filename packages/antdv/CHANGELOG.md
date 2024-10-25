@@ -1,5 +1,11 @@
 # @king-one/antdv
 
+## 1.0.22
+
+### Patch Changes
+
+- feat：增加 dialog 组件
+
 ## 1.0.21
 
 ### Patch Changes
