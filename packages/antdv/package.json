@@ -31,5 +31,8 @@
     "@king-one/utils": "workspace:^",
     "evtd": "^0.2.4",
     "vueuc": "^0.4.64"
+  },
+  "custom": {
+    "env": "antdv"
   }
 }

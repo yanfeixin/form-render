@@ -1,3 +1,4 @@
+/* eslint-disable ts/ban-ts-comment */
 import { Parser } from './parser'
 import { isArr, isEqual, isFn, isNum, isObj, isRegExp, isStr } from './shared'
 import { deleteInByDestructor, existInByDestructor, getDestructor, getInByDestructor, setInByDestructor } from './destructor'
@@ -426,6 +427,7 @@ export class Path {
       if (this.isMatchPattern) {
         if (this.isRegExp) {
           try {
+            // @ts-ignore
             return this.entire?.test?.(path.entire)
           }
           finally {
@@ -528,6 +530,7 @@ export class Path {
       }
     }
     else if (path && path[isMatcher]) {
+      // @ts-ignore
       return Path.parse(path.path)
     }
     else {

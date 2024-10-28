@@ -1,77 +1,88 @@
-/*
- * @Author: caohao
- * @Date: 2023-11-06 19:57:56
- * @LastEditors: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
- * @LastEditTime: 2024-10-16 11:30:18
- * @Description:
- */
 import { resolve } from 'node:path'
-import { rollup } from 'rollup'
-import glob from 'fast-glob'
+import vue from '@vitejs/plugin-vue'
+import { build } from 'vite'
+import dts from 'vite-plugin-dts'
+import { convertEnv, generateExternal, projRoot } from '../utils'
 
-import type { OutputOptions } from 'rollup'
-import { getLibPath, pkgRoot } from '../utils/paths'
-
-import { buildCdnConfig, buildConfigEntries, generateExternal, rollupBuildPlugins } from '../utils'
-// import { generateExternal, rollupBuildPlugins } from '../utils/rollup'
-
-export function excludeFiles(files: string[]) {
-  const excludes = ['node_modules', 'test', 'dist', 'build.config.ts'] // 'core'
-  return files.filter(path => !excludes.some(exclude => path.includes(exclude)))
-}
-
-// node
-export async function buildNodeModules() {
-  const { epRoot, PKG_NAME } = getLibPath()
-  const input = excludeFiles(
-    // await glob([...epFiles, `${PKG_NAME}/**/*.{js,ts,vue}`], {
-    await glob(`${PKG_NAME}/**/*.{js,ts,vue,tsx}`, {
-      cwd: pkgRoot,
-      absolute: true,
-      onlyFiles: true
-    })
-  )
-
-  const bundle = await rollup({
-    input,
-    plugins: rollupBuildPlugins(),
-    external: await generateExternal('node'),
-    treeshake: false
-  })
-  const buildConfigList = buildConfigEntries()
-  const options = buildConfigList.map(([module, config]): OutputOptions => {
-    return {
-      format: config.format,
-      dir: config.output.path,
-      exports: module === 'cjs' ? 'named' : undefined,
+export async function buildModules() {
+  const root = process.env.KING_COMPONENT_ROOT_PATH
+  const external = await generateExternal('node', root!)
+  const envData = convertEnv(process.env)
+  const output: any = [
+    {
+      // 打包成 es module
+      format: 'es',
+      // 重命名
+      entryFileNames: '[name].js',
+      // 打包目录和开发目录对应
       preserveModules: true,
-      preserveModulesRoot: epRoot,
-      // preserveModulesRoot: pkgRoot,
-      sourcemap: true,
-      entryFileNames: `[name].${config.ext}`
+      // 输出目录
+      dir: `${root}/es`
+      // 指定保留模块结构的根目录
+      // preserveModulesRoot: `${root}/src`
+    },
+    {
+      // 打包成 commonjs
+      format: 'cjs',
+      exports: 'named',
+      // 重命名
+      entryFileNames: '[name].js',
+      // 打包目录和开发目录对应
+      preserveModules: true,
+      // 输出目录
+      dir: `${root}/lib`
+      // 指定保留模块结构的根目录
+      // preserveModulesRoot: `${root}/src`
     }
-  })
+  ]
 
-  await Promise.all(
-    options.map((option) => {
-      return bundle.write(option)
+  if (envData.KING_PKG_BUILD_CDN) {
+    output.push({
+      format: 'umd', // UMD
+      entryFileNames: '[name].umd.js',
+      exports: 'named',
+      dir: `${root}/cdn`,
+      name: 'GIE_COMPONENTS', // UMD 模块的全局变量名
+      sourcemap: true, // 生成 sourcemap（可选）
+      globals: {
+        'vue': 'Vue', // UMD 格式的全局变量
+        'ant-design-vue': 'antd',
+        'axios': 'axios',
+        'lodash-es': 'lodashEs'
+      }
     })
-  )
-}
-
-// cdn
-export async function buildCdnModules() {
-  const { epRoot } = getLibPath()
-  const bundle = await rollup({
-    input: resolve(epRoot, 'index.ts'),
-    plugins: rollupBuildPlugins(true),
-    external: await generateExternal('cdn'),
-    treeshake: false
+  }
+  await build({
+    root,
+    build: {
+      rollupOptions: {
+        // 将vue模块排除在打包文件之外，使用用这个组件库的项目的vue模块。
+        external,
+        // 输出配置
+        output
+      },
+      lib: {
+        // 指定入口文件
+        entry: 'index.ts',
+        // 模块名
+        name: 'GIE_COMPONENTS'
+      }
+    },
+    plugins: [
+      vue(),
+      dts({
+        entryRoot: root,
+        // include: [root!, resolve(projRoot, './typings/global.d.ts')],
+        // 输出目录
+        outDir: ['types'],
+        // tsconfigPath: resolve(projRoot, 'tsconfg.lib.json'),
+        // tsconfigPath: path.resolve(__dirname, '../../../../tsconfg.lib.json'),
+        // 输出目录
+        // 将动态引入转换为静态（例如：`import('vue').DefineComponent` 转换为 `import { DefineComponent } from 'vue'`）
+        staticImport: true,
+        // 将所有的类型合并到一个文件中
+        rollupTypes: false
+      })
+    ]
   })
-  const buildCdnConfigList = buildCdnConfig()
-  await Promise.all(
-    buildCdnConfigList.map((option) => {
-      return bundle.write(option)
-    })
-  )
 }

@@ -1,4 +1,4 @@
-import { getCurrentInstance, onBeforeUnmount, ref, unref } from 'vue'
+import { getCurrentInstance, ref, unref } from 'vue'
 
 export interface DialogMethods {
   openDialog: () => void
@@ -37,9 +37,6 @@ export function useProDialogInit(): [
     return instance
   }
   const initDialog = (modalInstance: DialogMethods) => {
-    onBeforeUnmount(() => {
-      // console.log('组件卸载')
-    })
     // currentInstance?.emit('init-modal', modalInstance)
     modalRef.value = modalInstance
   }

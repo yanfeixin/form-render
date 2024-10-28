@@ -9,17 +9,10 @@
   "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "antdv": "gulp --require @esbuild-kit/cjs-loader -f ./gulpfile.ts --mode antdv",
-    "tapable": "gulp --require @esbuild-kit/cjs-loader -f ./gulpfile.tapable.ts  --mode tapable",
-    "use": "gulp --require @esbuild-kit/cjs-loader -f ./gulpfile.esnext.ts  --mode file",
-    "utils": "gulp --require @esbuild-kit/cjs-loader -f ./gulpfile.esnext.ts  --mode utils"
+    "build": "gulp --require @esbuild-kit/cjs-loader -f ./gulpfile.ts"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^26.0.1",
-    "@rollup/plugin-image": "^3.0.3",
-    "@rollup/plugin-node-resolve": "^15.2.3",
     "@types/gulp": "^4.0.17",
-    "consola": "^3.2.3",
     "dotenv": "^16.4.5",
     "dotenv-expand": "^11.0.6",
     "gulp": "^4.0.2",
@@ -27,9 +20,6 @@
     "gulp-clean-css": "^4.3.0",
     "gulp-postcss": "^10.0.0",
     "gulp-sass": "^5.1.0",
-    "minimist": "^1.2.8",
-    "rollup": "^4.20.0",
-    "rollup-plugin-esbuild": "^6.1.1",
-    "ts-morph": "^23.0.0"
+    "shelljs": "^0.8.5"
   }
 }

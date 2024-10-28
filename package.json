@@ -18,9 +18,7 @@
     "rm": "node -r @esbuild-kit/cjs-loader scripts/del",
     "pub": "pnpm run version && node scripts/publish.mjs",
     "lint:fix": "eslint . --fix",
-    "build:antdv": "pnpm run -C internal/build antdv",
-    "build:use": "pnpm run -C internal/build use",
-    "build:tapable": "pnpm run -C internal/build tapable"
+    "build": "pnpm run -C internal/build build"
   },
   "dependencies": {
     "vue": "^3.4.34"
@@ -46,6 +44,7 @@
     "sass": "^1.77.8",
     "typescript": "^5.5.4",
     "vite": "^5.3.4",
+    "vite-plugin-dts": "^4.3.0",
     "vite-plugin-pwa": "^0.20.1",
     "vitepress": "^1.3.2"
   },

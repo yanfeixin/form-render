@@ -1,9 +1,9 @@
-import { remove } from 'fs-extra'
-import type { TaskFunction } from 'gulp'
-import { buildOutput, getDirs, getLibPath, pkgRoot, projRoot } from '../utils/paths'
+import shell from 'shelljs'
 
-export const clean: TaskFunction = async () => {
-  const { epOutput } = getLibPath()
-  await remove(epOutput)
-  await remove(buildOutput)
+export async function removeDist() {
+  const componentPath = process.env.KING_COMPONENT_ROOT_PATH
+  shell.rm('-rf', `${componentPath}/lib`)
+  shell.rm('-rf', `${componentPath}/es`)
+  shell.rm('-rf', `${componentPath}/types`)
+  shell.rm('-rf', `${componentPath}/cdn`)
 }

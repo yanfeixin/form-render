@@ -1,13 +1,7 @@
 {
   "references": [
     {
-      "path": "./tsconfig.docs.json"
-    },
-    {
-      "path": "./tsconfig.build.json"
-    },
-    {
-      "path": "./tsconfig.esnext.json"
+      "path": "./tsconfg.lib.json"
     }
   ],
   "files": []

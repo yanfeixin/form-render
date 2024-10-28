@@ -1,37 +1,32 @@
-/*
- * @Description:
- * @Version: 2.0
- * @Autor: caohao
- * @Date: 2024-09-16 16:54:56
- * @LastEditors: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
- * @LastEditTime: 2024-10-20 01:09:56
- */
 import { resolve } from 'node:path'
-import type { TaskFunction } from 'gulp'
-import { parallel, series } from 'gulp'
-import minimist from 'minimist'
+import { select } from '@inquirer/prompts'
+import { getPackages } from '@manypkg/get-packages'
 import dotenv from 'dotenv'
-import { buildEnv, setPkgRoot, title } from './src/utils'
-import { buildCdnModules, buildNodeModules, buildTheme, clean, copyThemeCdn, copyTypesDefinitions, generateTypesDefinitions } from './src/tasks'
+import { series } from 'gulp'
+import { buildModules, removeDist } from './src/tasks'
+import { buildEnv } from './src/utils/paths'
 
-// eslint-disable-next-line no-console
-console.log(title('开始构建～～！'))
+const unBuildLibs = ['@king-one/antdv-docs', '@king-one/shared-docs', '@king-one/build', '@king-one/resolver', '@king-one/tapable', '@king-one/theme-chalk']
+async function choiceLib() {
+  const { packages } = await getPackages(process.cwd())
 
-export const loadEnv: TaskFunction = (done) => {
-  const argvs = minimist(process.argv.slice(2))
+  const choices = packages.map(pkg => ({
+    name: pkg.packageJson.name,
+    value: pkg.dir
+  }))
 
-  const { mode } = argvs
-  const envPath = resolve(buildEnv, `.env${mode ? `.${mode}` : ``}`)
-  dotenv.config({ path: envPath })
-  setPkgRoot(process.env.PKG_ROOT_PATH as string)
-  done()
+  const answer = await select({
+    message: '请选择要构建的项目',
+    choices: choices.filter(item => !unBuildLibs.includes(item.name))
+  })
+  const packageJson = packages.find(item => item.dir === answer)?.packageJson
+  const env = (packageJson as any)?.custom?.env
+  if (env) {
+    const envPath = resolve(buildEnv, `.env${env ? `.${env}` : ``}`)
+    if (envPath)
+      dotenv.config({ path: envPath })
+  }
+  process.env.KING_COMPONENT_ROOT_PATH = answer
 }
-export default series(
-  // runTask('testModel'),
-  loadEnv,
-  clean,
-  buildTheme,
-  parallel(buildCdnModules, buildNodeModules),
-  generateTypesDefinitions,
-  parallel(copyTypesDefinitions, copyThemeCdn)
-)
+
+export default series(choiceLib, removeDist, buildModules)

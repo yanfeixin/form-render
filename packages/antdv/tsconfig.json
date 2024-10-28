@@ -1,0 +1,10 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "composite": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "types": ["vite/client"]
+  },
+  "include": ["components/**/*", "index.ts", "installer.ts", "../../typings/*.d.ts"],
+  "exclude": ["node_modules", "dist", "*.json", "build"]
+}
