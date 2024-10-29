@@ -61,6 +61,9 @@ importers:
       axios:
         specifier: ^1.7.5
         version: 1.7.5
+      consola:
+        specifier: ^3.2.3
+        version: 3.2.3
       fast-glob:
         specifier: ^3.3.2
         version: 3.3.2
@@ -4812,6 +4815,11 @@ packages:
 
   /confbox@0.1.7:
     resolution: {integrity: sha512-uJcB/FKZtBMCJpK8MQji6bJHgu1tixKPxRLeGkNzBoOZzpnZUJm0jm2/sBDWcuBx1dYgxV4JU+g5hmNxCyAmdA==}
+    dev: true
+
+  /consola@3.2.3:
+    resolution: {integrity: sha512-I5qxpzLv+sJhTVEoLYNcTW+bThDCPsit0vLNKShZx6rLtpilNpmmeTPaeqJb9ZE9dV3DGaeby6Vuhrw38WjeyQ==}
+    engines: {node: ^14.18.0 || >=16.10.0}
     dev: true
 
   /convert-source-map@1.9.0:

@@ -1,8 +1,8 @@
-import { resolve } from 'node:path'
 import vue from '@vitejs/plugin-vue'
 import { build } from 'vite'
 import dts from 'vite-plugin-dts'
-import { convertEnv, generateExternal, projRoot } from '../utils'
+import { convertEnv, generateExternal } from '../utils'
+import { viteCssAlias } from '../plugins/vite-css-alias'
 
 export async function buildModules() {
   const root = process.env.KING_COMPONENT_ROOT_PATH
@@ -17,9 +17,9 @@ export async function buildModules() {
       // 打包目录和开发目录对应
       preserveModules: true,
       // 输出目录
-      dir: `${root}/es`
+      dir: `${root}/es`,
       // 指定保留模块结构的根目录
-      // preserveModulesRoot: `${root}/src`
+      preserveModulesRoot: `${root}`
     },
     {
       // 打包成 commonjs
@@ -36,7 +36,7 @@ export async function buildModules() {
     }
   ]
 
-  if (envData.KING_PKG_BUILD_CDN) {
+  if (envData.KING_BUILD_CDN) {
     output.push({
       format: 'umd', // UMD
       entryFileNames: '[name].umd.js',
@@ -55,11 +55,16 @@ export async function buildModules() {
   await build({
     root,
     build: {
+      cssCodeSplit: true,
       rollupOptions: {
         // 将vue模块排除在打包文件之外，使用用这个组件库的项目的vue模块。
         external,
         // 输出配置
-        output
+        output,
+        // treeshake: {
+        //   moduleSideEffects: false
+        // },
+        treeshake: false
       },
       lib: {
         // 指定入口文件
@@ -80,9 +85,11 @@ export async function buildModules() {
         // 输出目录
         // 将动态引入转换为静态（例如：`import('vue').DefineComponent` 转换为 `import { DefineComponent } from 'vue'`）
         staticImport: true,
+
         // 将所有的类型合并到一个文件中
         rollupTypes: false
-      })
+      }),
+      viteCssAlias()
     ]
   })
 }

@@ -3,7 +3,7 @@ import { select } from '@inquirer/prompts'
 import { getPackages } from '@manypkg/get-packages'
 import dotenv from 'dotenv'
 import { series } from 'gulp'
-import { buildModules, removeDist } from './src/tasks'
+import { buildModules, buildTheme, removeDist } from './src/tasks'
 import { buildEnv } from './src/utils/paths'
 
 const unBuildLibs = ['@king-one/antdv-docs', '@king-one/shared-docs', '@king-one/build', '@king-one/resolver', '@king-one/tapable', '@king-one/theme-chalk']
@@ -28,5 +28,13 @@ async function choiceLib() {
   }
   process.env.KING_COMPONENT_ROOT_PATH = answer
 }
+function buildProject(done) {
+  if (process.env.KING_BUILD_THEME) {
+    series(buildModules, buildTheme)(done)
+  }
+  else {
+    series(buildModules)(done)
+  }
+}
 
-export default series(choiceLib, removeDist, buildModules)
+export default series(choiceLib, removeDist, buildProject)

@@ -39,6 +39,7 @@
     "@vitejs/plugin-vue-jsx": "^4.0.0",
     "ant-design-vue": "^4.2.4",
     "axios": "^1.7.5",
+    "consola": "^3.2.3",
     "fast-glob": "^3.3.2",
     "fs-extra": "^11.2.0",
     "sass": "^1.77.8",

@@ -1,5 +1,5 @@
 interface ViteEnv {
-  readonly KING_PKG_BUILD_CDN: boolean
+  readonly KING_BUILD_CDN: boolean
 
 }
 const envPrefix = 'KING_'
