@@ -2,7 +2,7 @@
  * @Author: caohao
  * @Date: 2023-10-12 10:02:50
  * @LastEditors: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
- * @LastEditTime: 2024-10-29 14:40:09
+ * @LastEditTime: 2024-10-29 15:48:02
  * @Description:
  */
 import path from 'node:path'
@@ -15,7 +15,7 @@ import chalk from 'chalk'
 // 基础方法
 import dartSass from 'sass'
 import gulpSass from 'gulp-sass'
-import { THEME_FILE_NAME, pkThemeRoot, withTaskName } from '../../utils'
+import { THEME_FILE_NAME, getLibPath, pkThemeRoot, withTaskName } from '../../utils'
 import { copyfont, minifontCss } from './gulpfile.base'
 
 const sass = gulpSass(dartSass)
@@ -41,7 +41,8 @@ function compile(config) {
 }
 
 export function buildTheme(done) {
-  const epOutThemeRoot = path.resolve(process.env.KING_COMPONENT_ROOT_PATH!, THEME_FILE_NAME)
+  const { epOutput } = getLibPath(process.env.KING_COMPONENT_ROOT_PATH!)
+  const epOutThemeRoot = path.resolve(epOutput, THEME_FILE_NAME)
   // 打包配置
   const config = {
     input: pkThemeRoot,
