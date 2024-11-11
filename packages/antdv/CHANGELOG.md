@@ -1,5 +1,47 @@
 # @king-one/antdv
 
+## 1.0.29
+
+### Patch Changes
+
+- feat：修改虚拟列表页码错误
+
+## 1.0.28
+
+### Patch Changes
+
+- feat：修改虚拟列表样式
+
+## 1.0.27
+
+### Patch Changes
+
+- feat: 虚拟列表组件增加 update⌚️
+
+## 1.0.26
+
+### Patch Changes
+
+- feat：修改虚拟列表组件的 slot 传值
+
+## 1.0.25
+
+### Patch Changes
+
+- fix: 修复虚拟列表组件
+
+## 1.0.24
+
+### Patch Changes
+
+- feat： 修改构建文件
+
+## 1.0.23
+
+### Patch Changes
+
+- feat：增加新版虚拟列表
+
 ## 1.0.22
 
 ### Patch Changes

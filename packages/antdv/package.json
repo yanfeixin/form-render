@@ -1,14 +1,14 @@
 {
   "name": "@king-one/antdv",
   "type": "module",
-  "version": "1.0.22",
+  "version": "1.0.29",
   "description": "",
   "author": "",
   "license": "ISC",
   "keywords": [],
-  "main": "dist/lib/index.js",
+  "main": "dist/lib/index.cjs",
   "module": "dist/es/index.mjs",
-  "types": "dist/es/index.d.ts",
+  "types": "dist/types/index.d.ts",
   "files": [
     "CHANGELOG.md",
     "README.md",
@@ -29,7 +29,9 @@
   },
   "dependencies": {
     "@king-one/utils": "workspace:^",
+    "@vueuse/core": "^10.11.0",
     "evtd": "^0.2.4",
+    "vue-demi": "^0.14.10",
     "vueuc": "^0.4.64"
   },
   "custom": {

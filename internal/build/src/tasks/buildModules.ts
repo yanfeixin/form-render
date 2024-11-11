@@ -15,7 +15,7 @@ export async function buildModules() {
       // 打包成 es module
       format: 'es',
       // 重命名
-      entryFileNames: '[name].js',
+      entryFileNames: '[name].mjs',
       // 打包目录和开发目录对应
       preserveModules: true,
       // 输出目录

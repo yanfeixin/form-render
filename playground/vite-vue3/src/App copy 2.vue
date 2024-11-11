@@ -1,5 +1,5 @@
 <script setup lang='ts'>
-import { computed, ref } from 'vue'
+import { computed, nextTick, ref } from 'vue'
 import { useVirtualList } from './useVirtualList'
 // import { useVirtualList } from '@vueuse/core'
 function getRandomInt(min: number, max: number): number {
@@ -11,14 +11,13 @@ function getRandomInt(min: number, max: number): number {
 const allItems = Array.from(Array.from({ length: 100 }).keys())
 const filteredList = computed(() => allItems.map((_, index) => ({
   index,
-  height: 100
+  height: 1000
 })))
-// const scale = ref<number>(1) // scale, scaleTo, state
-const Tscale = ref<number>(1)
-const { list, containerProps, wrapperProps, scrollTo, scaleTo, state } = useVirtualList(
+// const scale = ref<number>(1)
+const { list, containerProps, wrapperProps, scrollTo, scale } = useVirtualList(
   filteredList,
   {
-    itemHeight: 100
+    itemHeight: i => filteredList.value[i].height
   }
 )
 
@@ -27,14 +26,10 @@ function handlePage() {
   scrollTo(+page.value)
 }
 function handleAdd() {
-  Tscale.value += 0.1
-  scaleTo(Tscale.value)
-  // scaleTo(Tscale.value)
-  // handleScale(scale.value)
+  scale.value += 0.1
 }
 function handleSub() {
-  Tscale.value -= 0.1
-  scaleTo(Tscale.value)
+  scale.value -= 0.1
 }
 </script>
 
@@ -50,29 +45,21 @@ function handleSub() {
     <button @click="handleSub">
       --
     </button>
-    <div v-bind="containerProps" style="height: 300px;width: 800px;" class="asd">
-      <div class="bbb">
-        <div
-          v-bind="wrapperProps" style="position: absolute;left: 50%;"
-        >
-          <div v-for="item in list" :key="item.index" class="item" :style="{ height: `${item.data.height}px` }" :data-index="item.index">
-            Row: {{ item.data }}
-          </div>
+    <div v-bind="containerProps" style="height: 750px" class="asd">
+      <div v-bind="wrapperProps" :style="{ transform: `scale(${scale})`, transformOrigin: '50% 0' }">
+        <div v-for="item in list" :key="item.index" class="item" :style="{ height: `${item.data.height}px` }">
+          Row: {{ item.data }}
         </div>
       </div>
     </div>
-    <div>{{ state.current }}</div>
   </div>
 </template>
 
 <style>
-.bbb{
-  position: relative;
-  margin: 0 auto;
-}
 .item{
   background: #fff;
+  margin-bottom: 10px;
   border: 1px solid red;
-  width: 600px;
+  width: 800px;
 }
 </style>

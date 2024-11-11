@@ -5,7 +5,7 @@
   "fixed": [],
   "linked": [],
   "access": "restricted",
-  "baseBranch": "release-v3.0.0-20240726",
+  "baseBranch": "release-v5.0.0-20241028",
   "updateInternalDependencies": "patch",
   "ignore": []
 }
