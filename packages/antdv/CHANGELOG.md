@@ -1,5 +1,66 @@
 # @king-one/antdv
 
+## 1.0.39
+
+### Patch Changes
+
+- fix：修改 pro-area 组件的 props
+
+## 1.0.38
+
+### Patch Changes
+
+- fix: 修改 hooks 的导出
+
+## 1.0.37
+
+### Patch Changes
+
+- fix: 修复 pro-area 的表单收集
+
+## 1.0.36
+
+### Patch Changes
+
+- fix: 修改 pro-modal 的类型
+
+## 1.0.35
+
+### Patch Changes
+
+- fix：修改 pro-modal bug
+
+## 1.0.34
+
+### Patch Changes
+
+- feat：增加 pro-area 和 pro-picker 组件
+
+## 1.0.33
+
+### Patch Changes
+
+- feat：增加业务 proUseForm hook
+- feat：新增 ProTag 组件
+
+## 1.0.32
+
+### Patch Changes
+
+- fix: 修改 pro-title 组件的样式
+
+## 1.0.31
+
+### Patch Changes
+
+- feat： 增加 pro-dialog 组家
+
+## 1.0.30
+
+### Patch Changes
+
+- feat：增加 proTitle 组件
+
 ## 1.0.29
 
 ### Patch Changes

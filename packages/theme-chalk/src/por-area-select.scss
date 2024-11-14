@@ -1,0 +1,5 @@
+@use 'common/var' as *;
+@use 'mixins/index' as *;
+.#{bem('pro-area-select')}{
+    width: 100%;
+}

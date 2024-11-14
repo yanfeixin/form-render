@@ -1,78 +1,98 @@
+<!-- eslint-disable no-console -->
 <script setup lang='ts'>
-import { computed, ref } from 'vue'
-import { useVirtualList } from './useVirtualList'
-// import { useVirtualList } from '@vueuse/core'
-function getRandomInt(min: number, max: number): number {
-  min = Math.ceil(min)
-  max = Math.floor(max)
-  return Math.floor(Math.random() * (max - min + 1)) + min // 包含min和max
-}
+import { KProArea, KProPicker, KProTitle, useAreaProArea } from '@king-one/antdv/components'
+import { onMounted, reactive, ref } from 'vue'
+import type { Rule } from 'ant-design-vue/es/form'
 
-const allItems = Array.from(Array.from({ length: 100 }).keys())
-const filteredList = computed(() => allItems.map((_, index) => ({
-  index,
-  height: 100
-})))
-// const scale = ref<number>(1) // scale, scaleTo, state
-const Tscale = ref<number>(1)
-const { list, containerProps, wrapperProps, scrollTo, scaleTo, state } = useVirtualList(
-  filteredList,
-  {
-    itemHeight: 100
-  }
-)
+const value = ref()
+const value1 = reactive({
 
-const page = ref(1)
-function handlePage() {
-  scrollTo(+page.value)
-}
+})
+const { ops } = useAreaProArea()
 function handleAdd() {
-  Tscale.value += 0.1
-  scaleTo(Tscale.value)
-  // scaleTo(Tscale.value)
-  // handleScale(scale.value)
+  console.log(value1)
 }
-function handleSub() {
-  Tscale.value -= 0.1
-  scaleTo(Tscale.value)
+interface FormState {
+  username: string
+  password: string
+  aaa: {
+    province?: string
+    city?: string
+    county?: string
+  }
 }
+
+const formState = reactive<FormState>({
+  username: '',
+  password: '',
+  aaa: {}
+})
+function onFinish(values: any) {
+  console.log('Success:', values)
+}
+
+function onFinishFailed(errorInfo: any) {
+  console.log('Failed:', errorInfo)
+}
+async function aaavalidator(_rule: Rule, value: any) {
+  if (!value.province) {
+    return Promise.reject(new Error('请选择省市区'))
+  }
+  return Promise.resolve()
+}
+onMounted(() => {
+  setTimeout(() => {
+    value.value = '1856582762272702464'
+  }, 200)
+})
 </script>
 
 <template>
-  <div>
-    <input v-model="page" type="text">
-    <button @click="handlePage">
-      toggle
-    </button>
-    <button @click="handleAdd">
-      ++
-    </button>
-    <button @click="handleSub">
-      --
-    </button>
-    <div v-bind="containerProps" style="height: 300px;width: 800px;" class="asd">
-      <div class="bbb">
-        <div
-          v-bind="wrapperProps" style="position: absolute;left: 50%;"
-        >
-          <div v-for="item in list" :key="item.index" class="item" :style="{ height: `${item.data.height}px` }" :data-index="item.index">
-            Row: {{ item.data }}
-          </div>
-        </div>
-      </div>
-    </div>
-    <div>{{ state.current }}</div>
+  <KProPicker v-model="value" is-init />
+  <KProTitle title="伟大的昊哥" un-border />
+  <KProArea
+    v-model="value1" :options="ops" :field-names="{
+      id: 'name',
+    }"
+  />
+  <div>{{ value1 }}</div>
+  <div @click="handleAdd">
+    123
   </div>
+
+  <a-form
+    :model="formState"
+    name="basic"
+    :label-col="{ span: 8 }"
+    :wrapper-col="{ span: 16 }"
+    autocomplete="off"
+    @finish="onFinish"
+    @finish-failed="onFinishFailed"
+  >
+    <a-form-item
+      label="Username"
+      name="username"
+      :rules="[{ required: true, message: 'Please input your username!' }]"
+    >
+      <a-input v-model:value="formState.username" />
+    </a-form-item>
+
+    <a-form-item
+      label="Password"
+      name="aaa"
+      :rules="[{ required: true, message: 'Please input your password!' }, {
+        validator: aaavalidator, trigger: 'change',
+      }]"
+    >
+      <KProArea v-model="formState.aaa" :options="ops" />
+    </a-form-item>
+
+    <a-form-item :wrapper-col="{ offset: 8, span: 16 }">
+      <a-button type="primary" html-type="submit">
+        Submit
+      </a-button>
+    </a-form-item>
+  </a-form>
 </template>
 
-<style>
-.bbb{
-  position: relative;
-  margin: 0 auto;
-}
-.item{
-  background: #fff;
-  border: 1px solid red;
-  width: 600px;
-}
-</style>
+<style></style>

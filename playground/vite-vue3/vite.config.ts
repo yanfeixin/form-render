@@ -17,7 +17,15 @@ export default defineConfig(({ mode }: ConfigEnv) => {
     },
     server: {
       host: '0.0.0.0',
-      open: true
+      open: true,
+      proxy: {
+        '/api/': {
+          target: 'http://192.168.2.134:8091',
+          ws: false,
+          changeOrigin: true,
+          rewrite: path => path.replace('/api', '')
+        }
+      }
     }
   }
 })

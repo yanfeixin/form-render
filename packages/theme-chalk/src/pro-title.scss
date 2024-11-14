@@ -1,0 +1,19 @@
+@use 'common/var' as *;
+@use 'mixins/index' as *;
+.#{bem('pro-title')}{
+    border-bottom: 1px solid #ccc;
+    position: relative;
+    padding-left: 10px;
+}
+.#{bem('pro-title')}::before{
+    content: '';
+    position: absolute;
+    width: 3px;
+    height: 100%;
+    background: #517cfc;
+    left: 0;
+}
+
+.#{bem('pro-title','','unborder')}{
+    border: none;
+}

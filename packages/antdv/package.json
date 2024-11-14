@@ -1,7 +1,7 @@
 {
   "name": "@king-one/antdv",
   "type": "module",
-  "version": "1.0.29",
+  "version": "1.0.39",
   "description": "",
   "author": "",
   "license": "ISC",
@@ -20,6 +20,7 @@
   "peerDependencies": {
     "ant-design-vue": "^4.2.4",
     "async-validator": "^4.2.5",
+    "axios": "^1.6.2",
     "lodash-es": "^4.17.21",
     "vue": "^3.4.34"
   },
@@ -30,6 +31,7 @@
   "dependencies": {
     "@king-one/utils": "workspace:^",
     "@vueuse/core": "^10.11.0",
+    "@vueuse/shared": "^11.0.0",
     "evtd": "^0.2.4",
     "vue-demi": "^0.14.10",
     "vueuc": "^0.4.64"
