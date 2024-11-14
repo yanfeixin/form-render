@@ -86,12 +86,26 @@ const levels = computed(() => {
 const c = computed(() => {
   return [b()]
 })
+function handleChange(index: levelType) {
+  if (index === 1) {
+    const list = levels.value.slice(index)
+    list.forEach((item) => {
+      model.value[item] = undefined
+    })
+  }
+  else if (index === 2) {
+    const list = levels.value.slice(index)
+    list.forEach((item) => {
+      model.value[item] = undefined
+    })
+  }
+}
 </script>
 
 <template>
   <Row :gutter="10">
     <Col v-for="(item, index) in levels" :key="item" :span="24 / level">
-      <Select v-model:value="model[item]" :placeholder="placeholder(index + 1 as levelType)" :class="c" :options="ops(index + 1 as levelType)" />
+      <Select v-model:value="model[item]" :placeholder="placeholder(index + 1 as levelType)" :class="c" :options="ops(index + 1 as levelType)" @change="() => handleChange(index + 1 as levelType)" />
     </Col>
   </Row>
 </template>

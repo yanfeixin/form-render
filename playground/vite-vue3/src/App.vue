@@ -1,14 +1,12 @@
 <!-- eslint-disable no-console -->
 <script setup lang='ts'>
-import { KProArea, KProPicker, KProTitle, useAreaProArea } from '@king-one/antdv/components'
+import { KProArea, KProPicker, KProTitle, useProArea } from '@king-one/antdv/components'
 import { onMounted, reactive, ref } from 'vue'
 import type { Rule } from 'ant-design-vue/es/form'
 
-const value = ref()
-const value1 = reactive({
-
-})
-const { ops } = useAreaProArea()
+const value = ref({ a: '' })
+const value1 = reactive({ })
+const { ops } = useProArea()
 function handleAdd() {
   console.log(value1)
 }
@@ -42,13 +40,29 @@ async function aaavalidator(_rule: Rule, value: any) {
 }
 onMounted(() => {
   setTimeout(() => {
-    value.value = '1856582762272702464'
+    Object.assign(value1, {
+      province: '北京',
+      city: '北京市',
+      county: '丰台区'
+    })
   }, 200)
 })
+function handleEdit() {
+  value.value.a = '1856582762272702464'
+}
+function handleaaa() {
+  value.value.a = ''
+}
 </script>
 
 <template>
-  <KProPicker v-model="value" is-init />
+  <a-button type="primary" @click="handleaaa">
+    清空
+  </a-button>
+  <a-button type="primary" @click="handleEdit">
+    回显
+  </a-button>
+  <KProPicker v-model="value.a" is-init />
   <KProTitle title="伟大的昊哥" un-border />
   <KProArea
     v-model="value1" :options="ops" :field-names="{

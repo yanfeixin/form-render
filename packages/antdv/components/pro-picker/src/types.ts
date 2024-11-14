@@ -15,9 +15,6 @@ export const ProPickerProps = {
   mode: {
     type: String as PropType< 'multiple' | 'tags' | 'SECRET_COMBOBOX_MODE_DO_NOT_USE'>
   },
-  isInit: {
-    type: Boolean
-  },
   delay: {
     type: Number,
     default: 200

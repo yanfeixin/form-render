@@ -12,7 +12,7 @@ const http = axios.create({
 http.interceptors.request.use(
   (conf) => {
     const headers: Record<string, string> = { ...(conf.headers as any) }
-    const token = '6734a4f75f7ebc70a2be9815'
+    const token = '673559b05f7ebc70a2be981c'
 
     if (token && !headers.token) {
       headers.token = token

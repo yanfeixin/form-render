@@ -1,5 +1,35 @@
 # @king-one/antdv
 
+## 1.0.44
+
+### Patch Changes
+
+- fix:修改 useProArea 的导出方法
+
+## 1.0.43
+
+### Patch Changes
+
+- fix: 修改 picker 组件回显
+
+## 1.0.42
+
+### Patch Changes
+
+- fix: 修改部分 bug
+
+## 1.0.41
+
+### Patch Changes
+
+- perf：优化部分功能
+
+## 1.0.40
+
+### Patch Changes
+
+- fix：修复 por-area 组件。选择省市区时清空下一级的数据
+
 ## 1.0.39
 
 ### Patch Changes

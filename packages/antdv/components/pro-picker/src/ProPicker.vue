@@ -15,52 +15,66 @@ const state = reactive({
   data: [],
   fetching: false
 })
-watch(value, (value: string | string[] | number | number[] | undefined) => {
-  if (typeof value === 'string' || typeof value === 'number') {
-    // if (props.isInit)
-    proPickerApi.company({
-      params: { value }
-    }).then((res) => {
-      state.data = res.data.options.map(item => ({
-        label: item.label,
-        value: item.value
-      }))
-      state.fetching = false
-    })
+watch(
+  value,
+  (value: string | string[] | number | number[] | undefined) => {
+    if (!value)
+      return
+    const type = state.data.some((item: any) => item.value === value)
+    if (type)
+      return
+    if (typeof value === 'string' || typeof value === 'number') {
+      proPickerApi
+        .company({
+          params: { value }
+        })
+        .then((res) => {
+          state.data = res.data.options.map((item: any) => ({
+            label: item.label,
+            value: item.value
+          }))
+        })
+    }
+    else if (Array.isArray(value)) {
+      proPickerApi
+        .company({
+          params: { value: value.join(',') }
+        })
+        .then((res) => {
+          state.data = res.data.options.map((item: any) => ({
+            label: item.label,
+            value: item.value
+          }))
+          state.fetching = false
+        })
+    }
+  },
+  {
+    immediate: true
   }
-  else if (Array.isArray(value)) {
-    proPickerApi.company({
-      params: { value: value.join(',') }
-    }).then((res) => {
-      state.data = res.data.options.map(item => ({
-        label: item.label,
-        value: item.value
-      }))
-      state.fetching = false
-    })
-  }
-}, {
-  once: true
-})
+)
 const handleSearch = debounce((value: string) => {
   if (value) {
     state.fetching = true
     if (props.type === 'company') {
-      proPickerApi.company({
-        params: { label: value }
-      }).then((res) => {
-        state.data = res.data.options.map(item => ({
-          label: item.label,
-          value: item.value
-        }))
-        state.fetching = false
-      })
+      proPickerApi
+        .company({
+          params: { label: value }
+        })
+        .then((res) => {
+          state.data = res.data.options.map((item: any) => ({
+            label: item.label,
+            value: item.value
+          }))
+          state.fetching = false
+        })
     }
     else {
-      proPickerApi.user({
-        params: { label: value }
-      }).then(() => {
-      })
+      proPickerApi
+        .user({
+          params: { label: value }
+        })
+        .then(() => {})
     }
   }
 }, props.delay)
