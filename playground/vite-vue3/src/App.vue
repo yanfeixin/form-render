@@ -1,6 +1,6 @@
 <!-- eslint-disable no-console -->
 <script setup lang='ts'>
-import { KProArea, KProPicker, KProTitle, useProArea } from '@king-one/antdv/components'
+import { KIcon, KProArea, KProPicker, KProTitle, useProArea } from '@king-one/antdv/components'
 import { onMounted, reactive, ref } from 'vue'
 import type { Rule } from 'ant-design-vue/es/form'
 
@@ -56,6 +56,8 @@ function handleaaa() {
 </script>
 
 <template>
+  <!-- //color="#235399" -->
+  <KIcon name="title-icon" />
   <a-button type="primary" @click="handleaaa">
     清空
   </a-button>
@@ -63,7 +65,7 @@ function handleaaa() {
     回显
   </a-button>
   <KProPicker v-model="value.a" is-init />
-  <KProTitle title="伟大的昊哥" un-border />
+
   <KProArea
     v-model="value1" :options="ops" :field-names="{
       id: 'name',
@@ -107,6 +109,7 @@ function handleaaa() {
       </a-button>
     </a-form-item>
   </a-form>
+  <KProTitle title="测试一下" un-border />
 </template>
 
 <style></style>

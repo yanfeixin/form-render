@@ -9,9 +9,13 @@ export const TitleProps = {
     type: String,
     required: true
   },
+  color: {
+    type: String,
+    default: '#0e74ff'
+  },
   size: {
     type: Number,
-    default: 16
+    default: 20
   }
 } as const
 

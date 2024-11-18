@@ -1,5 +1,11 @@
 # @king-one/antdv
 
+## 1.0.46
+
+### Patch Changes
+
+- feat:增加 icon 组件及修改对应的字体文件构建
+
 ## 1.0.45
 
 ### Patch Changes

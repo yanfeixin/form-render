@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useNamespace } from '@king-one/antdv/hooks/use-namespace'
+import { KIcon } from '../../icon'
 import { TitleProps } from './types'
 
 defineOptions({
@@ -18,7 +19,8 @@ const c = computed(() => {
 
 <template>
   <div :class="c">
-    <span :style="{ fontSize: `${size}px` }">{{ title }}</span>
+    <KIcon name="title-icon" class="icon" :size="size" :color="color" />
+    <span :style="{ fontSize: `${size}px`, color }">{{ title }}</span>
     <slot />
   </div>
 </template>

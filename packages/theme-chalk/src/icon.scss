@@ -1,19 +1,29 @@
+@use 'common/var' as *;
+@use 'mixins/index' as *;
+
+@function random-url($url) {
+  $random-url: $url + '?t=' + random(100000); // 生成一个 0 到 99999 之间的数字
+  @return url(#{$random-url});
+}
+
+
+
 @font-face {
-    font-family: "iconfont"; /* Project id 4749032 */
-    src: url('./fonts/iconfont.ttf') format('woff2'),
-         url('./fonts/iconfont.woff') format('woff'),
-         url('./fonts/iconfont.woff2') format('truetype');
-  }
-  
-  .iconfont {
-    font-family: "iconfont" !important;
-    font-size: 16px;
-    font-style: normal;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  
-  .icon-king-title-icon:before {
-    content: "\e680";
-  }
-  
+  font-family: "iconfont";
+  /* Project id 4749032 */
+  src: #{random-url('./fonts/iconfont.woff2')} format('woff2'),
+       #{random-url('./fonts/iconfont.woff')} format('woff'),
+       #{random-url('./fonts/iconfont.ttf')} format('truetype');
+}
+
+.#{bem('icon')}{
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-king-title-icon:before {
+  content: "\e680";
+}

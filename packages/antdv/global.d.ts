@@ -4,6 +4,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     ICollapseTranstion: typeof import('@king-one/antdv')['KCollapseTranstion'];
     IForm: typeof import('@king-one/antdv')['KForm'];
+    IIcon: typeof import('@king-one/antdv')['KIcon'];
     IProArea: typeof import('@king-one/antdv')['KProArea'];
     IProModal: typeof import('@king-one/antdv')['KProModal'];
     IProPicker: typeof import('@king-one/antdv')['KProPicker'];
