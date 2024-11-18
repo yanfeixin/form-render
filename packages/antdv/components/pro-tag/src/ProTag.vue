@@ -21,4 +21,3 @@ const tagState = computed(() => {
   </ATag>
 </template>
 
-<style></style>

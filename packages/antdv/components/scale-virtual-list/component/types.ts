@@ -3,6 +3,7 @@ import type { UseVirtualListItem, UseVirtualListOptions } from '../hooks/useVirt
 export interface VirtualListProps {
   list: Array<any>
   option: UseVirtualListOptions
+  itemClassName?: string
 }
 export interface VirtualListSlot {
   default: (props: { item: UseVirtualListItem<any>, index: number }) => any

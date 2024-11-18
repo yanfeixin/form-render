@@ -109,7 +109,3 @@ function handleChange(index: levelType) {
     </Col>
   </Row>
 </template>
-
-<style>
-
-</style>

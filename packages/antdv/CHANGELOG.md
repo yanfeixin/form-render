@@ -1,5 +1,11 @@
 # @king-one/antdv
 
+## 1.0.45
+
+### Patch Changes
+
+- feat：虚拟列表增加 item 的 class
+
 ## 1.0.44
 
 ### Patch Changes

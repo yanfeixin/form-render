@@ -4,7 +4,9 @@ import { toRefs } from 'vue'
 import { type UseVirtualListState, useVirtualList } from '../hooks/useVirtualList'
 import type { VirtualListProps, VirtualListSlot } from './types'
 
-const props = defineProps<VirtualListProps>()
+const props = withDefaults(defineProps<VirtualListProps>(), {
+  itemClassName: `${defaultNamespace}-scale-virtual-item`
+})
 const emit = defineEmits<{
   'update:state': [state: UseVirtualListState | null]
 }>()
@@ -23,7 +25,7 @@ onUpdate(value => emit('update:state', value))
   <div :class="`${defaultNamespace}-scale-virtual-list`" v-bind="containerProps">
     <div :class="`${defaultNamespace}-scale-virtual-list-container`">
       <div :class="`${defaultNamespace}-scale-vittual-wrapper`" v-bind="wrapperProps">
-        <div v-for="item in list" :key="item.index">
+        <div v-for="item in list" :key="item.index" :class="itemClassName">
           <slot :item="item" :index="item.index" />
         </div>
       </div>

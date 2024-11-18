@@ -97,5 +97,3 @@ const handleSearch = debounce((value: string) => {
     </template>
   </Select>
 </template>
-
-<style></style>
