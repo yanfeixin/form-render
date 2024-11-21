@@ -5,7 +5,7 @@ title: My Awesome Project
 titleTemplate: Next Generation Frontend Tooling
 
 hero:
-  name: My Awesome Project
+  name: king-one
   text: 风起于青萍之末
   tagline: Answer Explanation All
   image:

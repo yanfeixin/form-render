@@ -5,7 +5,7 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import { componentPreview, containerPreview } from '../../shared-docs/src/plugins'
 
 export default defineConfig({
-  title: 'My Awesome Project',
+  title: '@king-one/antdv',
   description: 'A VitePress Site',
   head: [
     [
@@ -20,7 +20,14 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Examples', link: '/markdown-examples' }
+      { text: 'Examples', link: '/markdown-examples' },
+      {
+        text: '相关链接',
+        items: [
+          { text: '@king-one/use', link: 'https://www.npmjs.com/package/@king-one/use' },
+          { text: '@king-one/utils', link: 'https://www.npmjs.com/package/@king-one/utils' }
+        ]
+      }
     ],
 
     sidebar: [
@@ -29,6 +36,12 @@ export default defineConfig({
         items: [
           { text: 'Markdown Examples', link: '/markdown-examples' },
           { text: 'Runtime API Examples', link: '/api-examples' }
+        ]
+      },
+      {
+        text: 'Feedback 反馈组件',
+        items: [
+          { text: 'Modal 对话框', link: '/components/modal' }
         ]
       }
     ],
@@ -50,7 +63,8 @@ export default defineConfig({
   },
   vite: {
     server: {
-      port: 9001
+      port: 9001,
+      host: '0.0.0.0'
     },
     plugins: [
       vueJsx(),

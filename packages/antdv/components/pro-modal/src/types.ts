@@ -1,8 +1,26 @@
-import type { ModalProps } from 'ant-design-vue'
+import type { ModalFuncProps, ModalProps } from 'ant-design-vue'
 import type { PropType } from 'vue'
 
+type ModalType = ModalFuncProps
 export const ProModalProps = {
   modalProps: {
-    type: Object as PropType<Omit<ModalProps, 'open'>>
+    type: Object as PropType<Omit<ModalType, 'open'>>
+  },
+  modelValue: {
+    type: Boolean,
+    required: true
   }
 } as const
+
+// import type { ModalFuncProps, ModalProps } from 'ant-design-vue'
+// import type { PropType } from 'vue'
+
+// type MPType = ModalProps
+// export const ProModalProps = {
+//   modalProps: {
+//     type: Object as PropType<Omit<MPType, 'open'>>
+//   },
+//   mProps: {
+//     type: Object as PropType<{ name: string }>
+//   }
+// } as const

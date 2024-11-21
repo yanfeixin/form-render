@@ -1,5 +1,71 @@
 # @king-one/antdv
 
+## 1.0.57
+
+### Patch Changes
+
+- fix:修复 tsx 组件构建错误
+
+## 1.0.56
+
+### Patch Changes
+
+- feat：使用 tsx 重构 pro-modal 组件
+
+## 1.0.55
+
+### Patch Changes
+
+- feat:增加事件
+
+## 1.0.54
+
+### Patch Changes
+
+- feat:tsx 实现组件
+
+## 1.0.53
+
+### Patch Changes
+
+- feat: 优化
+
+## 1.0.52
+
+### Patch Changes
+
+- feat:优化
+
+## 1.0.51
+
+### Patch Changes
+
+- feat:优化
+
+## 1.0.50
+
+### Patch Changes
+
+- feat：优化
+
+## 1.0.49
+
+### Patch Changes
+
+- feat：优化
+
+## 1.0.48
+
+### Patch Changes
+
+- feat：重构 pro-modal
+
+## 1.0.47
+
+### Patch Changes
+
+- fix: 修复 pro-tag 引入错误
+
 ## 1.0.46
 
 ### Patch Changes

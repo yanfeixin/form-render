@@ -29,6 +29,9 @@ $containerPrefix: #{$defaultPrefix}__#{$componentPrefix};
   .#{$defaultPrefix}-source {
     width: 100%;
   }
+  .#{$defaultPrefix}-source {
+    font-size: 15px;
+  }
 }
 
 .#{$containerPrefix}__container > .#{$defaultPrefix}-preview {

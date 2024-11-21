@@ -1,6 +1,7 @@
 import { resolve } from 'node:path'
 import vue from '@vitejs/plugin-vue'
 import { build } from 'vite'
+import vueJsx from '@vitejs/plugin-vue-jsx'
 import dts from 'vite-plugin-dts'
 import { convertEnv, generateExternal, getLibPath } from '../utils'
 import { viteCssAlias } from '../plugins/vite-css-alias'
@@ -77,6 +78,7 @@ export async function buildModules() {
     },
     plugins: [
       vue(),
+      vueJsx({ optimize: true }),
       dts({
         entryRoot: root,
         // include: [root!, resolve(projRoot, './typings/global.d.ts')],

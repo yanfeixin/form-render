@@ -2,16 +2,16 @@
 // GlobalComponents for Volar
 declare module 'vue' {
   export interface GlobalComponents {
-    ICollapseTranstion: typeof import('@king-one/antdv')['KCollapseTranstion'];
-    IForm: typeof import('@king-one/antdv')['KForm'];
-    IIcon: typeof import('@king-one/antdv')['KIcon'];
-    IProArea: typeof import('@king-one/antdv')['KProArea'];
-    IProModal: typeof import('@king-one/antdv')['KProModal'];
-    IProPicker: typeof import('@king-one/antdv')['KProPicker'];
-    IProTag: typeof import('@king-one/antdv')['KProTag'];
-    IProTitle: typeof import('@king-one/antdv')['KProTitle'];
-    IScaleVirtualList: typeof import('@king-one/antdv')['KScaleVirtualList'];
-    IScrollBar: typeof import('@king-one/antdv')['KScrollBar'];
+    KCollapseTranstion: typeof import('@king-one/antdv')['KCollapseTranstion'];
+    KForm: typeof import('@king-one/antdv')['KForm'];
+    KIcon: typeof import('@king-one/antdv')['KIcon'];
+    KProArea: typeof import('@king-one/antdv')['KProArea'];
+    KProModal: typeof import('@king-one/antdv')['KProModal'];
+    KProPicker: typeof import('@king-one/antdv')['KProPicker'];
+    KProTag: typeof import('@king-one/antdv')['KProTag'];
+    KProTitle: typeof import('@king-one/antdv')['KProTitle'];
+    KScaleVirtualList: typeof import('@king-one/antdv')['KScaleVirtualList'];
+    KScrollBar: typeof import('@king-one/antdv')['KScrollBar'];
   }
 }
 

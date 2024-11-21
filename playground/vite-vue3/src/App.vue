@@ -1,9 +1,21 @@
 <!-- eslint-disable no-console -->
 <script setup lang='ts'>
-import { KIcon, KProArea, KProPicker, KProTitle, useProArea } from '@king-one/antdv/components'
+import { KIcon, KProArea, KProModal, KProPicker, KProTitle, useProArea } from '@king-one/antdv/components'
 import { onMounted, reactive, ref } from 'vue'
 import type { Rule } from 'ant-design-vue/es/form'
+import zhCN from 'ant-design-vue/es/locale/zh_CN'
+import Example from './example.vue'
 
+// const open = ref<boolean>(false)
+
+// function showModal() {
+//   open.value = true
+// }
+
+// function handleOk(e: MouseEvent) {
+//   console.log(e)
+//   open.value = false
+// }
 const value = ref({ a: '' })
 const value1 = reactive({ })
 const { ops } = useProArea()
@@ -56,60 +68,74 @@ function handleaaa() {
 </script>
 
 <template>
-  <!-- //color="#235399" -->
-  <KIcon name="title-icon" />
-  <a-button type="primary" @click="handleaaa">
-    清空
-  </a-button>
-  <a-button type="primary" @click="handleEdit">
-    回显
-  </a-button>
-  <KProPicker v-model="value.a" is-init />
+  <a-config-provider :locale="zhCN">
+    <!-- //color="#235399" -->
+    <KIcon name="title-icon" />
+    <a-button type="primary" @click="handleaaa">
+      清空
+    </a-button>
+    <a-button type="primary" @click="handleEdit">
+      回显
+    </a-button>
+    <KProPicker v-model="value.a" is-init />
 
-  <KProArea
-    v-model="value1" :options="ops" :field-names="{
-      id: 'name',
-    }"
-  />
-  <div>{{ value1 }}</div>
-  <div @click="handleAdd">
-    123
-  </div>
+    <KProArea
+      v-model="value1" :options="ops" :field-names="{
+        id: 'name',
+      }"
+    />
+    <div>{{ value1 }}</div>
+    <div @click="handleAdd">
+      123
+    </div>
 
-  <a-form
-    :model="formState"
-    name="basic"
-    :label-col="{ span: 8 }"
-    :wrapper-col="{ span: 16 }"
-    autocomplete="off"
-    @finish="onFinish"
-    @finish-failed="onFinishFailed"
-  >
-    <a-form-item
-      label="Username"
-      name="username"
-      :rules="[{ required: true, message: 'Please input your username!' }]"
+    <a-form
+      :model="formState"
+      name="basic"
+      :label-col="{ span: 8 }"
+      :wrapper-col="{ span: 16 }"
+      autocomplete="off"
+      @finish="onFinish"
+      @finish-failed="onFinishFailed"
     >
-      <a-input v-model:value="formState.username" />
-    </a-form-item>
+      <a-form-item
+        label="Username"
+        name="username"
+        :rules="[{ required: true, message: 'Please input your username!' }]"
+      >
+        <a-input v-model:value="formState.username" />
+      </a-form-item>
 
-    <a-form-item
-      label="Password"
-      name="aaa"
-      :rules="[{ required: true, message: 'Please input your password!' }, {
-        validator: aaavalidator, trigger: 'change',
-      }]"
-    >
-      <KProArea v-model="formState.aaa" :options="ops" />
-    </a-form-item>
+      <a-form-item
+        label="Password"
+        name="aaa"
+        :rules="[{ required: true, message: 'Please input your password!' }, {
+          validator: aaavalidator, trigger: 'change',
+        }]"
+      >
+        <KProArea v-model="formState.aaa" :options="ops" />
+      </a-form-item>
 
-    <a-form-item :wrapper-col="{ offset: 8, span: 16 }">
-      <a-button type="primary" html-type="submit">
-        Submit
+      <a-form-item :wrapper-col="{ offset: 8, span: 16 }">
+        <a-button type="primary" html-type="submit">
+          Submit
+        </a-button>
+      </a-form-item>
+    </a-form>
+    <KProTitle title="测试一下" un-border />
+    <!-- <div>
+      <a-button type="primary" @click="showModal">
+        Open Modal
       </a-button>
-    </a-form-item>
-  </a-form>
-  <KProTitle title="测试一下" un-border />
+      <a-modal v-model:open="open" title="Basic Modal" @ok="handleOk">
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+      </a-modal>
+    </div> -->
+    <!-- <Example /> -->
+    <Example />
+  </a-config-provider>
 </template>
 
 <style></style>

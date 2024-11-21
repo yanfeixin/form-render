@@ -1,8 +1,7 @@
 import { withInstall } from '../utils/install'
-import ProModal from './src/ProModal.vue'
+import ProModal from './src/Modal'
 import './style'
 
 export * from './hooks/useProModal'
-export * from './src/types'
-export const KProModal: typeof ProModal = withInstall(ProModal)
+export const KProModal = withInstall(ProModal)
 export default KProModal

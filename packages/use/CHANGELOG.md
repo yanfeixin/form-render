@@ -1,5 +1,23 @@
 # @king-one/use
 
+## 1.0.20
+
+### Patch Changes
+
+- fix: 完善 report 方法
+
+## 1.0.19
+
+### Patch Changes
+
+- fix：修改 report 方法
+
+## 1.0.18
+
+### Patch Changes
+
+- build：优化打包构建
+
 ## 1.0.11
 
 ### Patch Changes

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import { Tag } from 'ant-design-vue'
 import { proTagProps } from './types'
 
 defineOptions({
@@ -16,8 +17,7 @@ const tagState = computed(() => {
 </script>
 
 <template>
-  <ATag :color="tagState?.color || 'default'">
+  <Tag :color="tagState?.color || 'default'">
     {{ tagState?.label || '' }}
-  </ATag>
+  </Tag>
 </template>
-

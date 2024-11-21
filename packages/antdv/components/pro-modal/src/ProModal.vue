@@ -1,7 +1,8 @@
 <script setup lang='ts'>
-import { Modal } from 'ant-design-vue'
+import { Modal, type ModalProps } from 'ant-design-vue'
 import { useNamespace } from '@king-one/antdv/hooks/use-namespace'
 import { computed } from 'vue'
+
 import { ProModalProps } from './types'
 
 defineOptions({
@@ -27,7 +28,7 @@ function handleCancel() {
 
 <template>
   <Modal
-    v-model:open="open" v-bind="modalProps" :wrap-class-name="c" @ok="handleClick"
+    v-model:open="open" v-bind="modalProps as any" :wrap-class-name="c" @ok="handleClick"
     @cancel="handleCancel"
   >
     <slot />

@@ -15,7 +15,7 @@ export async function buildGlobalTypeFile() {
     .filter(componentName => !componentName.endsWith('.ts') && !excludeComponents.includes(componentName))
     .map(
       componentName =>
-        `I${transformString(
+        `K${transformString(
           componentName,
           'upperCamelCase'
         )}: typeof import('@king-one/antdv')['K${transformString(componentName, 'upperCamelCase')}'];`

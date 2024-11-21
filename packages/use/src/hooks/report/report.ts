@@ -1,38 +1,33 @@
 import { reportApi } from '../../api'
 
-interface InfoInter {
+interface ErrorInfo {
   token: string
   custom?: { [key: string]: any }
   terminal: string
-  terminalInfo: string
   platform: string
+  wd?: any
+  events: string[]
 }
 
-class ErrorReporter {
-  private info: InfoInter
-
-  private userAgent: string
-
-  constructor(info: InfoInter) {
-    this.info = info
-    this.userAgent = navigator.userAgent
+export function reportInitEvent(info: ErrorInfo) {
+  const userAgent = navigator.userAgent
+  if (info.events.includes('error')) {
+    errorReportEvent(info, userAgent)
   }
-
-  errorReportEvent() {
-    window.onerror = this.handleGlobalError.bind(this)
+  if (info.events.includes('unhandledrejection')) {
+    rejectionReportEvent(info, userAgent)
   }
+}
 
-  rejectionReportEvent() {
-    window.onunhandledrejection = this.handleUnhandledRejection.bind(this)
-  }
-
-  handleGlobalError(
+export function errorReportEvent(info: ErrorInfo, userAgent: string) {
+  const selectWindow = info.wd || window
+  selectWindow.onerror = (
     message: Event | string,
     source: any,
     lineno: any,
     colno: any,
     error: any
-  ) {
+  ) => {
     const errorData = {
       message,
       source,
@@ -40,44 +35,47 @@ class ErrorReporter {
       colno,
       stack: error ? error.stack : ''
     }
-    this.reportError(errorData, 'error')
-  }
-
-  handleUnhandledRejection(event: PromiseRejectionEvent) {
-    const errorData = {
-      reason: event.reason
-    }
-    this.reportError(errorData, 'reject')
-  }
-
-  async reportError(errorData: any, type: string) {
-    const data = {
-      ...this.info,
-      terminalInfo: this.userAgent,
-      level: 'error',
-      message: '',
-      traceId: '',
-      type: '',
-      apiUrl: '',
-      remark: JSON.stringify(this.info.custom)
-    }
-    if (type === 'reject') {
-      data.message = JSON.stringify(errorData)
-      data.traceId = errorData.traceId
-      data.apiUrl = errorData.url
-      data.type = 'unhandledrejection'
-    }
-    if (type === 'error') {
-      data.message = errorData.stack || errorData.message
-      data.type = errorData.message ? errorData.message.split(':')[0] : ''
-    }
-    try {
-      await reportApi.errorReport({ data })
-    }
-    catch (error) {
-      console.error('ErrorReporter report error:', error)
-    }
+    reportError(errorData, info, userAgent, 'error')
   }
 }
 
-export default ErrorReporter
+export function rejectionReportEvent(info: ErrorInfo, userAgent: string) {
+  const selectWindow = info.wd || window
+  selectWindow.onunhandledrejection = (event: PromiseRejectionEvent) => {
+    const errorData = {
+      reason: event.reason
+    }
+    reportError(errorData, info, userAgent, 'reject')
+  }
+}
+
+export async function reportError(errorData: any, info: ErrorInfo, userAgent: string, type: string) {
+  const data = {
+    token: info.token,
+    terminal: info.terminal,
+    platform: info.platform,
+    terminalInfo: userAgent,
+    level: 'error',
+    message: '',
+    traceId: '',
+    type: '',
+    apiUrl: '',
+    remark: JSON.stringify(info.custom)
+  }
+  if (type === 'reject') {
+    data.message = JSON.stringify(errorData.reason)
+    data.traceId = errorData.reason.traceId
+    data.apiUrl = errorData.reason.url
+    data.type = 'unhandledrejection'
+  }
+  if (type === 'error') {
+    data.message = errorData.stack || errorData.message
+    data.type = errorData.message ? errorData.message.split(':')[0] : ''
+  }
+  try {
+    await reportApi.errorReport({ data })
+  }
+  catch (error) {
+    console.error('ErrorReporter report error:', error)
+  }
+}

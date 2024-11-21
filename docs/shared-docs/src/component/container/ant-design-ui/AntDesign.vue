@@ -7,7 +7,8 @@ import { useNameSpace } from '../../hooks/use-namespaces'
 import { useCodeFold } from '../../hooks/use-codefold'
 import { useCodeCopy } from '../../hooks/use-codecopy'
 import { MessageNoticeService } from '../../messages/index'
-
+import { ConfigProvider } from 'ant-design-vue'
+import zhCN from 'ant-design-vue/es/locale/zh_CN';
 interface DemoBlockProps {
   code: string
   showCode: string
@@ -56,30 +57,31 @@ watch(isCodeFold, () => {
 
 <template>
   <!-- <ClientOnly></ClientOnly> -->
-  <div :class="[ns.e('ant-design__container')]">
-    <section :class="[ns.bem('preview')]">
-      <slot />
-    </section>
-    <section :class="[ns.bem('description')]">
-      <div v-if="props.title" :class="[ns.bem('description', 'title')]">
-        {{ title }}
-      </div>
-      <div v-if="props.description" :class="[ns.bem('description', 'content')]" v-html="description" />
-      <div
-        v-if="props.description || (!props.title && !props.description)"
-        :class="[ns.bem('description', 'split-line')]"
-      />
-      <div :class="[ns.bem('description', 'handle-btn')]">
-        <CodeClose v-if="!isCodeFold" @click="setCodeFold(true)" />
-        <CodeOpen v-else @click="setCodeFold(false)" />
-        <CodeCopy @click="clickCodeCopy" />
-      </div>
-    </section>
+  <ConfigProvider :locale="zhCN">
+    <div :class="[ns.e('ant-design__container')]">
+      <section :class="[ns.bem('preview')]">
+        <slot />
+      </section>
+      <section :class="[ns.bem('description')]">
+        <div v-if="props.title" :class="[ns.bem('description', 'title')]">
+          {{ title }}
+        </div>
+        <div v-if="props.description" :class="[ns.bem('description', 'content')]" v-html="description" />
+        <div v-if="props.description || (!props.title && !props.description)"
+          :class="[ns.bem('description', 'split-line')]" />
+        <div :class="[ns.bem('description', 'handle-btn')]">
+          <CodeClose v-if="!isCodeFold" @click="setCodeFold(true)" />
+          <CodeOpen v-else @click="setCodeFold(false)" />
+          <CodeCopy @click="clickCodeCopy" />
+        </div>
+      </section>
 
-    <section ref="sourceCodeArea" :class="[ns.bem('source')]">
-      <div class="language-vue" v-html="showSourceCode" />
-    </section>
-  </div>
+      <section ref="sourceCodeArea" :class="[ns.bem('source')]">
+        <div class="language-vue" v-html="showSourceCode" />
+      </section>
+    </div>
+  </ConfigProvider>
+
 </template>
 
 <style src="./ant-design.scss"></style>
