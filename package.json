@@ -8,7 +8,7 @@
   "main": "index.js",
   "engines": {
     "node": ">=20",
-    "pnpm": "^8.1.0"
+    "pnpm": "^8.15.5"
   },
   "scripts": {
     "log": "changeset",
@@ -18,7 +18,8 @@
     "rm": "node -r @esbuild-kit/cjs-loader scripts/del",
     "pub": "pnpm run version && node scripts/publish.mjs",
     "lint:fix": "eslint . --fix",
-    "build": "pnpm run -C internal/build build"
+    "build": "pnpm run -C internal/build build",
+    "docs:dev": "pnpm run -C docs/antdv-docs docs:dev"
   },
   "dependencies": {
     "vue": "^3.4.34"

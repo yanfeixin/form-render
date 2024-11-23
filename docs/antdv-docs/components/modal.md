@@ -4,3 +4,6 @@
 demo-preview=../example/modal.vue
 
 :::
+
+### 组件抽离
+<DemoPreviewGroup dir="../example-group/modal"/>

@@ -3,7 +3,7 @@ import type { Renderer, Token } from 'markdown-it'
 import { isCheckPreviewCom1, isCheckPreviewCom2 } from './utils'
 import { transformPreview } from './componentPreview'
 import { containerDirectiveMount, parseContainer, parseContainerTag } from './containerPreview'
-
+// import { demoPreviewGroupPlugin  } from "./compoentGroup";
 export function componentPreview(md:any) {
   const defaultHtmlInlineRender = md.renderer.rules.html_inline!
   md.renderer.rules.html_inline = (
@@ -22,6 +22,7 @@ export function componentPreview(md:any) {
 }
 
 export function containerPreview(md: any) {
+  // demoPreviewGroupPlugin(md)
   containerDirectiveMount(md)
   parseContainerTag(md)
   parseContainer(md)

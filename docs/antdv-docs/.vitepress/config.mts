@@ -3,6 +3,7 @@ import { defineConfig } from 'vitepress'
 import { VitePWA } from 'vite-plugin-pwa'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import { componentPreview, containerPreview } from '../../shared-docs/src/plugins'
+import { demoPreviewGroupPlugin } from '../../shared-docs/src/plugins/compoentGroup'
 
 export default defineConfig({
   title: '@king-one/antdv',
@@ -57,6 +58,7 @@ export default defineConfig({
     config: (md) => {
       md.use(containerPreview)
       md.use(componentPreview)
+      md.use(demoPreviewGroupPlugin)
     },
     // catppuccin-latte material-theme-lighter one-light
     theme: { light: 'material-theme-lighter', dark: 'one-dark-pro' }
