@@ -75,7 +75,8 @@ watch(isCodeFold, () => {
     </section>
 
     <section ref="sourceCodeArea" :class="[ns.bem('source')]">
-      <div class="language-vue" v-html="showSourceCode" />
+      <slot name='code'></slot>
+      <!-- <div class="language-vue" v-html="showSourceCode" /> -->
     </section>
   </div>
 

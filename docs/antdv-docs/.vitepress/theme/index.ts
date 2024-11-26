@@ -3,8 +3,8 @@ import type { Theme } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 import '@king-one/shared-docs/src/component/styles/theme.scss'
 // import { Demo } from '@king-one/shared-docs/src/components'
-import { AntDesignContainer } from '@king-one/shared-docs/src/component'
-import DemoPreviewGroup from '../components/demo-preview-group.vue'
+import { AntDesignContainer, DemoPreviewGroup } from '@king-one/shared-docs/src/component'
+// import DemoPreviewGroup from '../components/demo-preview-group.vue'
 import layout from '../components/layout.vue'
 
 export default {

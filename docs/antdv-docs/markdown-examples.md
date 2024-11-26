@@ -1,12 +1,6 @@
 # Markdown Extension Examples
 
 This page demonstrates some of the built-in markdown extensions provided by VitePress.
-### 测试组件
-:::preview 1232 || 有点意思
-
-demo-preview=./example/a.vue
-
-:::
 
 ## Syntax Highlighting
 
