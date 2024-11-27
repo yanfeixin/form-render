@@ -1,5 +1,5 @@
 import { computed, defineComponent, onMounted, ref } from 'vue'
-import { VResizeObserver } from 'vueuc'
+import { useResizeObserver } from '@vueuse/core'
 import { off, on } from 'evtd'
 import { defaultNamespace } from '@king-one/antdv/hooks/use-namespace'
 import { scrollbarProps } from './types'
@@ -14,12 +14,6 @@ export default defineComponent({
         return
       sync()
     })
-    const handleContentResize = () => {
-      sync()
-    }
-    const handleContainerResize = () => {
-      sync()
-    }
     const contentRef = ref<HTMLElement | null>(null)
     const containerRef = ref<HTMLElement | null>(null)
     const yRailRef = ref<HTMLElement | null>(null)
@@ -35,11 +29,22 @@ export default defineComponent({
     const containerScrollTopRef = ref(0)
     const containerScrollLeftRef = ref(0)
 
+    useResizeObserver(contentRef, () => {
+      sync()
+    })
+    useResizeObserver(containerRef, () => {
+      sync()
+    })
     /**   竖向滚动条相关逻辑 */
     const needYBarRef = computed(() => {
       const { value: containerHeight } = containerHeightRef
       const { value: contentHeight } = contentHeightRef
       return containerHeight !== null && contentHeight !== null && contentHeight > containerHeight
+    })
+    const isShowYBarRef = ref<boolean>(false)
+    const showYBarRef = computed(() => {
+      const { trigger } = props
+      return trigger === 'none' || isShowYBarRef.value
     })
     /** 竖向滚动条的大小（高度） */
     const yBarSizeRef = computed(() => {
@@ -115,6 +120,7 @@ export default defineComponent({
       off('mousemove', window, handleYScrollMouseMove, true)
       off('mouseup', window, handleYScrollMouseUp, true)
       yBarPressed = false
+      isShowYBarRef.value = false
       sync()
     }
     const handleYScrollMouseDown = (e: MouseEvent) => {
@@ -125,6 +131,7 @@ export default defineComponent({
       memoYTop = containerScrollTopRef.value
       memoMouseY = e.clientY
       yBarPressed = true
+      isShowYBarRef.value = true
     }
 
     function handleScroll(e: Event): void {
@@ -139,6 +146,11 @@ export default defineComponent({
       const { value: containerWidth } = containerWidthRef
       const { value: contentWidth } = contentWidthRef
       return containerWidth !== null && contentWidth !== null && contentWidth > containerWidth
+    })
+    const isShowXBarRef = ref<boolean>(false)
+    const showXBarRef = computed(() => {
+      const { trigger } = props
+      return trigger === 'none' || isShowXBarRef.value
     })
     // 横向滚动条的大小（width）
     const xBarSizeRef = computed(() => {
@@ -209,6 +221,7 @@ export default defineComponent({
       e.stopPropagation()
       off('mousemove', window, handleXScrollMouseMove, true)
       off('mouseup', window, handleXScrollMouseUp, true)
+      isShowXBarRef.value = false
       xBarPressed = false
       sync()
     }
@@ -216,6 +229,7 @@ export default defineComponent({
       e.preventDefault()
       e.stopPropagation()
       xBarPressed = true
+      isShowXBarRef.value = true
       on('mousemove', window, handleXScrollMouseMove, true)
       on('mouseup', window, handleXScrollMouseUp, true)
       memoXLeft = containerScrollLeftRef.value
@@ -258,11 +272,26 @@ export default defineComponent({
       syncPositionState()
       syncScrollState()
     }
-
+    const handleMouseEnter = () => {
+      isShowYBarRef.value = true
+      isShowXBarRef.value = true
+    }
+    const handleMouseLeave = () => {
+      if (!yBarPressed) {
+        isShowYBarRef.value = false
+      }
+      if (!xBarPressed) {
+        isShowXBarRef.value = false
+      }
+    }
     return {
+      showYBarRef,
+      showXBarRef,
       sync,
-      handleContentResize,
-      handleContainerResize,
+      handleMouseEnter,
+      handleMouseLeave,
+      // handleContentResize,
+      // handleContainerResize,
       contentRef,
       yRailRef,
       xRailRef,
@@ -285,7 +314,7 @@ export default defineComponent({
     const createXBar = () => {
       return (
         <div class={`${defaultNamespace}-scrollbar-rail ${defaultNamespace}-scrollbar-rail--horizontal`} ref="xRailRef">
-          {this.needXBarRef && (
+          {this.needXBarRef && this.showXBarRef && (
             <div
               class={`${defaultNamespace}-scrollbar-rail__scrollbar--horizontal`}
               style={{
@@ -302,7 +331,7 @@ export default defineComponent({
     const createYBar = () => {
       return (
         <div class={`${defaultNamespace}-scrollbar-rail ${defaultNamespace}-scrollbar-rail--vertical`} ref="yRailRef">
-          {this.needYBarRef && (
+          {this.needYBarRef && this.showYBarRef && (
             <div
               class={`${defaultNamespace}-scrollbar-rail__scrollbar--vertical`}
               style={{
@@ -319,18 +348,17 @@ export default defineComponent({
 
     const createChildren = () => {
       return (
-        <div class={`${defaultNamespace}-scrollbar`} {...this.$attrs}>
+        <div class={`${defaultNamespace}-scrollbar`} {...this.$attrs} onMouseenter={this.handleMouseEnter} onMouseleave={this.handleMouseLeave}>
           {this.container
             ? (
                 $slots.default?.()
               )
             : (
                 <div class={`${defaultNamespace}-scrollbar-container`} onScroll={this.handleScroll} ref="containerRef">
-                  <VResizeObserver onResize={this.handleContentResize}>
-                    <div ref="contentRef" class={`${defaultNamespace}-scrollbar-content`}>
-                      {$slots.default?.()}
-                    </div>
-                  </VResizeObserver>
+
+                  <div ref="contentRef" class={`${defaultNamespace}-scrollbar-content`}>
+                    {$slots.default?.()}
+                  </div>
                 </div>
               )}
 
@@ -339,7 +367,7 @@ export default defineComponent({
         </div>
       )
     }
-    const createBarNode = this.container ? createChildren() : <VResizeObserver onResize={this.handleContainerResize}>{createChildren()}</VResizeObserver>
+    const createBarNode = createChildren()
     return createBarNode
   }
 })

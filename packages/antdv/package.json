@@ -34,8 +34,7 @@
     "@vueuse/core": "^10.11.0",
     "@vueuse/shared": "^11.0.0",
     "evtd": "^0.2.4",
-    "vue-demi": "^0.14.10",
-    "vueuc": "^0.4.64"
+    "vue-demi": "^0.14.10"
   },
   "custom": {
     "env": "antdv"

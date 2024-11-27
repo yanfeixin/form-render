@@ -10,6 +10,8 @@
   --component-preview-code-block-bg: #343030;
   --component-preview-primary-color: var(--vp-c-brand);
   --component-preview-success-color: #67c23a;
+  // --vp-code-block-bg:#333;
+  // --vp-code-lang-color:#00fffb;
 }
 
 .dark:root {
@@ -25,5 +27,6 @@
   --component-preview-primary-color: var(--vp-c-brand);
   --component-preview-success-color: #67c23a;
 }
+
 
 $defaultPrefix: 'vitepress-demo-preview';

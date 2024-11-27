@@ -40,9 +40,12 @@ export default defineConfig({
         ]
       },
       {
-        text: 'Feedback 反馈组件',
+        text: 'Basics 基础组件',
         items: [
-          { text: 'Modal 对话框', link: '/components/modal' }
+          { text: 'Modal 对话框', link: '/components/modal' },
+          { text: 'Scrollbar 滚动条', link: '/components/scroll-bar' },
+          { text: 'ProTitle 标题', link: '/components/pro-title' },
+          { text: 'VirtualList 虚拟列表', link: '/components/virtual-list' }
         ]
       }
     ],
@@ -61,7 +64,7 @@ export default defineConfig({
       md.use(demoPreviewGroupPlugin)
     },
     // catppuccin-latte material-theme-lighter one-light
-    theme: { light: 'material-theme-lighter', dark: 'one-dark-pro' }
+    theme: { light: 'github-light', dark: 'one-dark-pro' }
   },
   vite: {
     server: {

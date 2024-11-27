@@ -36,6 +36,7 @@ $containerPrefix: #{$defaultPrefix}__#{$componentPrefix};
 .#{$containerPrefix}__container .#{$defaultPrefix}-tabs {
     background: white;
     border-top: 1px dashed var(--component-preview-border);
+    border-bottom: 1px dashed var(--component-preview-border);
     height: 50px;
     display: flex;
 
@@ -46,7 +47,7 @@ $containerPrefix: #{$defaultPrefix}__#{$componentPrefix};
         cursor: pointer;
     }
     .is-active {
-        border-color: var(--king-color-primary);
+        border-color: #3451b2;
     }
 }
 
