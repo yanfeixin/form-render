@@ -31,4 +31,11 @@
         align-items: center;
         border-top: 1px solid #e6e8ea;
     }
+    .ant-modal-title{
+        flex: 1;
+    }
+    .pro-modal-title{
+        cursor: move;
+        width: 100%;
+    }
 }

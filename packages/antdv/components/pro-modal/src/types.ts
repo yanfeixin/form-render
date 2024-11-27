@@ -4,10 +4,14 @@ import type { PropType } from 'vue'
 type ModalType = ModalFuncProps
 export const ProModalProps = {
   modalProps: {
-    type: Object as PropType<Omit<ModalType, 'open'>>
+    type: Object as PropType<Omit<ModalType, 'open' | 'title'>>
   },
   modelValue: {
     type: Boolean,
+    required: true
+  },
+  title: {
+    type: String,
     required: true
   }
 } as const

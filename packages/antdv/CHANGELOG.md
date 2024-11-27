@@ -1,5 +1,11 @@
 # @king-one/antdv
 
+## 1.0.58
+
+### Patch Changes
+
+- feat：modal 增加拖拽功能
+
 ## 1.0.57
 
 ### Patch Changes

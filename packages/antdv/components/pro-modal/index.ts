@@ -1,5 +1,5 @@
 import { withInstall } from '../utils/install'
-import ProModal from './src/Modal'
+import ProModal from './src/ProModal.vue'
 import './style'
 
 export * from './hooks/useProModal'

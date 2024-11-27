@@ -166,4 +166,9 @@ function handleaaa() {
   </a-config-provider>
 </template>
 
-<style></style>
+<style>
+body{
+  width: 100vw;
+  overflow:hidden;
+}
+</style>

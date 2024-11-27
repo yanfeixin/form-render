@@ -11,7 +11,8 @@ const { modalVisible } = useProModal()
       open Modal
     </Button>
     <KProModal
-      v-model="modalVisible" :modal-props="{ title: 'title' }"
+      v-model="modalVisible"
+      title="伟大的昊哥"
     >
       测试内容
     </KProModal>

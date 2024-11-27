@@ -18,4 +18,5 @@ demo-preview=../example/modal.vue
 :::
 
 ### 组件抽离
+通常在用于[Table](https://www.antdv.com/components/table-cn) 操作列时，我们希望在点击按钮时，弹出一个对话框，此时就可以使用组件抽离的方式，将对话框抽离出来，进行复用。
 <DemoPreviewGroup dir="../example-group/modal"/>

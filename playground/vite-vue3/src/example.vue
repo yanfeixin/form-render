@@ -1,6 +1,6 @@
 <script setup lang='ts'>
 import { ref } from 'vue'
-import { KProModal } from '@king-one/antdv'
+import { KProModal } from '@king-one/antdv/components'
 
 const open = ref<boolean>(false)
 function showModal() {
@@ -16,7 +16,7 @@ function handleConfirm() {
     <a-button type="primary" @click="showModal">
       Open Modal
     </a-button>
-    <KProModal v-model="open" :modal-props="{ okText: '666', title: '伟大的昊哥', maskClosable: false }" @on-confirm="handleConfirm">
+    <KProModal v-model="open" title="伟大的昊哥" :modal-props="{ okText: '666', maskClosable: false }" @on-confirm="handleConfirm">
       <div>默认内容</div>
     </KProModal>
   </div>
