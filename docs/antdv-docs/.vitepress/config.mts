@@ -47,6 +47,12 @@ export default defineConfig({
           { text: 'ProTitle 标题', link: '/components/pro-title' },
           { text: 'VirtualList 虚拟列表', link: '/components/virtual-list' }
         ]
+      },
+      {
+        text: 'Business 业务组件',
+        items: [
+          { text: 'Picker 选择器', link: '/components/Business/picker' }
+        ]
       }
     ],
 

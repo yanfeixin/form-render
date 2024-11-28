@@ -12,7 +12,7 @@ const { modalVisible } = useProModal()
     </Button>
     <KProModal
       v-model="modalVisible"
-      title="伟大的昊哥"
+      title="默认标题"
     >
       测试内容
     </KProModal>
