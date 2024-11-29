@@ -13,7 +13,7 @@ outline: deep
 ### 竖向滚动（默认）
 :::preview 竖向滚动
 
-demo-preview=../example/modal/scroll-bar.vue
+demo-preview=../example/scroll/scroll-bar.vue
 
 :::
 
@@ -21,7 +21,7 @@ demo-preview=../example/modal/scroll-bar.vue
 
 :::preview 横向滚动条
 
-demo-preview=../example/modal/scrollx-bar.vue
+demo-preview=../example/scroll/scrollx-bar.vue
 
 :::
 

@@ -21,7 +21,7 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Examples', link: '/markdown-examples' },
+      { text: '组件', link: '/components/modal' },
       {
         text: '相关链接',
         items: [
@@ -32,13 +32,13 @@ export default defineConfig({
     ],
 
     sidebar: [
-      {
-        text: 'Examples',
-        items: [
-          { text: 'Markdown Examples', link: '/markdown-examples' },
-          { text: 'Runtime API Examples', link: '/api-examples' }
-        ]
-      },
+      // {
+      //   text: 'Examples',
+      //   items: [
+      //     { text: 'Markdown Examples', link: '/markdown-examples' },
+      //     { text: 'Runtime API Examples', link: '/api-examples' }
+      //   ]
+      // },
       {
         text: 'Basics 基础组件',
         items: [
@@ -51,7 +51,8 @@ export default defineConfig({
       {
         text: 'Business 业务组件',
         items: [
-          { text: 'Picker 选择器', link: '/components/Business/picker' }
+          { text: 'Picker 选择器', link: '/components/Business/picker' },
+          { text: 'Area 省市区', link: '/components/Business/area' }
         ]
       }
     ],
