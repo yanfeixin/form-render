@@ -2,7 +2,8 @@
 import { KProArea } from '@king-one/antdv'
 import { reactive } from 'vue'
 
-const value = reactive({})
+// eslint-disable-next-line prefer-const
+let value = reactive({})
 
 const ops = [
   {

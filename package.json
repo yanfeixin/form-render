@@ -19,7 +19,8 @@
     "pub": "pnpm run version && node scripts/publish.mjs",
     "lint:fix": "eslint . --fix",
     "build": "pnpm run -C internal/build build",
-    "docs:dev": "pnpm run -C docs/antdv-docs docs:dev"
+    "docs:dev": "pnpm run -C docs/antdv-docs docs:dev",
+    "docs:build": "pnpm run -C docs/antdv-docs docs:build"
   },
   "dependencies": {
     "vue": "^3.4.34"
