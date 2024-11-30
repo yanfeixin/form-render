@@ -16,6 +16,18 @@ outline: deep
 - 请把业务系统的请求封装挂载到 window.$http
 :::
 
+### 基础用法
+```vue
+<script setup lang='ts'>
+import { KProPicker } from '@king-one/antdv/components'
+const value = ref('')
+</script>
+
+<template>
+  <KProPicker v-model="value" />
+</template>
+```
+
 ### Props
 | 属性名 | 描述                                     | 类型                         | 默认值    |
 | ------ | ---------------------------------------- | ---------------------------- | --------- |
