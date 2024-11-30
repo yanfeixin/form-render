@@ -5,7 +5,7 @@ import { onMounted, reactive, ref } from 'vue'
 import type { Rule } from 'ant-design-vue/es/form'
 import zhCN from 'ant-design-vue/es/locale/zh_CN'
 import Example from './example.vue'
-
+import VirtualList from './App-virtualList.vue'
 // const open = ref<boolean>(false)
 
 // function showModal() {
@@ -18,7 +18,7 @@ import Example from './example.vue'
 // }
 const value = ref({ a: '' })
 const value1 = reactive({ })
-const { ops } = useProArea()
+// const { ops } = useProArea()
 function handleAdd() {
   console.log(value1)
 }
@@ -79,11 +79,11 @@ function handleaaa() {
     </a-button>
     <KProPicker v-model="value.a" is-init />
 
-    <KProArea
+    <!-- <KProArea
       v-model="value1" :options="ops" :field-names="{
         id: 'name',
       }"
-    />
+    /> -->
     <div>{{ value1 }}</div>
     <div @click="handleAdd">
       123
@@ -113,7 +113,7 @@ function handleaaa() {
           validator: aaavalidator, trigger: 'change',
         }]"
       >
-        <KProArea v-model="formState.aaa" :options="ops" />
+        <!-- <KProArea v-model="formState.aaa" :options="ops" /> -->
       </a-form-item>
 
       <a-form-item :wrapper-col="{ offset: 8, span: 16 }">
@@ -163,6 +163,7 @@ function handleaaa() {
         我们在想象中度过了许多年 许多年之后我们又开始想象 啦啦啦啦啦啦啦啦咧
       </div>
     </KScrollBar>
+    <VirtualList />
   </a-config-provider>
 </template>
 
