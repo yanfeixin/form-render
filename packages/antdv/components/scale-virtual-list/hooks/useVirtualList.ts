@@ -278,7 +278,7 @@ function useHorizontalVirtualList<T>(options: UseHorizontalVirtualListOptions, l
         marginLeft: `${offsetLeft.value}px`,
         display: 'flex',
         transform: `scale(${state.value.scale})`,
-        transformOrigin: '50% 0%'
+        transformOrigin: '0% 0%'
         // position: 'absolute',
         // left: '50%'
       }
@@ -344,7 +344,7 @@ function useVerticalVirtualList<T>(options: UseVerticalVirtualListOptions, list:
       style: {
         height: `${totalHeight.value - offsetTop.value}px`,
         marginTop: `${offsetTop.value}px`,
-        transform: `scale(${state.value.scale})`,
+        transform: `translateX(-50%) scale(${state.value.scale})`,
         transformOrigin: '50% 0%'
       }
     }

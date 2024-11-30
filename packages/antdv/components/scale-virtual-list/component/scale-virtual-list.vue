@@ -34,7 +34,7 @@ onUpdate(value => emit('update:state', value))
 <template>
   <div :class="`${defaultNamespace}-scale-virtual-list`" v-bind="containerProps">
     <div :class="`${defaultNamespace}-scale-virtual-list-container`" :style="containerSty">
-      <div v-bind="wrapperProps" ref="wrapperRef" :class="`${defaultNamespace}-scale-vittual-wrapper aaa`">
+      <div v-bind="wrapperProps" ref="wrapperRef" :class="`${defaultNamespace}-scale-vittual-wrapper`">
         <div v-for="item in list" :key="item.index" :class="itemClassName">
           <slot :item="item" :index="item.index" />
         </div>
