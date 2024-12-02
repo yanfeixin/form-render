@@ -1,6 +1,6 @@
 import { type EventHookOn, type MaybeRef, createEventHook } from '@vueuse/shared'
-import type { ComputedRef, Ref, ShallowRef, StyleValue } from 'vue-demi'
-import { computed, ref, shallowRef, watch } from 'vue-demi'
+import type { ComputedRef, Ref, ShallowRef, StyleValue } from 'vue'
+import { computed, ref, shallowRef, watch } from 'vue'
 import { useElementSize } from '@vueuse/core'
 
 export interface UseVirtualListState { start: number, end: number, current: number, scale: number }

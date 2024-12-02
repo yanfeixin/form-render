@@ -163,9 +163,6 @@ importers:
       vue:
         specifier: ^3.4.34
         version: 3.4.38(typescript@5.5.4)
-      vue-demi:
-        specifier: ^0.14.10
-        version: 0.14.10(vue@3.4.38)
 
   packages/path: {}
 
