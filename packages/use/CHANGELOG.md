@@ -1,5 +1,11 @@
 # @king-one/use
 
+## 2.0.1
+
+### Patch Changes
+
+- feat: 增加文件上传
+
 ## 1.0.21
 
 ### Patch Changes
