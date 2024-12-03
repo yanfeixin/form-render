@@ -6,6 +6,8 @@ import type { Rule } from 'ant-design-vue/es/form'
 import zhCN from 'ant-design-vue/es/locale/zh_CN'
 import Example from './example.vue'
 import VirtualList from './App-virtualList.vue'
+import AppForm from './App-form.vue'
+
 // const open = ref<boolean>(false)
 
 // function showModal() {
@@ -164,6 +166,8 @@ function handleaaa() {
       </div>
     </KScrollBar>
     <VirtualList />
+    <AppForm />
+    <div style="height: 300px;" />
   </a-config-provider>
 </template>
 

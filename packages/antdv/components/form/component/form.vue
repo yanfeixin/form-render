@@ -1,20 +1,18 @@
-<!--
- * @Description:
- * @Version: 2.0
- * @Autor: caohao
- * @Date: 2024-09-16 17:25:53
- * @LastEditors: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
- * @LastEditTime: 2024-11-15 13:51:01
--->
 <script setup lang='ts'>
-import { formType } from './form'
+import { useNamespace } from '@king-one/antdv/hooks/use-namespace'
+import { computed } from 'vue'
 
-defineProps(formType)
+defineOptions({ name: 'KForm' })
+const { b } = useNamespace('form')
+const c = computed(() => [b()])
 </script>
 
 <template>
-  <form class="king-form">
-    <div>伟大的好歌</div>
+  <form :class="c">
     <slot />
   </form>
 </template>
+
+<style>
+
+</style>

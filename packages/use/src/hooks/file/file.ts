@@ -51,7 +51,8 @@ export async function uploadFile(data: FormData, business = 'test'): Promise<Upl
     const url = detailRes[0].imageStr
 
     return { ...fileRes.data, url, fileId: fileRes.data.id } as UploadFileData
-  } catch (error) {
+  }
+  catch (error) {
     return Promise.reject(error)
   }
 }
@@ -60,7 +61,8 @@ export async function removeFile(fileId: string): Promise<void> {
   try {
     const res = await fileApi.delteFile({ params: { fileId } })
     return res
-  } catch (error) {
+  }
+  catch (error) {
     return Promise.reject(error)
   }
 }
