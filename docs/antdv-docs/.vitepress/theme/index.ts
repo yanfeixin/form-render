@@ -1,9 +1,8 @@
 // https://vitepress.dev/guide/custom-theme
 import type { Theme } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
-import '@king-one/shared-docs/src/component/styles/theme.scss'
-// import { Demo } from '@king-one/shared-docs/src/components'
-import { AntDesignContainer, DemoPreviewGroup } from '@king-one/shared-docs/src/component'
+import '../../../components/src/styles/theme.scss'
+import { AntDesignContainer, DemoPreviewGroup } from '../../../components/index'
 // import DemoPreviewGroup from '../components/demo-preview-group.vue'
 import layout from '../components/layout.vue'
 

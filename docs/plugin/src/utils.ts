@@ -1,3 +1,5 @@
+/* eslint-disable regexp/no-super-linear-backtracking */
+/* eslint-disable regexp/no-contradiction-with-assertion */
 import type MarkdownIt from 'markdown-it'
 
 // componentPreview check
@@ -5,10 +7,8 @@ export const isCheckPreviewCom1 = /^<preview (.*)><\/preview>$/
 export const isCheckPreviewCom2 = /^<preview (.*) \/>$/
 export const isCheckContainerPreview = /^demo-preview=(.+)$/
 
-const scriptRE = /<\/script>/
 const scriptLangTsRE = /<\s*script[^>]*\blang=['"]ts['"][^>]*/
 const scriptSetupRE = /<\s*script[^>]*\bsetup\b[^>]*/
-const scriptClientRE = /<\s*script[^>]*\bclient\b[^>]*/
 const scriptSetupCommonRE = /<\s*script\s+(?:(setup|lang='ts'|lang="ts")\s*)?(setup|lang='ts'|lang="ts")?\s*>/
 
 /**

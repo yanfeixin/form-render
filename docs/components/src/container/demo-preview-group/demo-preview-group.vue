@@ -1,22 +1,24 @@
+<!-- eslint-disable vue/no-side-effects-in-computed-properties -->
 <!-- eslint-disable no-console -->
 <script setup lang='ts'>
+import { computed, nextTick, onMounted, ref, watch } from 'vue'
 import { useNameSpace } from '../../hooks/use-namespaces'
-import { computed, ref, onMounted, watch, nextTick } from 'vue'
 import CodeOpen from '../../icons/code-open.vue'
 import CodeClose from '../../icons/code-close.vue'
 // import CodeCopy from '../../icons/code-copy.vue'
 import { useCodeFold } from '../../hooks/use-codefold'
+
 interface Props {
   files?: string
 }
 
+const props = withDefaults(defineProps<Props>(), { files: '() => []' })
 const { isCodeFold, setCodeFold } = useCodeFold()
 const sourceCodeArea = ref<any>(null)
 const tabsRef = ref<any>(null)
 const codeRef = ref<any>(null)
 
-
-const sourceCodeContainerHeight = () => {
+function sourceCodeContainerHeight() {
   let tabsHeight = 0
   if (tabsRef.value) {
     const { height } = tabsRef.value.getBoundingClientRect()
@@ -45,14 +47,13 @@ watch(isCodeFold, () => {
   setContainerHeight(container)
 })
 
-
 const ns = useNameSpace()
-const props = withDefaults(defineProps<Props>(), { files: '() => []' })
 const activeFile = ref<string>('')
 const parsedFiles = computed(() => {
   try {
     const files = JSON.parse(decodeURIComponent(props.files ?? ''))
-    if (!activeFile.value) activeFile.value = files[0]
+    if (!activeFile.value)
+      activeFile.value = files[0]
     return files
   }
   catch {
@@ -60,7 +61,7 @@ const parsedFiles = computed(() => {
   }
 })
 
-const handleTab = (file: string) => {
+function handleTab(file: string) {
   activeFile.value = file
   nextTick(() => {
     const currentContainerHeight = sourceCodeContainerHeight()
@@ -71,7 +72,7 @@ const handleTab = (file: string) => {
 
 <template>
   <div :class="[ns.e('preview-group__container')]">
-    <section :class="[ns.bem('preview')]" v-if="parsedFiles.length > 0">
+    <section v-if="parsedFiles.length > 0" :class="[ns.bem('preview')]">
       <slot />
     </section>
     <section :class="[ns.bem('description')]">
@@ -82,17 +83,20 @@ const handleTab = (file: string) => {
     </section>
 
     <section ref="sourceCodeArea" :class="[ns.bem('source')]">
-      <section :class="[ns.bem('tabs')]" ref="tabsRef">
-        <div :class="[ns.bem('tabs', 'tab'), activeFile === file && 'is-active']" v-for="file in parsedFiles"
-          :key="file" @click="handleTab(file)">{{ file }}</div>
+      <section ref="tabsRef" :class="[ns.bem('tabs')]">
+        <div
+          v-for="file in parsedFiles" :key="file"
+          :class="[ns.bem('tabs', 'tab'), activeFile === file && 'is-active']" @click="handleTab(file)"
+        >
+          {{ file }}
+        </div>
       </section>
       <div ref="codeRef" style="padding-bottom: 5px;">
         <template v-for="file in parsedFiles">
-          <slot :name="file" v-if="file === activeFile" />
+          <slot v-if="file === activeFile" :name="file" />
         </template>
       </div>
     </section>
-
   </div>
 </template>
 

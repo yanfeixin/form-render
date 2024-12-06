@@ -32,7 +32,6 @@
     "@esbuild-kit/cjs-loader": "^2.4.4",
     "@inquirer/prompts": "^7.0.0",
     "@king-one/antdv": "workspace:^",
-    "@king-one/shared-docs": "workspace:^",
     "@king-one/theme-chalk": "workspace:^",
     "@king-one/utils": "workspace:^",
     "@types/fs-extra": "^11.0.4",

@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 
-export const useCodeCopy = () => {
+export function useCodeCopy() {
   const copyContent = ref('')
   const clickCopy = async (value: string) => {
     await navigator.clipboard.writeText(value)

@@ -16,14 +16,16 @@ interface UseNameSpaceReturn {
 
 const defaultPrefix = 'vitepress-demo-preview'
 
-const generateName = (prefix: string, block?: string, element?: string, modifier?: string) => {
+function generateName(prefix: string, block?: string, element?: string, modifier?: string) {
   let defaultName = block === '' ? `${prefix}` : `${prefix}-${block}`
-  if (element) defaultName += `__${element}`
-  if (modifier) defaultName += `--${modifier}`
+  if (element)
+    defaultName += `__${element}`
+  if (modifier)
+    defaultName += `--${modifier}`
   return defaultName
 }
 
-export const useNameSpace = (block: string = ''): UseNameSpaceReturn => {
+export function useNameSpace(block: string = ''): UseNameSpaceReturn {
   const b = () => generateName(defaultPrefix, block)
   const e = (element: string = '') => generateName(defaultPrefix, block, element)
   const m = (modifier: string = '') => generateName(defaultPrefix, block, '', modifier)

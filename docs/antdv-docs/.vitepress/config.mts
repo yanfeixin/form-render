@@ -2,8 +2,7 @@ import { defineConfig } from 'vitepress'
 
 import { VitePWA } from 'vite-plugin-pwa'
 import vueJsx from '@vitejs/plugin-vue-jsx'
-import { componentPreview, containerPreview } from '../../shared-docs/src/plugins'
-import { demoPreviewGroupPlugin } from '../../shared-docs/src/plugins/compoentGroup'
+import { componentPreview, containerPreview, demoPreviewGroupPlugin } from '../../plugin/src'
 
 export default defineConfig({
   title: '@king-one/antdv',

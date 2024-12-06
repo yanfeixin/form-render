@@ -1,0 +1,30 @@
+{
+  "name": "@king-one/vitepress-components",
+  "type": "module",
+  "version": "1.0.3",
+  "description": "",
+  "author": "",
+  "license": "ISC",
+  "keywords": [],
+  "main": "./dist/lib/index.js",
+  "module": "./dist/es/index.mjs",
+  "types": "./dist/types/index.d.ts",
+  "files": [
+    "README.md",
+    "dist",
+    "package.json",
+    "src"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rm -rf dist  && vite build"
+  },
+
+  "peerDependencies": {
+    "vue": "^3.4.34"
+  }
+}

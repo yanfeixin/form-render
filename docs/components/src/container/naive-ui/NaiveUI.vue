@@ -55,31 +55,32 @@ watch(isCodeFold, () => {
 </script>
 
 <template>
-  <!-- <ClientOnly></ClientOnly> -->
-  <div :class="[ns.e('ant-design__container')]">
+  <div :class="[ns.e('naive-ui__container')]">
+    <section :class="[ns.bem('name_handle')]">
+      <div v-if="props.title" :class="[ns.bem('component', 'name')]">
+        {{ title }}
+      </div>
+      <div :class="[ns.bem('description', 'btns')]">
+        <CodeCopy @click="clickCodeCopy" />
+        <CodeClose v-if="!isCodeFold" @click="setCodeFold(true)" />
+        <CodeOpen v-else @click="setCodeFold(false)" />
+      </div>
+    </section>
+
+    <section v-if="props.description" :class="[ns.bem('description')]">
+      <span>
+        {{ description }}
+      </span>
+    </section>
+
     <section :class="[ns.bem('preview')]">
       <slot />
     </section>
-    <section :class="[ns.bem('description')]">
-      <div v-if="props.title" :class="[ns.bem('description', 'title')]">
-        {{ title }}
-      </div>
-      <div v-if="props.description" :class="[ns.bem('description', 'content')]" v-html="description" />
-      <div v-if="props.description || (!props.title && !props.description)"
-        :class="[ns.bem('description', 'split-line')]" />
-      <div :class="[ns.bem('description', 'handle-btn')]">
-        <CodeClose v-if="!isCodeFold" @click="setCodeFold(true)" />
-        <CodeOpen v-else @click="setCodeFold(false)" />
-        <CodeCopy @click="clickCodeCopy" />
-      </div>
-    </section>
 
     <section ref="sourceCodeArea" :class="[ns.bem('source')]">
-      <slot name='code'></slot>
-      <!-- <div class="language-vue" v-html="showSourceCode" /> -->
+      <div class="language-vue" v-html="showSourceCode" />
     </section>
   </div>
-
 </template>
 
-<style src="./ant-design.scss"></style>
+<style src="./naive-ui.scss"></style>

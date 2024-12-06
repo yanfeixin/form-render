@@ -6,7 +6,7 @@ import { parallel, series } from 'gulp'
 import { buildGlobalTypeFile, buildModules, buildTheme, removeDist } from './src/tasks'
 import { buildEnv } from './src/utils/paths'
 
-const unBuildLibs = ['@king-one/antdv-docs', '@king-one/shared-docs', '@king-one/build', '@king-one/resolver', '@king-one/tapable', '@king-one/theme-chalk']
+const unBuildLibs = ['@king-one/antdv-docs', '@king-one/vitepress-components', '@king-one/vitepress-plugin', '@king-one/build', '@king-one/resolver', '@king-one/tapable', '@king-one/theme-chalk']
 async function choiceLib() {
   const { packages } = await getPackages(process.cwd())
 

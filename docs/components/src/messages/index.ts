@@ -1,3 +1,4 @@
+/* eslint-disable ts/ban-ts-comment */
 import type { ComponentPublicInstance } from 'vue'
 import { createApp } from 'vue'
 

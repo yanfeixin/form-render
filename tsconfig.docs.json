@@ -7,7 +7,6 @@
     "module": "ESNext",
     "moduleResolution": "Node",
     "paths": {
-      "'@king-one/shared-docs/*": ["node_modules/@king-one/shared-docs/*"]
     },
     "resolveJsonModule": true,
     "types": ["vite/client"],

@@ -67,7 +67,7 @@ export function parseContainerTag(md: MarkdownIt) {
     const title = getParamArr && getParamArr[1] ? getParamArr[1] : ''
     const description = getParamArr && getParamArr[2] ? getParamArr[2] : ''
     if (token.nesting === 1)
-      return `<demo-preview title='${title}' description='${description}' code="${code}" showCode="${showCode}" suffixName="${suffixName}" absolutePath="${componentPath}" relativePath="${componentRelativePath}">\n<template #code>${md.render('```vue \n'+componentSourceCode+'```')}</template>`
+      return `<demo-preview title='${title}' description='${description}' code="${code}" showCode="${showCode}" suffixName="${suffixName}" absolutePath="${componentPath}" relativePath="${componentRelativePath}">\n<template #code>${md.render(`\`\`\`vue \n${componentSourceCode}\`\`\``)}</template>`
     return defaultContainerPreviewOpenRender(tokens, idx, options, env, self)
   }
   // 闭合标签 :::
