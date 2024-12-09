@@ -12,5 +12,7 @@
     "docs:build": "vitepress build",
     "docs:preview": "vitepress preview"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "medium-zoom": "^1.1.0"
+  }
 }

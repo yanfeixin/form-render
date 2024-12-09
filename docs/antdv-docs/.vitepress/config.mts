@@ -51,7 +51,8 @@ export default defineConfig({
         text: 'Business 业务组件',
         items: [
           { text: 'Picker 选择器', link: '/components/Business/picker' },
-          { text: 'Area 省市区', link: '/components/Business/area' }
+          { text: 'Area 省市区', link: '/components/Business/area' },
+          { text: 'Sign 签署', link: '/components/Business/sign' }
         ]
       }
     ],
