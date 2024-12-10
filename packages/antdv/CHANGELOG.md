@@ -1,5 +1,11 @@
 # @king-one/antdv
 
+## 1.0.59
+
+### Patch Changes
+
+- a4fcf1a: feat：增加 form-item 组件
+
 ## 1.0.58
 
 ### Patch Changes
