@@ -4,12 +4,11 @@ import { KIcon, KProArea, KProPicker, KProTitle, KScrollBar, useProArea } from '
 import { onMounted, reactive, ref } from 'vue'
 import type { Rule } from 'ant-design-vue/es/form'
 import zhCN from 'ant-design-vue/es/locale/zh_CN'
+import { FormPath } from '@king-one/path'
 import Example from './example.vue'
 import VirtualList from './App-virtualList.vue'
 import AppForm from './App-form.vue'
-
 // const open = ref<boolean>(false)
-
 // function showModal() {
 //   open.value = true
 // }

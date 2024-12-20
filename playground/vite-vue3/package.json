@@ -12,6 +12,7 @@
     "dev": "vite"
   },
   "devDependencies": {
-    "@king-one/antdv": "workspace:^"
+    "@king-one/antdv": "workspace:^",
+    "@king-one/path": "workspace:^"
   }
 }

@@ -3,13 +3,17 @@ import { KProTitle } from '@king-one/antdv'
 </script>
 
 <template>
-  <div>基础用法</div>
+  <h4 style="margin-bottom: 10px;">
+    基础用法
+  </h4>
   <KProTitle title="测试一下" />
-  <hr>
-  <div>设置大小和颜色</div>
+  <h4 style="margin-bottom: 10px;">
+    设置大小和颜色
+  </h4>
   <KProTitle title="测试一下" :size="14" color="red" />
-
-  <div>插槽</div>
+  <h4 style="margin-bottom: 10px;">
+    插槽
+  </h4>
   <KProTitle title="测试一下">
     插槽内容
   </KProTitle>

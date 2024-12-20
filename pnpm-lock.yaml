@@ -198,6 +198,9 @@ importers:
       '@king-one/antdv':
         specifier: workspace:^
         version: link:../../packages/antdv
+      '@king-one/path':
+        specifier: workspace:^
+        version: link:../../packages/path
 
   single/file:
     dependencies:

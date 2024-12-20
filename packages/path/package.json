@@ -1,19 +1,13 @@
 {
   "name": "@king-one/path",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "author": "",
   "license": "ISC",
   "keywords": [],
-  "exports": {
-    ".": {
-      "import": "./dist/es/index.mjs",
-      "require": "./dist/lib/index.js"
-    }
-  },
   "main": "./dist/lib/index.js",
   "module": "./dist/es/index.mjs",
-  "types": "./dist/types/src/types.d.ts",
+  "types": "./dist/types/index.d.ts",
   "files": [
     "README.md",
     "dist",

@@ -1,5 +1,11 @@
 # @king-one/path
 
+## 1.0.2
+
+### Patch Changes
+
+- fix: 修改声明的导出文件
+
 ## 1.0.1
 
 ### Patch Changes
