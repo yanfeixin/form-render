@@ -1,5 +1,11 @@
 # @king-one/path
 
+## 1.0.4
+
+### Patch Changes
+
+- feat：修改打包出输出的代码，去掉混淆
+
 ## 1.0.2
 
 ### Patch Changes
