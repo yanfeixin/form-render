@@ -173,6 +173,6 @@ function handleaaa() {
 <style>
 body{
   width: 100vw;
-  overflow:hidden;
+  overflow:auto;
 }
 </style>
