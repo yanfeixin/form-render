@@ -44,7 +44,8 @@ export default defineConfig({
           { text: 'Modal 对话框', link: '/components/modal' },
           { text: 'Scrollbar 滚动条', link: '/components/scroll-bar' },
           { text: 'ProTitle 标题', link: '/components/pro-title' },
-          { text: 'VirtualList 虚拟列表', link: '/components/virtual-list' }
+          { text: 'VirtualList 虚拟列表', link: '/components/virtual-list' },
+          { text: 'ProSignature 手写签名', link: '/components/pro-signature' }
         ]
       },
       {

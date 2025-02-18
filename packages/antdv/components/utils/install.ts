@@ -3,10 +3,10 @@
  * @Version: 2.0
  * @Autor: caohao
  * @Date: 2024-09-17 00:15:40
- * @LastEditors: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
- * @LastEditTime: 2024-10-28 09:57:37
+ * @LastEditors: yanfeixin
+ * @LastEditTime: 2025-02-18 10:35:02
  */
-import type { App, Directive, Plugin } from 'vue'
+import type { App, Directive, Plugin, PropType } from 'vue'
 
 export type SFCWithInstall<T> = T & Plugin
 
@@ -28,3 +28,4 @@ export function withInstallDirectives<T extends Directive>(main: T, name: string
     directive: main
   }
 }
+export const definePropType = <T>(val: any): PropType<T> => val

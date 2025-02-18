@@ -1,6 +1,6 @@
 <!-- eslint-disable no-console -->
 <script setup lang='ts'>
-import { KIcon, KProArea, KProPicker, KProTitle, KScrollBar, useProArea } from '@king-one/antdv/components'
+import { KIcon, KProArea, KProPicker, KProSignature, KProTitle, KScrollBar, useProArea } from '@king-one/antdv/components'
 import { onMounted, reactive, ref } from 'vue'
 import type { Rule } from 'ant-design-vue/es/form'
 import zhCN from 'ant-design-vue/es/locale/zh_CN'
@@ -166,6 +166,7 @@ function handleaaa() {
     </KScrollBar>
     <VirtualList />
     <AppForm />
+    <KProSignature />
     <div style="height: 300px;" />
   </a-config-provider>
 </template>

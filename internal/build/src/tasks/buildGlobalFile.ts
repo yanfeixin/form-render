@@ -22,7 +22,7 @@ export async function buildGlobalTypeFile() {
     )
     .join('\n    ')
   // eslint-disable-next-line no-console
-  console.log('componentDeclarations', componentDeclarations)
+  console.log('componentDeclarations\n', componentDeclarations)
   const content = `
 // GlobalComponents for Volar
 declare module 'vue' {
