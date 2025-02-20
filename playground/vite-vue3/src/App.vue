@@ -1,6 +1,6 @@
 <!-- eslint-disable no-console -->
 <script setup lang='ts'>
-import { KIcon, KProArea, KProPicker, KProSignature, KProTitle, KScrollBar, useProArea } from '@king-one/antdv/components'
+import { KIcon, KProArea, KProModal, KProPicker, KProSignature, KProTitle, KScrollBar, useProArea } from '@king-one/antdv/components'
 import { onMounted, reactive, ref } from 'vue'
 import type { Rule } from 'ant-design-vue/es/form'
 import zhCN from 'ant-design-vue/es/locale/zh_CN'
@@ -8,7 +8,8 @@ import { FormPath } from '@king-one/path'
 import Example from './example.vue'
 import VirtualList from './App-virtualList.vue'
 import AppForm from './App-form.vue'
-// const open = ref<boolean>(false)
+
+const open = ref<boolean>(true)
 // function showModal() {
 //   open.value = true
 // }
@@ -78,7 +79,7 @@ function handleaaa() {
     <a-button type="primary" @click="handleEdit">
       回显
     </a-button>
-    <KProPicker v-model="value.a" is-init />
+    <KProPicker v-model="value.a" type="flowApplication" />
 
     <!-- <KProArea
       v-model="value1" :options="ops" :field-names="{
@@ -169,6 +170,13 @@ function handleaaa() {
     <KProSignature />
     <div style="height: 300px;" />
   </a-config-provider>
+  <KProModal
+    v-model="open" :modal-props="{
+      confirmLoading: true,
+    }" title="测试一下"
+  >
+    测试内容
+  </KProModal>
 </template>
 
 <style>

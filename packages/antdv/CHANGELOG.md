@@ -1,5 +1,29 @@
 # @king-one/antdv
 
+## 1.0.64
+
+### Patch Changes
+
+- feat：ProPicker 组件增加 flowApplication 类型
+
+## 1.0.63
+
+### Patch Changes
+
+- fix：增加 ProMoldal 的 props 类型声明
+
+## 1.0.62
+
+### Patch Changes
+
+- feat：增加 modal 组件的 slot 插槽
+
+## 1.0.61
+
+### Patch Changes
+
+- feat:增加 footer 的插槽
+
 ## 1.0.60
 
 ### Patch Changes

@@ -1,8 +1,14 @@
 import type { PropType } from 'vue'
 
-// eslint-disable-next-line unused-imports/no-unused-vars
-const ProPickers = ['company', 'user'] as const
-export type ProPickerType = (typeof ProPickers)[number]
+// const ProPickers = ['company', 'user', 'department', 'flowApplication'] as const
+// export type ProPickerType = (typeof ProPickers)[number]
+export enum PickerApiEnum {
+  company = '/security/company/options',
+  user = '/security/user/options',
+  department = '/security/department/options',
+  flowApplication = '/dev-api/flow/application/options'
+}
+export type ProPickerType = keyof typeof PickerApiEnum
 export const ProPickerProps = {
   type: {
     type: String as PropType<ProPickerType>,

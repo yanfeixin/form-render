@@ -1,5 +1,11 @@
 # @king-one/use
 
+## 2.0.2
+
+### Patch Changes
+
+- feat:增加发送短信验证码的 hooks
+
 ## 2.0.1
 
 ### Patch Changes

@@ -1,9 +1,10 @@
 <script setup lang='ts'>
-import { Modal } from 'ant-design-vue'
+import { Button, Modal } from 'ant-design-vue'
 import { useNamespace } from '@king-one/antdv/hooks/use-namespace'
 import type { CSSProperties } from 'vue'
 import { computed, ref, watch, watchEffect } from 'vue'
 import { useDraggable } from '@vueuse/core'
+import type { ProModalSlots } from './types'
 import { ProModalProps } from './types'
 
 defineOptions({
@@ -11,6 +12,7 @@ defineOptions({
 })
 defineProps(ProModalProps)
 const emit = defineEmits(['onConfirm', 'onCancel'])
+defineSlots<ProModalSlots>()
 const modalTitleRef = ref<HTMLElement | null>(null)
 const open = defineModel({ required: true, type: Boolean })
 
@@ -87,6 +89,9 @@ const transformStyle = computed<CSSProperties>(() => {
       <div :style="transformStyle">
         <component :is="originVNode" />
       </div>
+    </template>
+    <template v-if="$slots.footer" #footer>
+      <slot name="footer" />
     </template>
   </Modal>
 </template>

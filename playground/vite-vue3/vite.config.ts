@@ -20,7 +20,7 @@ export default defineConfig(({ mode }: ConfigEnv) => {
       open: true,
       proxy: {
         '/api/': {
-          target: 'http://192.168.2.134:8091',
+          target: 'http://192.168.2.21:8827',
           ws: false,
           changeOrigin: true,
           rewrite: path => path.replace('/api', '')
