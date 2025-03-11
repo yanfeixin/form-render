@@ -3,101 +3,140 @@ import vue from '@vitejs/plugin-vue'
 import { build } from 'vite'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import dts from 'vite-plugin-dts'
-import { convertEnv, generateExternal, getLibPath } from '../utils'
+import type { UserConfig } from 'vite'
+import { type ViteEnv, convertEnv, generateExternal, getLibPath } from '../utils'
 import { viteCssAlias } from '../plugins/vite-css-alias'
 
-export async function buildModules() {
-  const root = process.env.KING_COMPONENT_ROOT_PATH
-  const { epOutput } = getLibPath(root!)
-  const external = await generateExternal('node', root!)
-  const envData = convertEnv(process.env)
-  const output: any = [
-    {
-      // 打包成 es module
-      format: 'es',
-      // 重命名
-      entryFileNames: '[name].mjs',
-      // 打包目录和开发目录对应
-      preserveModules: true,
-      // 输出目录
-      dir: resolve(epOutput, 'es'),
-      // 指定保留模块结构的根目录
-      preserveModulesRoot: `${root}`
-    },
-    {
-      // 打包成 commonjs
-      format: 'cjs',
-      exports: 'named',
-      // 重命名
-      entryFileNames: '[name].js',
-      // 打包目录和开发目录对应
-      preserveModules: true,
-      // 输出目录
-      dir: resolve(epOutput, 'lib')
-      // 指定保留模块结构的根目录
-      // preserveModulesRoot: `${root}/src`
-    }
-  ]
+interface BuildConfig {
+  root: string
+  external: string[]
+  epOutput: string
+  envData: ViteEnv
+}
 
-  if (envData.KING_BUILD_CDN) {
-    output.push({
-      format: 'umd', // UMD
-      entryFileNames: '[name].umd.js',
-      exports: 'named',
-      dir: `${root}/cdn`,
-      name: 'GIE_COMPONENTS', // UMD 模块的全局变量名
-      sourcemap: true, // 生成 sourcemap（可选）
-      globals: {
-        'vue': 'Vue', // UMD 格式的全局变量
-        'ant-design-vue': 'antd',
-        'axios': 'axios',
-        'lodash-es': 'lodashEs'
-      }
-    })
-  }
-  await build({
-    root,
-    build: {
-      // minify: false,
-      cssCodeSplit: true,
-      rollupOptions: {
-        // 将vue模块排除在打包文件之外，使用用这个组件库的项目的vue模块。
-        external,
-        // 输出配置
-        output,
-        // treeshake: {
-        //   moduleSideEffects: false
-        // },
-        treeshake: false
-      },
-      lib: {
-        // 指定入口文件
-        entry: 'index.ts',
-        // 模块名
-        name: 'GIE_COMPONENTS'
-      }
+// 创建 DTS 插件配置
+function createDtsPlugin(root: string) {
+  return dts({
+    entryRoot: root,
+    outDir: ['dist/types'],
+    staticImport: true,
+    beforeWriteFile: (_, content) => {
+      if (!content)
+        return false
     },
+    rollupTypes: false
+  })
+}
+
+// 创建基础构建配置
+function createBaseBuildConfig(config: BuildConfig): UserConfig {
+  return {
+    root: config.root,
     plugins: [
       vue(),
       vueJsx({ optimize: true }),
-      dts({
-        entryRoot: root,
-        // include: [root!, resolve(projRoot, './typings/global.d.ts')],
-        // 输出目录
-        outDir: ['dist/types'],
-        // tsconfigPath: resolve(projRoot, 'tsconfg.lib.json'),
-        // tsconfigPath: path.resolve(__dirname, '../../../../tsconfg.lib.json'),
-        // 将动态引入转换为静态（例如：`import('vue').DefineComponent` 转换为 `import { DefineComponent } from 'vue'`）
-        staticImport: true,
-        beforeWriteFile: (_, content) => {
-          if (!content) {
-            return false
-          }
-        },
-        // 将所有的类型合并到一个文件中
-        rollupTypes: false
-      }),
+      createDtsPlugin(config.root),
       viteCssAlias()
     ]
-  })
+  }
+}
+
+// 创建标准模块构建配置
+function createModulesBuildConfig(config: BuildConfig): UserConfig {
+  const { root, external, epOutput } = config
+
+  return {
+    ...createBaseBuildConfig(config),
+    build: {
+      cssCodeSplit: true,
+      rollupOptions: {
+        external,
+        output: [
+          {
+            // 打包成 es module
+            format: 'es',
+            // 重命名
+            entryFileNames: '[name].mjs',
+            // 打包目录和开发目录对应
+            preserveModules: true,
+            // 输出目录
+            dir: resolve(epOutput, 'es'),
+            // 指定保留模块结构的根目录
+            preserveModulesRoot: `${root}`
+          },
+          {
+            // 打包成 commonjs
+            format: 'cjs',
+            exports: 'named',
+            // 重命名
+            entryFileNames: '[name].js',
+            // 打包目录和开发目录对应
+            preserveModules: true,
+            // 输出目录
+            dir: resolve(epOutput, 'lib')
+            // 指定保留模块结构的根目录
+            // preserveModulesRoot: `${root}/src`
+          }
+        ],
+        treeshake: false
+      },
+      lib: {
+        entry: 'index.ts',
+        name: 'GIE_COMPONENTS'
+      }
+    }
+  }
+}
+
+// 创建 CDN 构建配置
+function createCdnBuildConfig(config: BuildConfig): UserConfig {
+  const { external, epOutput, envData } = config
+  const umdName = envData.KING_BUILD_UMD_NAME || 'KingDefault'
+
+  return {
+    ...createBaseBuildConfig(config),
+    build: {
+      rollupOptions: {
+        external,
+        output: {
+          format: 'umd',
+          entryFileNames: '[name].umd.js',
+          exports: 'named',
+          dir: resolve(epOutput, 'cdn'),
+          name: umdName
+        },
+        treeshake: false
+      },
+      lib: {
+        entry: 'index.ts',
+        name: umdName
+      }
+    }
+  }
+}
+
+export async function buildModules() {
+  const root = process.env.KING_COMPONENT_ROOT_PATH!
+  const { epOutput } = getLibPath(root)
+  const external = await generateExternal('node', root)
+  const envData = convertEnv(process.env)
+
+  const baseConfig: BuildConfig = {
+    root,
+    external,
+    epOutput,
+    envData
+  }
+
+  // 构建标准模块
+  await build(createModulesBuildConfig(baseConfig))
+
+  // 构建 CDN 版本
+  if (envData.KING_BUILD_CDN) {
+    const cdnConfig = {
+      ...baseConfig,
+      external: await generateExternal('cdn', root)
+    }
+    await build(createCdnBuildConfig(cdnConfig))
+  }
 }
