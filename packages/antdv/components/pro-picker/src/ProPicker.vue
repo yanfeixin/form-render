@@ -4,13 +4,15 @@ import { debounce } from 'lodash-es'
 import { Select, Spin } from 'ant-design-vue'
 import { reactive, watch } from 'vue'
 import { proPickerApi } from '../apis/pro-picker.api'
+import type { ProPickerEmits, ProPickerOption } from './types'
 import { PickerApiEnum, ProPickerProps } from './types'
 
 defineOptions({
   name: 'ProPicker'
 })
 const props = defineProps(ProPickerProps)
-const value = defineModel<string | string[] | number | number[]>()
+const emit = defineEmits<ProPickerEmits>()
+const value = defineModel<string | string[] | number | number[]>('value')
 const state = reactive({
   data: [],
   fetching: false
@@ -25,13 +27,7 @@ watch(
       return
 
     const url = PickerApiEnum[props.type]
-    proPickerApi.getOps({ url, params: { value } })
-      .then((res) => {
-        state.data = res.data.options.map((item: any) => ({
-          label: item.label,
-          value: item.value
-        }))
-      })
+
     if (typeof value === 'string' || typeof value === 'number') {
       proPickerApi
         .getOps({
@@ -64,6 +60,7 @@ watch(
     immediate: true
   }
 )
+
 const handleSearch = debounce((value: string) => {
   if (value) {
     state.fetching = true
@@ -78,6 +75,9 @@ const handleSearch = debounce((value: string) => {
       })
   }
 }, props.delay)
+function handleChange(_value, options) {
+  emit('change', options)
+}
 </script>
 
 <template>
@@ -90,6 +90,7 @@ const handleSearch = debounce((value: string) => {
     :filter-option="false"
     :not-found-content="state.fetching ? undefined : null"
     :options="state.data"
+    @change="handleChange"
     @search="handleSearch"
   >
     <template v-if="state.fetching" #notFoundContent>

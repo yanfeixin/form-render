@@ -1,5 +1,11 @@
 # @king-one/theme-chalk
 
+## 1.0.2
+
+### Patch Changes
+
+- feat：修改 ProTitle 的样式
+
 ## 1.0.1
 
 ### Patch Changes

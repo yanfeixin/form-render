@@ -1,5 +1,35 @@
 # @king-one/antdv
 
+## 1.0.69
+
+### Patch Changes
+
+- feat：修改 ProTitle 的样式
+
+## 1.0.68
+
+### Patch Changes
+
+- feat:修改 propicker 双向绑定的值
+
+## 1.0.67
+
+### Patch Changes
+
+- fix：修改 ProPicker 组件，flowApplication 内部封装的接口地址
+
+## 1.0.66
+
+### Patch Changes
+
+- feat：ProPicker 组件增加 change 事件
+
+## 1.0.65
+
+### Patch Changes
+
+- fix：修复 ProPicker
+
 ## 1.0.64
 
 ### Patch Changes

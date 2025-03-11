@@ -6,7 +6,7 @@ export enum PickerApiEnum {
   company = '/security/company/options',
   user = '/security/user/options',
   department = '/security/department/options',
-  flowApplication = '/dev-api/flow/application/options'
+  flowApplication = '/flow/application/options'
 }
 export type ProPickerType = keyof typeof PickerApiEnum
 export const ProPickerProps = {
@@ -26,3 +26,10 @@ export const ProPickerProps = {
     default: 200
   }
 } as const
+
+export interface ProPickerOption { label: string, value: string | number }
+
+// 修改 ProPickerEmits 的定义
+export interface ProPickerEmits {
+  (e: 'change', value?: ProPickerOption | ProPickerOption[]): void
+}
