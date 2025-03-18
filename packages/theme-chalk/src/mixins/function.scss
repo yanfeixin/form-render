@@ -30,3 +30,29 @@
   // @debug $name;
   @return $name;
 }
+// BEM
+@mixin b($block) {
+  $B: config.$namespace + config.$common-separator + $block !global;
+
+  .#{$B} {
+    @content;
+  }
+}
+@mixin e($element){
+  $currentSelector:$B + config.$element-separator+ $element !global;
+
+  // @at-root {
+  //   .#{$currentSelector}{
+  //     @content;
+  //   }
+  // }
+  .#{$currentSelector}{
+    @content;
+  }
+}
+@mixin em($modifier){
+  $m:$currentSelector+config.$modifier-separator+$modifier;
+  .#{$m}{
+    @content;
+  }
+}
