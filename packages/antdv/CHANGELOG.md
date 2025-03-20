@@ -1,5 +1,35 @@
 # @king-one/antdv
 
+## 1.0.75
+
+### Patch Changes
+
+- feat：优化虚拟列表组件,scrollTo 方法小于 0 时，禁止滚动
+
+## 1.0.74
+
+### Patch Changes
+
+- fix:修复虚拟列表的 bug
+
+## 1.0.73
+
+### Patch Changes
+
+- fix：优化
+
+## 1.0.72
+
+### Patch Changes
+
+- feat：增加 sourcemap
+
+## 1.0.71
+
+### Patch Changes
+
+- fix: 修复虚拟列表 bug
+
 ## 1.0.70
 
 ### Patch Changes

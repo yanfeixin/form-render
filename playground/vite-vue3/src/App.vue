@@ -9,7 +9,7 @@ import Example from './example.vue'
 import VirtualList from './App-virtualList.vue'
 import AppForm from './App-form.vue'
 
-const open = ref<boolean>(true)
+const open = ref<boolean>(false)
 // function showModal() {
 //   open.value = true
 // }

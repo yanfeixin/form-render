@@ -160,7 +160,7 @@ function createGetOffset<T>(source: UseVirtualListResources<T>['source'], itemSi
     for (let i = 0; i < source.value.length; i++) {
       const size = itemSize(i) * scale
       sum += size
-      if (sum >= scrollDirection) {
+      if (sum > scrollDirection) {
         offset = i
         break
       }
@@ -173,7 +173,7 @@ function createCalculateRange<T>(type: 'horizontal' | 'vertical', overscan: numb
   return () => {
     const element = containerRef.value
     if (element) {
-      const offset = getOffset(type === 'vertical' ? Math.ceil(element.scrollTop) : Math.ceil(element.scrollLeft))
+      const offset = getOffset(type === 'vertical' ? element.scrollTop : element.scrollLeft)
       const viewCapacity = getViewCapacity(type === 'vertical' ? element.clientHeight : element.clientWidth)
 
       const from = offset - overscan
@@ -184,7 +184,7 @@ function createCalculateRange<T>(type: 'horizontal' | 'vertical', overscan: numb
         end: to > source.value.length
           ? source.value.length
           : to,
-        current: offset,
+        current: offset - 1,
         scale: state.value.scale
       }
       currentList.value = source.value
@@ -203,14 +203,14 @@ function createGetDistance<T>(itemSize: UseVirtualListItemSize, source: UseVirtu
     const { scale = 1 } = state.value
     if (typeof itemSize === 'number') {
       const size = index * (itemSize * scale)
-      return size
+      return Math.ceil(size)
     }
 
     const size = source.value
       .slice(0, index)
       .reduce((sum, _, i) => sum + itemSize(i) * scale, 0)
 
-    return size
+    return Math.ceil(size)
   }
 }
 
@@ -238,6 +238,8 @@ const scrollToDictionaryForElementScrollKey = {
 function createScrollTo<T>(type: 'horizontal' | 'vertical', calculateRange: () => void, getDistance: ReturnType<typeof createGetDistance>, containerRef: UseVirtualListResources<T>['containerRef']) {
   return (index: number) => {
     if (containerRef.value) {
+      if (index < 0)
+        return
       containerRef.value[scrollToDictionaryForElementScrollKey[type]] = getDistance(index)
       calculateRange()
     }
