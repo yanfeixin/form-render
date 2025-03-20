@@ -1,5 +1,11 @@
 # @king-one/antdv
 
+## 1.0.70
+
+### Patch Changes
+
+- fix：修复虚拟列表，高度为小数时，current 计算错误
+
 ## 1.0.69
 
 ### Patch Changes

@@ -8,12 +8,12 @@ const virtualListRef = ref<InstanceType<typeof KScaleVirtualList> | null>(null)
 const allItems = Array.from(Array.from({ length: 100 }).keys())
 const filteredList = computed(() => allItems.map((_, index) => ({
   index,
-  height: 100
+  height: 100.3
 })))
 const Tscale = ref<number>(1)
 
 const options = {
-  itemHeight: 100
+  itemHeight: 100.3
 }
 
 const current = ref<number>(0)
