@@ -1,5 +1,17 @@
 # @king-one/antdv
 
+## 1.0.77
+
+### Patch Changes
+
+- 优化 scrollTop 逻辑
+
+## 1.0.76
+
+### Patch Changes
+
+- fix: 修复虚拟列表,scrollTop 的小数点问题
+
 ## 1.0.75
 
 ### Patch Changes

@@ -60,7 +60,7 @@ function handleUpdate(state) {
     </KScaleVirtualList>
     <div>
       <span>当前页码：</span>
-      <a>{{ current - 1 }}</a>
+      <a>{{ current }}</a>
     </div>
   </div>
 </template>

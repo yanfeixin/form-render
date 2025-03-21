@@ -173,7 +173,8 @@ function createCalculateRange<T>(type: 'horizontal' | 'vertical', overscan: numb
   return () => {
     const element = containerRef.value
     if (element) {
-      const offset = getOffset(type === 'vertical' ? element.scrollTop : element.scrollLeft)
+      // const offset = getOffset(type === 'vertical' ? element.scrollTop : element.scrollLeft)
+      const offset = getOffset(type === 'vertical' ? Math.ceil(element.scrollTop) + 1 : Math.ceil(element.scrollLeft))
       const viewCapacity = getViewCapacity(type === 'vertical' ? element.clientHeight : element.clientWidth)
 
       const from = offset - overscan
