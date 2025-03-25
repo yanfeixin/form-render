@@ -1,0 +1,43 @@
+# ProTable (暂不支持表头分组)
+
+# Todo list
+
+- [ ] 添加类似 ProProvider.Provider 组件 (有必要吗?)
+- [x] 暴露 request 函数 prop
+- [x] 添加 loading
+- [x] 重构数据逻辑到最外层组件, 通过 props 和 provider 的方式传递
+- [x] 表格数据应用问题处理
+- [x] column 中的 hideInTable 属性
+- [x] column 中的 hideInForm 属性
+- [x] column 中的 formItemRender 表单区域自定义动态渲染
+- [x] column 中的 initialValue 默认值
+- [x] column 中的 request 用来做类似下拉框的数据请求
+- [x] column 中的 fieldProps 属性
+  - [ ] 增加组件的类似下拉选项数据的 options 属性
+  - [ ] 是否增加自定义的 props
+- [x] column 中的 formItemProps 属性
+- [x] formItemSlot 支持
+- [x] formItemSlot 和 customFormFieldRender 的参数补充
+- [ ] formItem 的 slot 和 render 的参数是否只读
+- [x] formItem 查询重置按钮位置
+- [x] 适配 antdv 的 bodyCell slot (这一步完成后就已经支持了所有的 antdv 的 slots)
+- [x] 重写 antdv 的 bodyCell 和 headerCell 以进行类型补充
+- [x] 增加 RecordType 泛型
+- [x] pro-table 泛型组件支持
+- [x] form name 属性 (暂时可以使用 antd form 中的 name)
+- [x] table key 属性 (暂时可以使用 antd table 中的 rowKey)
+- [x] 增加 form 属性 (antdv 的 form 属性)
+- [x] 看情况排除某些不需要的 form 属性 (比如 model 属性)
+- [ ] table action column 相关功能
+- [ ] toolbar 相关功能
+- [ ] form components 各种组件
+- [ ] table body column 各种组件
+- [ ] 是否增加对 formState 的泛型支持?
+- [x] table expose
+- [x] 重构1
+- [x] 重构2 (是否将数据在顶层节点组件通过 provide 方法提供给所有子组件?)
+- [x] 单测 配置完成 部分用例补完
+- [x] 页面初始化不请求接口
+- [x] valueType 为 select, 默认取其对应的 label
+- [x] customRender 和 bodyCell 参数保持一致
+- [x] 增加页面相关参数外部可控制

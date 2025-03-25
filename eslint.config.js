@@ -10,7 +10,11 @@ module.exports = antfu(
       'node/prefer-global/process': 'off',
       'unused-imports/no-unused-vars': ['error', { caughtErrors: 'none' }],
       'no-return-assign': 'off',
-      'prefer-promise-reject-errors': 'off'
+      'prefer-promise-reject-errors': 'off',
+      'ts/ban-ts-comment': 'off',
+      'sort-imports': 'off',
+      'ts/no-import-type-side-effects': 'off',
+      'ts/consistent-type-definitions': 'off'
     }
   }
 )

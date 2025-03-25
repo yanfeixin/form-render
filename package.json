@@ -1,7 +1,6 @@
 {
   "name": "king-one",
   "version": "1.0.0",
-  "packageManager": "pnpm@9.14.4",
   "description": "",
   "author": "",
   "license": "ISC",
@@ -21,6 +20,7 @@
     "lint:fix": "eslint . --fix",
     "build": "pnpm run -C internal/build build",
     "docs:dev": "pnpm run -C docs/antdv-docs docs:dev",
+    "dev": "pnpm run -C playground/vite-vue3 dev",
     "docs:build": "pnpm run -C docs/antdv-docs docs:build"
   },
   "dependencies": {
@@ -44,7 +44,7 @@
     "consola": "^3.2.3",
     "fast-glob": "^3.3.2",
     "fs-extra": "^11.2.0",
-    "sass": "~1.77.8",
+    "sass": "^1.77.8",
     "typescript": "^5.5.4",
     "vite": "^5.3.4",
     "vite-plugin-dts": "^4.3.0",

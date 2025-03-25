@@ -11,6 +11,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vite"
   },
+  "dependencies": {
+    "vue-router": "^4.5.0"
+  },
   "devDependencies": {
     "@king-one/antdv": "workspace:^",
     "@king-one/path": "workspace:^"
