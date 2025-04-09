@@ -1,5 +1,11 @@
 # @king-one/antdv
 
+## 1.0.78
+
+### Patch Changes
+
+- feat：KScrollBar 组件,横向滚动条时，增加 wheel 事件,通过滚轮控制滚动
+
 ## 1.0.77
 
 ### Patch Changes

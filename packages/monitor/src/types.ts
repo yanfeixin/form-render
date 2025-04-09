@@ -28,7 +28,7 @@ export interface MonitorOptions {
   url: string
   appId: string
   env?: 'production' | 'development'
-  sampleRate?: number
+  sampleRate?: number // 采样率
   extraInfo?: Record<string, any>
   beforeSend?: (data: any) => any | false | null
   integrations?: Integration[]

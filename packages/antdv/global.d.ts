@@ -9,6 +9,7 @@ declare module 'vue' {
     KProModal: typeof import('@king-one/antdv')['KProModal'];
     KProPicker: typeof import('@king-one/antdv')['KProPicker'];
     KProSignature: typeof import('@king-one/antdv')['KProSignature'];
+    KProTable: typeof import('@king-one/antdv')['KProTable'];
     KProTag: typeof import('@king-one/antdv')['KProTag'];
     KProTitle: typeof import('@king-one/antdv')['KProTitle'];
     KScaleVirtualList: typeof import('@king-one/antdv')['KScaleVirtualList'];

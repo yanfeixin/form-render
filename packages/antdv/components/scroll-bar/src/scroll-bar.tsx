@@ -44,7 +44,7 @@ export default defineComponent({
     const isShowYBarRef = ref<boolean>(false)
     const showYBarRef = computed(() => {
       const { trigger } = props
-      return trigger === 'none' || isShowYBarRef.value
+      return trigger !== 'none' && (trigger === 'always' || isShowYBarRef.value)
     })
     /** 竖向滚动条的大小（高度） */
     const yBarSizeRef = computed(() => {
@@ -150,7 +150,7 @@ export default defineComponent({
     const isShowXBarRef = ref<boolean>(false)
     const showXBarRef = computed(() => {
       const { trigger } = props
-      return trigger === 'none' || isShowXBarRef.value
+      return trigger !== 'none' && (trigger === 'always' || isShowXBarRef.value)
     })
     // 横向滚动条的大小（width）
     const xBarSizeRef = computed(() => {
@@ -284,12 +284,28 @@ export default defineComponent({
         isShowXBarRef.value = false
       }
     }
+    const handleXScrollWheel = (e: WheelEvent) => {
+      const { value: container } = mergedContainerRef
+      if (container && e.deltaY && needXBarRef.value && props.xScrollable) {
+        const currentScrollLeft = container.scrollLeft
+        const maxScrollLeft = container.scrollWidth - container.clientWidth
+        // 使用较小的增量值来实现平滑滚动
+        const delta = e.deltaY * 0.6
+        // 确保滚动值在有效范围内
+        const newScrollLeft = Math.max(0, Math.min(currentScrollLeft + delta, maxScrollLeft))
+        container.scrollLeft = newScrollLeft
+        sync()
+        e.stopPropagation()
+        e.preventDefault()
+      }
+    }
     return {
       showYBarRef,
       showXBarRef,
       sync,
       handleMouseEnter,
       handleMouseLeave,
+      handleXScrollWheel,
       // handleContentResize,
       // handleContainerResize,
       contentRef,
@@ -354,7 +370,7 @@ export default defineComponent({
                 $slots.default?.()
               )
             : (
-                <div class={`${defaultNamespace}-scrollbar-container`} onScroll={this.handleScroll} ref="containerRef">
+                <div class={`${defaultNamespace}-scrollbar-container`} onScroll={this.handleScroll} ref="containerRef" onWheel={this.handleXScrollWheel}>
 
                   <div ref="contentRef" class={`${defaultNamespace}-scrollbar-content`}>
                     {$slots.default?.()}
